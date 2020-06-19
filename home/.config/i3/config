@@ -1,0 +1,248 @@
+# i3 config file (v4)
+
+#set wallpaper
+exec --no-startup-id ~/.fehbg
+
+# Colors
+# %%base16_template: i3##colors %%
+## Base16 Paraiso
+# Author: Jan T. Sott
+#
+# You can use these variables anywhere in the i3 configuration file.
+
+set $base00 #2f1e2e
+set $base01 #41323f
+set $base02 #4f424c
+set $base03 #776e71
+set $base04 #8d8687
+set $base05 #a39e9b
+set $base06 #b9b6b0
+set $base07 #e7e9db
+set $base08 #ef6155
+set $base09 #f99b15
+set $base0A #fec418
+set $base0B #48b685
+set $base0C #5bc4bf
+set $base0D #06b6ef
+set $base0E #815ba4
+set $base0F #e96ba8
+
+# %%base16_template_end%%
+
+#colors
+# class                  border  backgr. text    indicator child_border
+client.focused           $base02 $base00 $base05 $base02 $base02
+client.unfocused         $base00 $base00 $base04 $base00 $base00
+client.focused_inactive  $base00 $base00 $base04 $base00 $base00
+
+# Modifier keys
+set $mod Mod4
+set $alt Mod1
+
+# vim keybinds
+set $left   h
+set $down   j
+set $up     k
+set $right  l
+
+# Font
+font pango:Fira Sans Regular 11
+
+# Gaps
+gaps horizontal 20 
+gaps vertical 0 
+gaps top 55 
+gaps inner 25
+default_border pixel 0
+for_window [class=".*"] border pixel 0
+
+###### KEYBINDINGS #######
+
+floating_modifier $mod
+
+# change focus
+bindsym $mod+$left  focus left
+bindsym $mod+$down  focus down
+bindsym $mod+$up    focus up
+bindsym $mod+$right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+$left  move left
+bindsym $mod+Shift+$down  move down
+bindsym $mod+Shift+$up    move up
+bindsym $mod+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal and vertical orientation
+bindsym $mod+minus split v
+bindsym $mod+bar   split h
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+Shift+t layout tabbed
+bindsym $mod+Shift+s layout stacked
+bindsym $mod+Shift+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+o sticky toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+p focus parent
+bindsym $mod+a focus parent
+
+#volume
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Media player controls
+bindsym XF86AudioPlay exec mpris-ctl pp
+bindsym XF86AudioNext exec mpris-ctl next
+bindsym XF86AudioPrev exec mpris-ctl prev
+
+# Quick color macros
+bindsym        XF86Tools  exec rofi -show SetWallpaper -modi SetWallpaper:~/.config/rofi/scripts/setwallpaper.sh -font "Fira Sans 11"
+bindsym Shift+ XF86Tools  exec setwallpaper -R
+bindsym $alt+  XF86Tools  exec setwallpaper -R && setcolor -G
+
+bindsym        XF86Launch5 exec rofi -show SetColor -modi SetColor:~/.config/rofi/scripts/setcolor.sh -font "Fira Sans 11"
+bindsym Shift+ XF86Launch5 exec setcolor -R
+bindsym $alt+  XF86Launch5 exec setcolor -G
+
+#bindsym XF86Launch6 
+#bindsym XF86Launch7 
+#bindsym XF86Launch8 
+
+# Rofi
+bindsym $alt+Tab     exec rofi -show window
+bindsym $alt+F2      exec rofi -show run -font "Fira Code 11"
+bindsym $alt+F1      exec rofi -show PowerMenu -modi PowerMenu:~/.config/rofi/scripts/powermenu.sh -font "Fira Sans 11"
+
+# Close windows
+bindsym $alt+F4      kill
+bindsym $mod+Shift+q kill
+
+# Terminal
+bindsym $mod+t       exec kitty --single-instance --listen-on unix:@mykitty
+bindsym $mod+Return  exec kitty --single-instance --listen-on unix:@mykitty
+
+### Screenshot ###
+# Entire Screen
+bindsym --release Print        exec shotgun - | save_clip
+bindsym --release Shift+Print  exec shotgun - | save_file
+# Window
+bindsym --release $mod+Print       exec sel=$(slopblur) && shotgun $sel - | save_clip
+bindsym --release $mod+Shift+Print exec sel=$(slopblur) && shotgun $sel - | save_file
+
+
+# scratchpad
+bindsym $mod+u       scratchpad show
+bindsym $mod+Shift+u move scratchpad
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+x exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+mode "resize" {
+        # resize windows
+        bindsym $right resize shrink width 30 px or 10 ppt
+        bindsym $down resize grow height 30 px or 10 ppt
+        bindsym $up resize shrink height 30 px or 10 ppt
+        bindsym $left resize grow width 30 px or 10 ppt
+
+        # resize gaps
+        bindsym minus       gaps outer current plus 10
+        bindsym plus        gaps outer current minus 10
+        bindsym Shift+minus gaps inner current plus 10
+        bindsym Shift+plus  gaps inner current minus 10
+
+        # move windows
+        bindsym Shift+$right move right 30
+        bindsym Shift+$down  move down 30
+        bindsym Shift+$up    move up 30
+        bindsym Shift+$left  move left 30
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "display" {
+
+        # toggle thinkpad modes
+        bindsym s exec dock-single
+        bindsym d exec dock-dual
+        bindsym t exec thinkpad
+
+        bindsym $left move workspace to output left
+        bindsym $right move workspace to output right
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+bindsym $mod+d mode "display"
+
+
+#lockscreen
+bindsym $mod+control+l exec --no-startup-id betterlockscreen -l blur
+
+### Startup programs ###
+
+#start compositor
+exec --no-startup-id picom
+
+#(re)start polybar
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+#(re)start dunst
+exec_always --no-startup-id killall dunst && dunst
+
+# Update lockscreen
+exec_always --no-startup-id betterlockscreen -u $(grep feh ~/.fehbg | cut -d \' -f 2)

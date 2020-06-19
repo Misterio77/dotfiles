@@ -1,0 +1,79 @@
+/* %%base16_template: styles##css-variables %%
+/* Paraiso by Jan T. Sott */
+
+:root {
+  --base00: #2f1e2e;
+  --base01: #41323f;
+  --base02: #4f424c;
+  --base03: #776e71;
+  --base04: #8d8687;
+  --base05: #a39e9b;
+  --base06: #b9b6b0;
+  --base07: #e7e9db;
+  --base08: #ef6155;
+  --base09: #f99b15;
+  --base0A: #fec418;
+  --base0B: #48b685;
+  --base0C: #5bc4bf;
+  --base0D: #06b6ef;
+  --base0E: #815ba4;
+  --base0F: #e96ba8;
+}
+
+/* %%base16_template_end%%
+*/
+
+
+/* Accent = 02
+ * Background = 00
+ * Header bg = 01
+ *
+ */
+
+.theme-dark {
+    --header-primary: var(--base07);
+    --header-secondary: var(--base05);
+    --text-normal: var(--base07);
+    --text-muted: var(--base04);
+    --text-link: var(--base08);
+    --channels-default: var(--base05);
+    --interactive-normal: var(--base05);
+    --interactive-hover: var(--base06);
+    --interactive-active: var(--base07);
+    --interactive-muted: var(--base04);
+    --background-primary: var(--base00);
+    --background-secondary: var(--base00);
+    --background-secondary-alt: var(--base01);
+    --background-tertiary: var(--base01);
+    --background-accent: var(--base02);
+    --background-floating: var(--base00);
+    --background-mobile-primary: var(--background-primary);
+    --background-mobile-secondary: var(--background-secondary);
+    --scrollbar-thin-thumb: var(--base02);
+    --scrollbar-auto-thumb: var(--base02);
+    --scrollbar-auto-track: var(--base01);
+    --scrollbar-auto-scrollbar-color-thumb: var(--base02);
+    --scrollbar-auto-scrollbar-color-track: var(--base01);
+    --focus-primary: var(--base08);
+    --channeltextarea-background: var(--base01);
+}
+.scroller-2FKFPG {
+    background-color: var(--base00);
+}
+.headerPlaying-j0WQBV, .headerStreaming-2FjmGz {
+    background: var(--base08);
+}
+.theme-dark .headerNormal-T_seeN {
+    background-color: var(--base00);
+}
+.theme-dark .body-3iLsc4, .theme-dark .footer-1fjuF6 {
+    background-color: var(--base00);
+    color: var(--base06);
+}
+.theme-dark .quickMessage-1yeL4E {
+    background-color: var(--base01);
+    border-color: var(--base01);
+}
+.theme-dark .inset-3sAvek {
+    background-color: var(--base01);
+}

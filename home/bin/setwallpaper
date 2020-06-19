@@ -1,0 +1,29 @@
+#!/bin/bash
+# Query
+if [[ $* == *-Q* ]]; then
+    basename $(grep feh ~/.fehbg | cut -d \' -f 2)
+    exit
+fi
+
+# List
+if [[ $* == *-L* ]]; then
+    ls -1R ~/Pictures/Wallpapers/ | grep -E ".png|.jpg|.jpeg"
+    exit
+fi
+
+# From scheme
+if [[ $* == *-G* ]]; then
+    #TODO
+    echo "a" >> /dev/null
+# Random
+elif [[ $* == *-R* ]]; then
+    mapfile -t wallpapers < <(setwallpaper -L)
+    rand=$(( $RANDOM % ${#wallpapers[@]}))
+    wallpaper=~/Pictures/Wallpapers/${wallpapers[$rand]}
+# Specified
+else
+    wallpaper=~/Pictures/Wallpapers/$1
+fi
+
+
+feh --bg-scale --no-xinerama ${wallpaper}

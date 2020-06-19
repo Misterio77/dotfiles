@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+kitty @ --to unix:@mykitty set-colors -a -c "~/.config/kitty/kitty.conf"

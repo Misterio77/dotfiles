@@ -1,0 +1,69 @@
+#!/usr/bin/bash
+
+cd ~/.base16
+
+# Query
+if [[ $* == *-Q* ]]; then
+    head -n 1 ~/.config/setcolor/current
+    exit
+fi
+
+# List
+if [[ $* == *-L* ]]; then
+    ls -1R ~/.base16/schemes/ | grep -E ".yml|.yaml" | cut -d \. -f 1
+    exit
+fi
+
+# Update
+if [[ $*  == *-U* ]]; then
+    pybase16 update
+    exit
+fi
+
+# Build
+if [[ $* == *-B* ]]; then 
+    pybase16 build
+    exit
+fi
+
+# Get color from wallpaper
+if [[ $* == *-G* ]]; then
+    schemer2 -format img::colors -in $(grep feh ~/.fehbg | cut -d \' -f 2) -out /tmp/colors.txt > /dev/null
+    [[ -d ~/.base16/schemes/auto-generated/ ]] || mkdir ~/.base16/schemes/auto-generated/
+    python3 ~/Documents/GitHub/auto-base16-theme/AutoBase16Theme.py --debugColorsVerbose --inputColorPaletteFile /tmp/colors.txt ~/Documents/GitHub/auto-base16-theme/templates/base16-template.yaml ~/.base16/schemes/auto-generated/auto-generated.yaml > /dev/null
+    scheme="auto-generated"
+    pybase16 build -s auto-generated > /dev/null 2>&1
+# Random
+elif [[ $* == *-R* ]]; then
+    mapfile -t schemes < <(setcolor -L)
+    rand=$(( $RANDOM % ${#schemes[@]}))
+    scheme=${schemes[$rand]}
+else
+    # Store Scheme argument
+    scheme=$1
+fi
+
+
+# Inject scheme
+~/.local/bin/pybase16 inject \
+    -s ${scheme} \
+    -f ~/.config/kitty/kitty.conf \
+    -f ~/.config/i3/config \
+    -f ~/.config/zathura/zathurarc \
+    -f ~/.Xresources \
+    -f ~/.config/rofi/themes/base16.rasi \
+    -f ~/.config/polybar/colors.ini \
+    -f ~/.config/dunst/dunstrc \
+    -f ~/.themes/FlatColor/gtk-3.0/gtk.css \
+    -f ~/.themes/FlatColor/gtk-3.20/gtk.css \
+    -f ~/.themes/FlatColor/gtk-2.0/gtkrc \
+    -f ~/.config/beautifuldiscord/style.css \
+    && echo "${scheme}" > ~/.config/setcolor/current
+
+polybar-msg cmd hide >> /dev/null
+polybar-msg cmd restart >> /dev/null & \
+i3-msg reload >> /dev/null & \
+kitty @ --to unix:@mykitty set-colors -a -c "~/.config/kitty/kitty.conf" & \
+killall dunst > /dev/null 2>&1 & \
+systemctl restart --user xsettingsd & \
+gtkrc-reload

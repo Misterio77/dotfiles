@@ -1,0 +1,22 @@
+[general]
+autosens = 1
+sensitivity = 100
+
+[input]
+method = pulse
+source = auto
+
+[output]
+method = ncurses
+channels = stereo
+
+[color]
+background = default
+foreground = white
+
+[smoothing]
+; integral = 77
+; monstercat = 0
+; waves = 0
+; gravity = 100
+; ignore = 0

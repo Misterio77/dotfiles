@@ -1,0 +1,63 @@
+[global]
+    monitor = 0
+    follow = mouse
+    geometry = "300x100-15+45"
+    indicate_hidden = yes
+    shrink = no
+    transparency = 33
+    notification_height = 40
+    separator_height = 1
+    padding = 8
+    horizontal_padding = 8
+    frame_width = 1
+    sort = yes
+    idle_threshold = 120
+    font = Fira Sans 11
+    line_height = 0
+    markup = full
+    format = "<b>%s</b>\n%b"
+    alignment = left
+    show_age_threshold = 60
+    ignore_newline = no
+    stack_duplicates = true
+    hide_duplicate_count = true
+    show_indicators = yes
+    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    history_length = 20
+    dmenu = /usr/bin/dmenu -p dunst:
+    browser = /usr/bin/firefox-developer-edition -new-tab
+    always_run_script = true
+    class = Dunst
+    startup_notification = false
+    verbosity = mesg
+    corner_radius = 0
+    mouse_left_click = do_action
+    mouse_middle_click = close_all
+    mouse_right_click = close_current
+
+# %%base16_template: dunst##default %%
+frame_color = "#2f1e2e"
+separator_color = "#a39e9b"
+
+[base16_low]
+    msg_urgency = low
+    background = "#2f1e2e"
+    foreground = "#776e71"
+
+[base16_normal]
+    msg_urgency = normal
+    background = "#2f1e2e"
+    foreground = "#a39e9b"
+
+[base16_critical]
+    msg_urgency = critical
+    background = "#2f1e2e"
+    foreground = "#b9b6b0"
+
+# %%base16_template_end%%
+
+[shortcuts]
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    history = ctrl+grave
+    context = ctrl+shift+period

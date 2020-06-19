@@ -1,0 +1,13 @@
+[Unit]
+Description="Xsettings Daemon"
+
+[Service]
+StartLimitBurst=20
+StartLimitIntervalSec=5
+Type=exec
+WorkingDirectory=/home/misterio
+ExecStart=/usr/bin/xsettingsd
+Restart=no
+
+[Install]
+WantedBy=default.target
