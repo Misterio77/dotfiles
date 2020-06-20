@@ -2,7 +2,7 @@
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
 gtk-theme-name="FlatColor"
-gtk-icon-theme-name="oomox-Misterio-dark"
+gtk-icon-theme-name="Papirus"
 gtk-font-name="Fira Sans 11"
 gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=0

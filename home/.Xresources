@@ -1,23 +1,23 @@
 # %%base16_template: xresources##default-256 %%
-! Base16 Paraiso
-! Scheme: Jan T. Sott
+! Base16 Pasque
+! Scheme: Gabriel Fontes (https://github.com/Misterio77)
 
-#define base00 #2f1e2e
-#define base01 #41323f
-#define base02 #4f424c
-#define base03 #776e71
-#define base04 #8d8687
-#define base05 #a39e9b
-#define base06 #b9b6b0
-#define base07 #e7e9db
-#define base08 #ef6155
-#define base09 #f99b15
-#define base0A #fec418
-#define base0B #48b685
-#define base0C #5bc4bf
-#define base0D #06b6ef
-#define base0E #815ba4
-#define base0F #e96ba8
+#define base00 #271C3A
+#define base01 #100323
+#define base02 #3E2D5C
+#define base03 #5D5766
+#define base04 #BEBCBF
+#define base05 #DEDCDF
+#define base06 #EDEAEF
+#define base07 #BBAADD
+#define base08 #A92258
+#define base09 #918889
+#define base0A #804ead
+#define base0B #C6914B
+#define base0C #7263AA
+#define base0D #8E7DC6
+#define base0E #953B9D
+#define base0F #59325C
 
 *foreground:   base05
 #ifdef background_opacity

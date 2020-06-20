@@ -2,4 +2,5 @@ Xft/Hinting 1
 Xft/HintStyle "hintslight"
 Xft/Antialias 1
 Xft/RGBA "rgb"
-Net/ThemeName "tmp"
+Net/ThemeName "FlatColor-Base16"
+Net/IconThemeName "Papirus"

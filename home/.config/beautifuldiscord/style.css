@@ -1,23 +1,23 @@
 /* %%base16_template: styles##css-variables %%
-/* Paraiso by Jan T. Sott */
+/* Pasque by Gabriel Fontes (https://github.com/Misterio77) */
 
 :root {
-  --base00: #2f1e2e;
-  --base01: #41323f;
-  --base02: #4f424c;
-  --base03: #776e71;
-  --base04: #8d8687;
-  --base05: #a39e9b;
-  --base06: #b9b6b0;
-  --base07: #e7e9db;
-  --base08: #ef6155;
-  --base09: #f99b15;
-  --base0A: #fec418;
-  --base0B: #48b685;
-  --base0C: #5bc4bf;
-  --base0D: #06b6ef;
-  --base0E: #815ba4;
-  --base0F: #e96ba8;
+  --base00: #271C3A;
+  --base01: #100323;
+  --base02: #3E2D5C;
+  --base03: #5D5766;
+  --base04: #BEBCBF;
+  --base05: #DEDCDF;
+  --base06: #EDEAEF;
+  --base07: #BBAADD;
+  --base08: #A92258;
+  --base09: #918889;
+  --base0A: #804ead;
+  --base0B: #C6914B;
+  --base0C: #7263AA;
+  --base0D: #8E7DC6;
+  --base0E: #953B9D;
+  --base0F: #59325C;
 }
 
 /* %%base16_template_end%%
@@ -31,16 +31,16 @@
  */
 
 .theme-dark {
-    --header-primary: var(--base07);
+    --header-primary: var(--base04);
     --header-secondary: var(--base05);
-    --text-normal: var(--base07);
+    --text-normal: var(--base05);
     --text-muted: var(--base04);
     --text-link: var(--base08);
     --channels-default: var(--base05);
-    --interactive-normal: var(--base05);
-    --interactive-hover: var(--base06);
-    --interactive-active: var(--base07);
-    --interactive-muted: var(--base04);
+    --interactive-normal: var(--base03);
+    --interactive-hover: var(--base05);
+    --interactive-active: var(--base05);
+    --interactive-muted: var(--base03);
     --background-primary: var(--base00);
     --background-secondary: var(--base00);
     --background-secondary-alt: var(--base01);

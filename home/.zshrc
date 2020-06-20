@@ -36,6 +36,16 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-history-substring-search
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light simnalamburt/zsh-expand-all
+zinit light softmoth/zsh-vim-mode
+
+# vim mode appearance
+export MODE_CURSOR_VIINS="blinking bar"
+export MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS"
+export MODE_CURSOR_VMD="block"
+export MODE_CURSOR_SEARCH="steady underline"
+export MODE_CURSOR_VISUAL="steady bar"
+export MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL"
+export MODE_INDICATOR_VICMD=">-"
 
 # disable certain expansions
 export ZSH_EXPAND_ALL_DISABLE=alias
