@@ -1,7 +1,8 @@
 # DO NOT EDIT! This file will be overwritten by LXAppearance.
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
-gtk-theme-name="FlatColor"
+include "/home/misterio/.gtkrc-2.0.mine"
+gtk-theme-name="FlatColor-Base16"
 gtk-icon-theme-name="Papirus"
 gtk-font-name="Fira Sans 11"
 gtk-cursor-theme-name="Adwaita"
@@ -14,5 +15,5 @@ gtk-enable-event-sounds=1
 gtk-enable-input-feedback-sounds=1
 gtk-xft-antialias=1
 gtk-xft-hinting=1
-gtk-xft-hintstyle="hintslight"
+gtk-xft-hintstyle="hintfull"
 gtk-xft-rgba="rgb"
