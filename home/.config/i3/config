@@ -49,10 +49,10 @@ set $right  l
 font pango:Fira Sans Regular 11
 
 # Gaps
-gaps horizontal 20 
+gaps horizontal 30
 gaps vertical 0 
-gaps top 55 
-gaps inner 25
+gaps top 60
+gaps inner 30
 default_border pixel 0
 for_window [class=".*"] border pixel 0
 

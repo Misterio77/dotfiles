@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+zenity --password | sudo -S $*
