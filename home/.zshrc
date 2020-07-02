@@ -51,7 +51,7 @@ export MODE_INDICATOR_VICMD=">-"
 export ZSH_EXPAND_ALL_DISABLE=alias
 
 # aliases
-alias ls='ls --color=auto'
+source "$HOME/.aliases"
 
 # Title
 case $TERM in

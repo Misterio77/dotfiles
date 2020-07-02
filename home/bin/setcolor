@@ -63,7 +63,7 @@ fi
 polybar-msg cmd hide >> /dev/null
 polybar-msg cmd restart >> /dev/null & \
 i3-msg reload >> /dev/null & \
-kitty @ --to unix:@mykitty set-colors -a -c "~/.config/kitty/kitty.conf" & \
+reloadkitty & \
 killall dunst > /dev/null 2>&1 & \
 systemctl restart --user xsettingsd & \
 gtkrc-reload

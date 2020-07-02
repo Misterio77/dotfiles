@@ -142,8 +142,8 @@ bindsym $alt+F4      kill
 bindsym $mod+Shift+q kill
 
 # Terminal
-bindsym $mod+t       exec kitty --single-instance --listen-on unix:@mykitty
-bindsym $mod+Return  exec kitty --single-instance --listen-on unix:@mykitty
+bindsym $mod+t       exec kitty -1 --listen-on=unix:@reloadkitty
+bindsym $mod+Return  exec kitty -1 --listen-on=unix:@reloadkitty
 
 ### Screenshot ###
 # Entire Screen
@@ -187,7 +187,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+x exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+x exec zenity --question --text="Do you really want to exit? This will end your X session." --no-wrap --icon-name=exit && i3-msg exit
 
 mode "resize" {
         # resize windows
