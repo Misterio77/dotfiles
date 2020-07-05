@@ -61,7 +61,8 @@
     --deprecated-quickswitcher-input-background: var(--base01);
     --deprecated-quickswitcher-input-placeholder: var(--base05);
     --background-modifier-hover: var(--background-secondary);
-    --background-modifier-active: var(--background-secondary-alt)
+    --background-modifier-active: var(--background-secondary-alt);
+    --activity-card-background: var(--background-secondary);
 }
 .scroller-2FKFPG {
     background-color: var(--background-primary);
@@ -207,4 +208,24 @@
 }
 .clickable-2ap7je .header-2o-2hj {
     background-color: var(--background-primary);
+}
+.peopleColumn-29fq28 {
+    background-color: var(--background-tertiary);
+}
+.theme-dark .outer-1AjyKL.active-1xchHY, .theme-dark .outer-1AjyKL.interactive-3B9GmY:hover {
+    background-color: var(--background-primary);
+}
+
+.theme-dark .popout-38lTFE {
+    background-color: var(--background-primary);
+}
+
+.theme-dark .scrollerThemed-2oenus.themedWithTrack-q8E3vB>.scroller-2FKFPG::-webkit-scrollbar-track-piece {
+    background-color: var(--background-primary);
+    border: 4px solid var(--background-secondary);
+}
+
+.theme-dark .scrollerThemed-2oenus.themedWithTrack-q8E3vB>.scroller-2FKFPG::-webkit-scrollbar-thumb {
+    background-color: var(--background-secondary);
+    border-color: var(--background-secondary);
 }
