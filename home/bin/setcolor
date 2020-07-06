@@ -47,16 +47,15 @@ fi
 # Inject scheme
 ~/.local/bin/pybase16 inject \
     -s ${scheme} \
-    -f ~/.config/kitty/kitty.conf \
+    -f ~/.config/kitty/colors.conf \
     -f ~/.config/i3/config \
     -f ~/.config/zathura/zathurarc \
     -f ~/.Xresources \
     -f ~/.config/rofi/themes/base16.rasi \
     -f ~/.config/polybar/colors.ini \
     -f ~/.config/dunst/dunstrc \
-    -f ~/.themes/FlatColor/gtk-3.0/gtk.css \
-    -f ~/.themes/FlatColor/gtk-3.20/gtk.css \
-    -f ~/.themes/FlatColor/gtk-2.0/gtkrc \
+    -f ~/.themes/FlatColor/colors3 \
+    -f ~/.themes/FlatColor/colors2 \
     -f ~/.config/beautifuldiscord/style.css \
     && echo "${scheme}" > ~/.config/setcolor/current
 

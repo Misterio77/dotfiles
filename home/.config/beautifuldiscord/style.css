@@ -78,14 +78,14 @@
     color: var(--header-secondary);
 }
 .theme-dark .quickMessage-1yeL4E {
-    background-color: var(--base01);
-    border-color: var(--base01);
+    background-color: var(--background-secondary);
+    border-color: var(--background-secondary);
 }
 .theme-dark .inset-3sAvek {
-    background-color: var(--base01);
+    background-color: var(--background-secondary);
 }
 .theme-dark .userSettingsAccount-2eMFVR .viewBody-2Qz-jg {
-    color: var(--base05);
+    color: var(--header-primary);
 }
 .theme-dark .modal-yWgWj- {
     background-color: var(--background-primary);
@@ -94,16 +94,16 @@
     background-color: var(--background-primary);
 }
 .theme-dark .lookLink-9FtZy-.colorPrimary-3b3xI6 {
-    color: var(--base05);
+    color: var(--header-primary);
 }
 .theme-dark .notDetected-33MY4s, .theme-light .notDetected-33MY4s {
-    background-color: var(--base01);
+    background-color: var(--background-primary);
 }
 .theme-dark .notDetected-33MY4s .gameName-1RiWHm, .theme-light .notDetected-33MY4s .gameName-1RiWHm {
-    color: var(--base05);
+    color: var(--header-primary);
 }
 .theme-dark .gameName-1RiWHm {
-    color: var(--base05);
+    color: var(--header-primary);
 }
 .theme-dark .notDetected-33MY4s .lastPlayed-3bQ7Bo, .theme-light .notDetected-33MY4s .lastPlayed-3bQ7Bo {
     color: var(--header-primary);
@@ -112,15 +112,15 @@
     color: var(--header-primary);
 }
 .css-1k00wn6-singleValue {
-    color: var(--base05);
+    color: var(--header-primary);
 }
 .theme-dark .codeRedemptionRedirect-1wVR4b {
-    color: var(--base05);
-    background-color: var(--base01);
-    border-color: var(--base01);
+    color: var(--header-primary);
+    background-color: var(--background-primary);
+    border-color: var(--background-primary);
 }
 .theme-dark .emptyStateHeader-248f_b {
-    color: var(--base05);
+    color: var(--header-primary);
 }
 .theme-dark .emptyStateSubtext-2hdA9c {
     color: var(--header-primary);

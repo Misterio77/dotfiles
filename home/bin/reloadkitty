@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
-kitty @ --to unix:@reloadkitty set-colors -a -c "~/.config/kitty/kitty.conf"
+kitty @ --to unix:@reloadkitty set-colors -a -c "~/.config/kitty/colors.conf"
 
