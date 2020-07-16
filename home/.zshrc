@@ -8,6 +8,12 @@ export VISUAL=nvim
 export PATH=$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$HOME/.cargo/bin:/usr/local/bin:$PATH
 source /etc/profile.d/jre.sh
 
+# Bitwarden token
+function bw {
+    source /tmp/bwtoken && /usr/bin/bw "$@"
+}
+
+
 # History
 HISTFILE=~/.zsh_history
 HISTSIZE=10000

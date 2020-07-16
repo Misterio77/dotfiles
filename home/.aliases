@@ -1,3 +1,4 @@
 # aliases
 alias ls='ls --color=auto'
 alias kitty='kitty -1 --listen-on=unix:@reloadkitty'
+alias spotify='spicetify apply watch -l'

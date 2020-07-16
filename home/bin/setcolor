@@ -57,6 +57,7 @@ fi
     -f ~/.themes/FlatColor/colors3 \
     -f ~/.themes/FlatColor/colors2 \
     -f ~/.config/beautifuldiscord/style.css \
+    -f ~/.config/spicetify/Themes/base16/color.ini \
     && echo "${scheme}" > ~/.config/setcolor/current
 
 polybar-msg cmd hide >> /dev/null

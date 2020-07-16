@@ -1,0 +1,13 @@
+[Unit]
+Description="Spicetify live update"
+
+[Service]
+StartLimitBurst=20
+StartLimitIntervalSec=5
+Type=exec
+WorkingDirectory=/home/misterio
+ExecStart=spicetify apply watch -l
+Restart=no
+
+[Install]
+WantedBy=default.target

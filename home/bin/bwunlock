@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+while [ $(echo $?) -eq 0 ]; do
+    password=$(zenity --password)
+    if [ $(echo $?) -ne 0 ]; then
+        exit -1
+    fi
+    token=$(bw unlock --raw $password)
+    if [ $(echo $?) -eq 0 ]; then
+        echo "export BW_SESSION=$token" > /tmp/bwtoken
+        exit 0
+    fi
+done

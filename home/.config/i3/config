@@ -229,6 +229,9 @@ mode "display" {
 bindsym $mod+r mode "resize"
 bindsym $mod+d mode "display"
 
+for_window [instance="origin.exe"] move scratchpad
+for_window [instance="explorer.exe"] move scratchpad
+
 #Toggle picom
 bindsym $mod+c exec --no-startup-id "picom"
 bindsym $mod+Shift+c exec --no-startup-id "killall picom"

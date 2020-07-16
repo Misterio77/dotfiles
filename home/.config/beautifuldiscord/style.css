@@ -64,6 +64,9 @@
     --background-modifier-active: var(--background-secondary-alt);
     --activity-card-background: var(--background-secondary);
 }
+body {
+    font-family: Fira Sans, sans serif;
+}
 .scroller-2FKFPG {
     background-color: var(--background-primary);
 }
