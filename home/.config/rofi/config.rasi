@@ -1,6 +1,15 @@
 configuration {
+    show-icons:          true;
+    icon-theme:          "Papirus";
+    drun-display-format: "{icon} {name}";
+    threads:             0;
+    scroll-method:       0;
+    disable-history:     false;
+    fullscreen:          false;
+    hide-scrollbar:      true;
     run-command: "zsh -i -c '{cmd}'";
     run-shell-command: "kitty -1 --listen-on=unix:@reloadkitty '{cmd}'";
+    font: "Fira Sans 12";
 }
 
-@import "/home/misterio/.config/rofi/themes/base16.rasi"
+@import "/home/misterio/.config/rofi/themes/center.rasi"

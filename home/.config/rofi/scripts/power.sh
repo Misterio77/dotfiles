@@ -1,6 +1,6 @@
 #!/bin/bash
 
-options=("鈴 Suspend" "⏻ Shutdown" " Reboot")
+options=("鈴 " "⏻ " " ")
 
 if [[ -z "$@" ]]; then
     for option in "${options[@]}"; do

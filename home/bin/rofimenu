@@ -1,0 +1,69 @@
+#!/bin/bash
+
+path="$HOME/.config/rofi"
+
+menu=$1
+
+if [ -n "$2" ]; then
+    theme=$2
+elif [ -z "$2" ]; then
+    theme="center"
+fi
+
+if [ -n "$3" ]; then
+    display=$3
+elif [ -z "$3" ]; then
+    display=$menu
+fi
+
+
+
+case $menu in
+    "run")
+        rofimodi="run"
+        rofishow="run"
+        ;;
+    "window")
+        rofimodi="window"
+        rofishow="window"
+        ;;
+    "applications"|"apps")
+        rofimodi="drun"
+        rofishow="drun"
+        ;;
+    "colors")
+        rofimodi="$display:$path/scripts/colors.sh"
+        rofishow="$display"
+        ;;
+    "wallpapers")
+        rofimodi="$display:$path/scripts/wallpapers.sh"
+        rofishow="$display"
+        ;;
+    "power")
+        rofimodi="$display:$path/scripts/power.sh"
+        rofishow="$display"
+        ;;
+    *)
+        exit -1;
+        ;;
+esac
+
+case $theme in
+    "left")
+        rofitheme="$path/themes/left.rasi"
+        ;;
+    "right")
+        rofitheme="$path/themes/right.rasi"
+        ;;
+    "center")
+        rofitheme="$path/themes/center.rasi"
+        ;;
+    "icons")
+        rofitheme="$path/themes/icons.rasi"
+        ;;
+    *)
+        exit -1;
+        ;;
+esac
+
+rofi -modi $rofimodi -show $rofishow -theme $rofitheme -display-$rofimodi $display

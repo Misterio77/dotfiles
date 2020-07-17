@@ -51,7 +51,7 @@ fi
     -f ~/.config/i3/config \
     -f ~/.config/zathura/zathurarc \
     -f ~/.Xresources \
-    -f ~/.config/rofi/themes/base16.rasi \
+    -f ~/.config/rofi/themes/styles/colors.rasi \
     -f ~/.config/polybar/colors.ini \
     -f ~/.config/dunst/dunstrc \
     -f ~/.themes/FlatColor/colors3 \

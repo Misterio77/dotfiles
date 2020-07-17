@@ -1,7 +1,8 @@
+@import "styles/colors.rasi"
 * {
-  background-color: #282C33;
-  border-color: #2e343f;
-  text-color: #8ca0aa;
+  background-color: @background;
+  border-color: @background;
+  text-color: @foreground;
   spacing: 0;
   width: 512px;
 }
@@ -17,9 +18,9 @@ prompt {
 }
 
 textbox {
-  background-color: #2e343f;
+  background-color: @lightbg;
   border: 0 0 1px 0;
-  border-color: #282C33;
+  border-color: @lightfg;
   padding: 8px 16px;
 }
 
@@ -39,5 +40,8 @@ element {
 }
 
 element selected {
-  background-color: #2e343f;
+  background-color: @foreground;
+  text-color: @background;
 }
+
+

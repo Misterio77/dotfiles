@@ -1,0 +1,108 @@
+@import "styles/colors.rasi"
+
+* {
+  /* General */
+  text-font:                            "Fira Sans 11";
+  icon-font:                            "Fira Code Nerd Font 32";
+  icon-font-small:                      "Fira Code Nerd Font 24";
+
+  option-6-listview-spacing:            10px;
+
+  menu-window-padding:                   5px 15px;
+  menu-inputbar-margin:                  10px 0px;
+  menu-prompt-padding:                   10px 20px 10px 20px;
+  menu-prompt-margin:                    0px 0px 0px 0px;
+  menu-element-border:                   2px;
+  menu-element-padding:                  8px 16px 8px -40px;
+}
+
+/* ########### */
+
+#window {
+  width: 34.5%;
+  height: 20%;
+}
+
+/* ########### */
+
+* {
+  background-color: @background;
+  text-color: @foreground;
+  font: @icon-font;
+}
+
+#horibox {
+  children: [ listview ];
+}
+#listview {
+  layout: horizontal;
+}
+#element {
+  padding: @option-element-padding;
+  background-color: @alternate-normal-background;
+}
+#element.selected {
+  background-color: @selected-normal-background;
+  text-color: @selected-normal-foreground;
+}
+
+/* ########### */
+
+* {
+  font: @text-font;
+}
+#window {
+  padding: @menu-window-padding;
+  children: [ inputbar, horibox ];
+}
+#inputbar {
+  children: [ prompt ];
+  margin: @menu-inputbar-margin;
+}
+prompt,
+textbox-prompt-colon {
+  padding: @menu-prompt-padding;
+  border: 2px;
+  border-color: @border-color;
+}
+#prompt {
+  margin: @menu-prompt-margin;
+  background-color: @background;
+  text-color: @foreground;
+}
+#horibox {
+  padding: 0px;
+}
+#listview {
+  spacing: @option-6-listview-spacing;
+  lines: 6;
+}
+#element {
+  font: @icon-font;
+  border: @menu-element-border;
+  padding: @menu-element-padding;
+  border-color: @border-color;
+}
+#element.selected {
+  border-color: @border-color;
+}
+element.active,
+element.selected.urgent {
+  background-color: @active-background;
+  text-color: @active-foreground;
+  border-color: @border-color;
+}
+element.selected.urgent {
+  border-color: @border-color;
+}
+element.urgent,
+element.selected.active {
+  background-color: @selected-active-background;
+  text-color: @selected-active-foreground;
+  border-color: @border-color;
+}
+element.selected.active {
+  border-color: @border-color;
+}
+
+

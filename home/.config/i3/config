@@ -5,27 +5,27 @@ exec --no-startup-id ~/.fehbg
 
 # Colors
 # %%base16_template: i3##colors %%
-## Base16 Pasque
-# Author: Gabriel Fontes (https://github.com/Misterio77)
+## Base16 Atelier Cave Light
+# Author: Bram de Haan (http://atelierbramdehaan.nl)
 #
 # You can use these variables anywhere in the i3 configuration file.
 
-set $base00 #271C3A
-set $base01 #100323
-set $base02 #3E2D5C
-set $base03 #5D5766
-set $base04 #BEBCBF
-set $base05 #DEDCDF
-set $base06 #EDEAEF
-set $base07 #BBAADD
-set $base08 #A92258
-set $base09 #918889
-set $base0A #804ead
-set $base0B #C6914B
-set $base0C #7263AA
-set $base0D #8E7DC6
-set $base0E #953B9D
-set $base0F #59325C
+set $base00 #efecf4
+set $base01 #e2dfe7
+set $base02 #8b8792
+set $base03 #7e7887
+set $base04 #655f6d
+set $base05 #585260
+set $base06 #26232a
+set $base07 #19171c
+set $base08 #be4678
+set $base09 #aa573c
+set $base0A #a06e3b
+set $base0B #2a9292
+set $base0C #398bc6
+set $base0D #576ddb
+set $base0E #955ae7
+set $base0F #bf40bf
 
 # %%base16_template_end%%
 
@@ -51,7 +51,7 @@ font pango:Fira Sans Regular 11
 # Gaps
 gaps horizontal 30
 gaps vertical 0 
-gaps top 60
+gaps top 65
 gaps inner 30
 default_border pixel 0
 for_window [class=".*"] border pixel 0
@@ -119,23 +119,53 @@ bindsym XF86AudioPlay exec mpris-ctl pp
 bindsym XF86AudioNext exec mpris-ctl next
 bindsym XF86AudioPrev exec mpris-ctl prev
 
-# Quick color macros
-bindsym        XF86Tools  exec rofi -show SetWallpaper -modi SetWallpaper:~/.config/rofi/scripts/setwallpaper.sh -font "Fira Sans 11"
-bindsym Shift+ XF86Tools  exec setwallpaper -R
-bindsym $alt+  XF86Tools  exec setwallpaper -R && setcolor -G
+## Macro keys ##
+set $m1 XF86Tools
+set $m2 XF86Launch5
+set $m3 XF86Launch6
+set $m4 XF86Launch7
+set $m5 XF86Launch8
 
-bindsym        XF86Launch5 exec rofi -show SetColor -modi SetColor:~/.config/rofi/scripts/setcolor.sh -font "Fira Sans 11"
-bindsym Shift+ XF86Launch5 exec setcolor -R
-bindsym $alt+  XF86Launch5 exec setcolor -G
+# M1
+bindsym        $m1 exec rofimenu applications left 舘
 
-#bindsym XF86Launch6 
-#bindsym XF86Launch7 
-#bindsym XF86Launch8 
+# M2
+bindsym        $m2 exec rofimenu run center \>
 
-# Rofi
-bindsym $alt+Tab     exec rofi -show window
-bindsym $alt+F2      exec rofi -show run -font "Fira Code 11"
-bindsym $alt+F1      exec rofi -show PowerMenu -modi PowerMenu:~/.config/rofi/scripts/powermenu.sh -font "Fira Sans 11"
+# M3
+#bindsym        $m3 exec rofimenu favorites
+
+# M4
+bindsym        $m4 exec rofimenu colors right  
+bindsym Shift+ $m4 exec setcolor -R
+
+# M5
+bindsym        $m5  exec rofimenu wallpapers right  
+bindsym Shift+ $m5  exec setwallpaper -R
+
+
+### Shortcuts ###
+# Open app menu
+exec_always killall xcape; xcape -t 150 -e 'Super_L=Super_L|Escape'
+bindsym $mod+Escape exec rofimenu applications left 舘
+
+# Login bitwarden
+bindsym Scroll_Lock             exec bwunlock
+# Logout bitwarden
+bindsym Shift+Scroll_Lock       exec bwlock
+# Change Window
+bindsym $alt+Tab     exec rofimenu window center  
+
+# Run dialog
+bindsym $alt+F2      exec rofimenu run center \>
+
+# Power menu
+bindsym Pause        exec rofimenu power icons $(whoami)@$(hostname) 
+
+#lockscreen
+bindsym $mod+control+l exec --no-startup-id bwlock && betterlockscreen -l blur
+bindsym $mod+Pause     exec --no-startup-id bwlock && betterlockscreen -l blur
+bindsym Shift+Pause    exec --no-startup-id bwlock && betterlockscreen -l blur
 
 # Close windows
 bindsym $alt+F4      kill
@@ -145,11 +175,11 @@ bindsym $mod+Shift+q kill
 bindsym $mod+t       exec kitty -1 --listen-on=unix:@reloadkitty
 bindsym $mod+Return  exec kitty -1 --listen-on=unix:@reloadkitty
 
-### Screenshot ###
+# Screenshot
 # Entire Screen
 bindsym --release Print        exec shotgun - | save_clip
 bindsym --release Shift+Print  exec shotgun - | save_file
-# Window
+# Selection
 bindsym --release $mod+Print       exec sel=$(slopblur) && shotgun $sel - | save_clip
 bindsym --release $mod+Shift+Print exec sel=$(slopblur) && shotgun $sel - | save_file
 
@@ -229,6 +259,7 @@ mode "display" {
 bindsym $mod+r mode "resize"
 bindsym $mod+d mode "display"
 
+# Move origin out of the way
 for_window [instance="origin.exe"] move scratchpad
 for_window [instance="explorer.exe"] move scratchpad
 
@@ -236,18 +267,15 @@ for_window [instance="explorer.exe"] move scratchpad
 bindsym $mod+c exec --no-startup-id "picom"
 bindsym $mod+Shift+c exec --no-startup-id "killall picom"
 
-#lockscreen
-bindsym $mod+control+l exec --no-startup-id betterlockscreen -l blur
-
 ### Startup programs ###
 
-#start compositor
+# start compositor
 exec --no-startup-id picom
 
-#(re)start polybar
+# (re)start polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-#(re)start dunst
+# (re)start dunst
 exec_always --no-startup-id killall dunst && dunst
 
 # Update lockscreen

@@ -36,23 +36,23 @@
     mouse_right_click = close_current
 
 # %%base16_template: dunst##default %%
-frame_color = "#271C3A"
-separator_color = "#DEDCDF"
+frame_color = "#efecf4"
+separator_color = "#585260"
 
 [base16_low]
     msg_urgency = low
-    background = "#271C3A"
-    foreground = "#5D5766"
+    background = "#efecf4"
+    foreground = "#7e7887"
 
 [base16_normal]
     msg_urgency = normal
-    background = "#271C3A"
-    foreground = "#DEDCDF"
+    background = "#efecf4"
+    foreground = "#585260"
 
 [base16_critical]
     msg_urgency = critical
-    background = "#271C3A"
-    foreground = "#EDEAEF"
+    background = "#efecf4"
+    foreground = "#26232a"
 
 # %%base16_template_end%%
 
