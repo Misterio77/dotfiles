@@ -1,0 +1,25 @@
+#!/usr/bin/bash
+server=$1
+idleenabled=$(cat /srv/minecraft/servers/$server.conf | grep IDLE_SERVER | cut -d '=' -f2)
+processno=$(pgrep -f minecraft_$server | wc -l)
+
+if [[ $idleenabled == "true" ]]; then
+    if [ $processno -ge 2 ]; then
+        echo "running"
+        exit 0
+    elif [ $processno -eq 1 ]; then
+        echo "suspended"
+        exit 1
+    else
+        echo "dead"
+        exit -1
+    fi
+else
+    if [ $processno -ge 1 ]; then
+        echo "running"
+        exit 0
+    else
+        echo "dead"
+        exit -1
+    fi
+fi

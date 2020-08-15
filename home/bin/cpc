@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+text=$(< /dev/stdin)
+if [[ -z "$text" ]]; then
+    notify-send "Couldn't copy" -t 10000
+    exit -1
+fi
+
+notify-send "Copied to clipboard:" "$text" -t 10000
+echo -n $text | xclip -selection clipboard

@@ -1,23 +1,23 @@
 # %%base16_template: xresources##default-256 %%
-! Base16 Atelier Cave Light
-! Scheme: Bram de Haan (http://atelierbramdehaan.nl)
+! Base16 Pasque
+! Scheme: Gabriel Fontes (https://github.com/Misterio77)
 
-#define base00 #efecf4
-#define base01 #e2dfe7
-#define base02 #8b8792
-#define base03 #7e7887
-#define base04 #655f6d
-#define base05 #585260
-#define base06 #26232a
-#define base07 #19171c
-#define base08 #be4678
-#define base09 #aa573c
-#define base0A #a06e3b
-#define base0B #2a9292
-#define base0C #398bc6
-#define base0D #576ddb
-#define base0E #955ae7
-#define base0F #bf40bf
+#define base00 #271C3A
+#define base01 #100323
+#define base02 #3E2D5C
+#define base03 #5D5766
+#define base04 #BEBCBF
+#define base05 #DEDCDF
+#define base06 #EDEAEF
+#define base07 #BBAADD
+#define base08 #A92258
+#define base09 #918889
+#define base0A #804ead
+#define base0B #C6914B
+#define base0C #7263AA
+#define base0D #8E7DC6
+#define base0E #953B9D
+#define base0F #59325C
 
 *foreground:   base05
 #ifdef background_opacity
@@ -54,4 +54,4 @@
 *color20:      base04
 *color21:      base06
 
-# %%base16_template_end%%
+%%base16_template_end%%

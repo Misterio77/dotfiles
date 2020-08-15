@@ -5,27 +5,27 @@ exec --no-startup-id ~/.fehbg
 
 # Colors
 # %%base16_template: i3##colors %%
-## Base16 Atelier Cave Light
-# Author: Bram de Haan (http://atelierbramdehaan.nl)
+## Base16 Pasque
+# Author: Gabriel Fontes (https://github.com/Misterio77)
 #
 # You can use these variables anywhere in the i3 configuration file.
 
-set $base00 #efecf4
-set $base01 #e2dfe7
-set $base02 #8b8792
-set $base03 #7e7887
-set $base04 #655f6d
-set $base05 #585260
-set $base06 #26232a
-set $base07 #19171c
-set $base08 #be4678
-set $base09 #aa573c
-set $base0A #a06e3b
-set $base0B #2a9292
-set $base0C #398bc6
-set $base0D #576ddb
-set $base0E #955ae7
-set $base0F #bf40bf
+set $base00 #271C3A
+set $base01 #100323
+set $base02 #3E2D5C
+set $base03 #5D5766
+set $base04 #BEBCBF
+set $base05 #DEDCDF
+set $base06 #EDEAEF
+set $base07 #BBAADD
+set $base08 #A92258
+set $base09 #918889
+set $base0A #804ead
+set $base0B #C6914B
+set $base0C #7263AA
+set $base0D #8E7DC6
+set $base0E #953B9D
+set $base0F #59325C
 
 # %%base16_template_end%%
 
@@ -133,7 +133,7 @@ bindsym        $m1 exec rofimenu applications left 舘
 bindsym        $m2 exec rofimenu run center \>
 
 # M3
-#bindsym        $m3 exec rofimenu favorites
+bindsym        $m3 exec servidor=$(~/.config/polybar/scripts/minecraft-detailed.sh) && kitty -1 --listen-on=unix:@reloadkitty sudo -u minecraft /srv/minecraft/bin/minecraftd $servidor console
 
 # M4
 bindsym        $m4 exec rofimenu colors right  
@@ -149,10 +149,12 @@ bindsym Shift+ $m5  exec setwallpaper -R
 exec_always killall xcape; xcape -t 150 -e 'Super_L=Super_L|Escape'
 bindsym $mod+Escape exec rofimenu applications left 舘
 
+# Get a password from bitwarden
+bindsym Scroll_Lock            exec (bwpass | cpc)
 # Login bitwarden
-bindsym Scroll_Lock             exec bwunlock
+bindsym Shift+Scroll_Lock      exec bwunlock
 # Logout bitwarden
-bindsym Shift+Scroll_Lock       exec bwlock
+bindsym $alt+Scroll_Lock       exec bwlock
 # Change Window
 bindsym $alt+Tab     exec rofimenu window center  
 

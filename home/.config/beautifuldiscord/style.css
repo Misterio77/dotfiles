@@ -1,23 +1,23 @@
 /* %%base16_template: styles##css-variables %%
-/* Atelier Cave Light by Bram de Haan (http://atelierbramdehaan.nl) */
+/* Pasque by Gabriel Fontes (https://github.com/Misterio77) */
 
 :root {
-  --base00: #efecf4;
-  --base01: #e2dfe7;
-  --base02: #8b8792;
-  --base03: #7e7887;
-  --base04: #655f6d;
-  --base05: #585260;
-  --base06: #26232a;
-  --base07: #19171c;
-  --base08: #be4678;
-  --base09: #aa573c;
-  --base0A: #a06e3b;
-  --base0B: #2a9292;
-  --base0C: #398bc6;
-  --base0D: #576ddb;
-  --base0E: #955ae7;
-  --base0F: #bf40bf;
+  --base00: #271C3A;
+  --base01: #100323;
+  --base02: #3E2D5C;
+  --base03: #5D5766;
+  --base04: #BEBCBF;
+  --base05: #DEDCDF;
+  --base06: #EDEAEF;
+  --base07: #BBAADD;
+  --base08: #A92258;
+  --base09: #918889;
+  --base0A: #804ead;
+  --base0B: #C6914B;
+  --base0C: #7263AA;
+  --base0D: #8E7DC6;
+  --base0E: #953B9D;
+  --base0F: #59325C;
 }
 
 /* %%base16_template_end%%

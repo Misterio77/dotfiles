@@ -1,10 +1,10 @@
 [global]
     monitor = 0
     follow = mouse
-    geometry = "300x100-15+45"
+    geometry = "400x5-15+75"
     indicate_hidden = yes
     shrink = no
-    transparency = 33
+    transparency = 20
     notification_height = 40
     separator_height = 1
     padding = 8
@@ -36,23 +36,23 @@
     mouse_right_click = close_current
 
 # %%base16_template: dunst##default %%
-frame_color = "#efecf4"
-separator_color = "#585260"
+frame_color = "#271C3A"
+separator_color = "#DEDCDF"
 
 [base16_low]
     msg_urgency = low
-    background = "#efecf4"
-    foreground = "#7e7887"
+    background = "#271C3A"
+    foreground = "#5D5766"
 
 [base16_normal]
     msg_urgency = normal
-    background = "#efecf4"
-    foreground = "#585260"
+    background = "#271C3A"
+    foreground = "#DEDCDF"
 
 [base16_critical]
     msg_urgency = critical
-    background = "#efecf4"
-    foreground = "#26232a"
+    background = "#271C3A"
+    foreground = "#EDEAEF"
 
 # %%base16_template_end%%
 

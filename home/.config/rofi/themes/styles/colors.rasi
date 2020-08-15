@@ -1,20 +1,20 @@
 /* %%base16_template: rofi##colors %%
 
- * Base16 Atelier Cave Light ROFI Color theme
+ * Base16 Pasque ROFI Color theme
  *
  * Authors
- *  Scheme: Bram de Haan (http://atelierbramdehaan.nl)
+ *  Scheme: Gabriel Fontes (https://github.com/Misterio77)
  *  Template: Jordi Pakey-Rodriguez (https://github.com/0xdec), Andrea Scarpino (https://github.com/ilpianista)
  */
 
 * {
-    red:                         rgba ( 190, 70, 120, 100 % );
-    blue:                        rgba ( 87, 109, 219, 100 % );
-    lightfg:                     rgba ( 38, 35, 42, 100 % );
-    lightbg:                     rgba ( 226, 223, 231, 100 % );
-    foreground:                  rgba ( 88, 82, 96, 100 % );
-    background:                  rgba ( 239, 236, 244, 100 % );
-    background-color:            rgba ( 239, 236, 244, 0 % );
+    red:                         rgba ( 169, 34, 88, 100 % );
+    blue:                        rgba ( 142, 125, 198, 100 % );
+    lightfg:                     rgba ( 237, 234, 239, 100 % );
+    lightbg:                     rgba ( 16, 3, 35, 100 % );
+    foreground:                  rgba ( 222, 220, 223, 100 % );
+    background:                  rgba ( 39, 28, 58, 100 % );
+    background-color:            rgba ( 39, 28, 58, 0 % );
     separatorcolor:              @foreground;
     border-color:                @foreground;
     selected-normal-foreground:  @lightbg;

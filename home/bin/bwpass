@@ -1,0 +1,28 @@
+#!/usr/bin/zsh
+source /tmp/bwtoken
+
+bwstatus=$(bw status --pretty | grep "status" | cut -d '"' -f 4)
+if [[ $bwstatus = "locked" ]]; then
+    notify-send "Error" "Your vault is locked" -t 10000
+    exit -2
+fi
+
+if [ -n "$1" ]; then
+    query=$1
+elif [ -z "$2" ]; then
+    query=$(zenity --entry --text="Account/site to search on bitwarden")
+    if [ $(echo $?) -ne 0 ]; then
+        exit -1
+    fi
+fi
+
+password=$(bw get password $query --nointeraction)
+if [ $(echo $?) -eq 0 ]; then
+    notify-send "Password for $query:" "$password" -t 10000
+    echo $password
+else
+    notify-send "Error" "Couldn't find password for $query" -t 10000
+    exit -1
+fi
+
+
