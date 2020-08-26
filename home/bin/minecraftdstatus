@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 server=$1
 idleenabled=$(cat /srv/minecraft/servers/$server.conf | grep IDLE_SERVER | cut -d '=' -f2)
-processno=$(pgrep -f minecraft_$server | wc -l)
+processno=$(pgrep -f bungeecord_$server | wc -l)
 
 if [[ $idleenabled == "true" ]]; then
     if [ $processno -ge 2 ]; then

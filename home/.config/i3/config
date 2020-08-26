@@ -134,6 +134,7 @@ bindsym        $m2 exec rofimenu run center \>
 
 # M3
 bindsym        $m3 exec servidor=$(~/.config/polybar/scripts/minecraft-detailed.sh) && kitty -1 --listen-on=unix:@reloadkitty sudo -u minecraft /srv/minecraft/bin/minecraftd $servidor console
+bindsym Shift+ $m3 exec kitty -1 --listen-on=unix:@reloadkitty zsh -c 'cd /srv/minecraft && sudo su minecraft'
 
 # M4
 bindsym        $m4 exec rofimenu colors right  
