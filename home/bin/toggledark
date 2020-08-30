@@ -1,0 +1,52 @@
+#!/usr/bin/bash
+
+function try_scheme() {
+	newscheme=$1
+	currentscheme=$2
+	setcolor -L | grep -x "$newscheme" >> /dev/null
+
+	if [ $? -eq 0 ] && [ "$newscheme" != "$currentscheme" ]; then
+		echo "applying $newscheme"
+		setcolor $1
+		exit 0
+	else
+		echo "not applying $newscheme"
+		return 1
+	fi
+}
+
+scheme=$(setcolor -Q)
+
+if [[ $scheme =~ "light" ]]; then
+	attempt=${scheme/light/dark} # Try replacing light with dark
+	try_scheme $attempt $scheme
+
+	attempt=${scheme#"light"}   # Try removing light as prefix
+	try_scheme $attempt $scheme
+	attempt=${scheme#"light-"}   # Same but include dash
+	try_scheme $attempt $scheme
+
+	attempt=${scheme%"light"}   # Try removing light as sufix
+	try_scheme $attempt $scheme
+	attempt=${scheme%"-light"}  # Same but include dash
+	try_scheme $attempt $scheme
+elif [[ $scheme =~ "dark" ]]; then 
+	attempt=${scheme/dark/light} # Try replacing dark with light
+	try_scheme $attempt $scheme
+
+	attempt=${scheme#"dark"}   # Try removing dark as prefix
+	try_scheme $attempt $scheme
+	attempt=${scheme#"dark-"}   # Same but include dash
+	try_scheme $attempt $scheme
+
+	attempt=${scheme%"dark"}   # Try removing dark as sufix
+	try_scheme $attempt $scheme
+	attempt=${scheme%"-dark"}  # Same but include dash
+	try_scheme $attempt $scheme
+else
+	try_scheme "$scheme-dark"
+	try_scheme "dark-$scheme"
+	try_scheme "$scheme-light"
+	try_scheme "light-$scheme"
+fi
+exit -1

@@ -2,6 +2,6 @@
 echo "export BW_SESSION=0" > /tmp/bwtoken
 bw lock
 if [ $(echo $?) -eq 0 ]; then
-    notify-send "Locked" "Your vault is now locked" -t 10000
+    notify-send "Locked" "Your vault is now locked" -t 2000
 fi
 exit 0

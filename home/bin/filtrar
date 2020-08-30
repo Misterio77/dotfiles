@@ -1,2 +1,0 @@
-#!/usr/bin/bash
-cat $1 | cut -d '' -f6 | xargs | tr -dc '[:alnum:]\n\r'

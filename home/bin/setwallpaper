@@ -11,12 +11,8 @@ if [[ $* == *-L* ]]; then
     exit
 fi
 
-# From scheme
-if [[ $* == *-G* ]]; then
-    #TODO
-    echo "a" >> /dev/null
 # Random
-elif [[ $* == *-R* ]]; then
+if [[ $* == *-R* ]]; then
     mapfile -t wallpapers < <(setwallpaper -L)
     rand=$(( $RANDOM % ${#wallpapers[@]}))
     wallpaper=~/Pictures/Wallpapers/${wallpapers[$rand]}
@@ -27,3 +23,4 @@ fi
 
 
 feh --bg-scale --no-xinerama ${wallpaper}
+multilockscreen -u $(grep feh ~/.fehbg | cut -d \' -f 2) --span --fx >> /dev/null &

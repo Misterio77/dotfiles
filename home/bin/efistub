@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+label="Arch Linux"
+rootuuid="5d825900-2ddb-4fb9-a793-845fa039d2bd"
+flags="nvidia-drm.modeset=1 quiet splash loglevel=2 rd.systemd.show_status=auto rd.udev.log_priority=2 vt.global_cursor_default=0"
+
+sudo efibootmgr -c -L "$label" --loader /vmlinuz-linux --unicode "root=UUID=$rootuuid rw initrd=\initramfs-linux.img $flags" --verbose
