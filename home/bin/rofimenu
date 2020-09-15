@@ -30,6 +30,7 @@ case $menu in
     "applications"|"apps")
         rofimodi="drun"
         rofishow="drun"
+		flags="-show-icons"
         ;;
     "colors")
         rofimodi="$display:$path/scripts/colors.sh"
@@ -66,4 +67,4 @@ case $theme in
         ;;
 esac
 
-rofi -modi $rofimodi -show $rofishow -theme $rofitheme -display-$rofimodi $display
+rofi -modi $rofimodi -show $rofishow -theme $rofitheme -display-$rofimodi $display $flags

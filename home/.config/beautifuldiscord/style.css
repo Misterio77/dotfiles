@@ -232,3 +232,6 @@ body {
     background-color: var(--background-secondary);
     border-color: var(--background-secondary);
 }
+.theme-dark .header-sJd8D7 {
+	color: var(--text-normal)
+}

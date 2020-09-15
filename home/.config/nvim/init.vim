@@ -6,6 +6,7 @@ Plug 'dense-analysis/ale'
 Plug 'lambdalisue/suda.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
+Plug 'cespare/vim-toml'
 
 call plug#end()
 colorscheme noctu

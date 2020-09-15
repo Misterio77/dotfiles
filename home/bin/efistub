@@ -1,6 +1,16 @@
 #!/usr/bin/bash
+disk="Thanatos"
 label="Arch Linux"
-rootuuid="5d825900-2ddb-4fb9-a793-845fa039d2bd"
-flags="nvidia-drm.modeset=1 quiet splash loglevel=2 rd.systemd.show_status=auto rd.udev.log_priority=2 vt.global_cursor_default=0"
+parameters="nvidia-drm.modeset=1 quiet splash loglevel=2 rd.systemd.show_status=auto rd.udev.log_priority=2 vt.global_cursor_default=0"
 
-sudo efibootmgr -c -L "$label" --loader /vmlinuz-linux --unicode "root=UUID=$rootuuid rw initrd=\initramfs-linux.img $flags" --verbose
+
+efibootmgr | grep "$label" | cut -d '*' -f1 | \
+	while read line; do
+		entry=$(echo $line | cut -d 't' -f2)
+		sudo efibootmgr -b $entry -B
+	done
+
+rootuuid=$(lsblk -o LABEL,UUID | grep $disk | cut -d ' ' -f2)
+
+
+sudo efibootmgr -c -L "$label" --loader /vmlinuz-linux --unicode "root=UUID=$rootuuid rw initrd=\initramfs-linux.img $parameters" --verbose

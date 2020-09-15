@@ -181,8 +181,8 @@ bindsym $mod+Return  exec kitty -1 --listen-on=unix:@reloadkitty
 
 # Screenshot
 # Entire Screen
-bindsym --release Print        exec --no-startup-id shotgun - | save_clip
-bindsym --release Shift+Print  exec --no-startup-id shotgun - | save_file
+#bindsym --release Print        exec --no-startup-id shotgun - | save_clip
+#bindsym --release Shift+Print  exec --no-startup-id shotgun - | save_file
 # Selection
 bindsym --release $mod+Print       exec --no-startup-id sel=$(slopblur) && shotgun $sel - | save_clip
 bindsym --release $mod+Shift+Print exec --no-startup-id sel=$(slopblur) && shotgun $sel - | save_file
@@ -266,6 +266,9 @@ bindsym $mod+d mode "display"
 # Move origin out of the way
 for_window [instance="origin.exe"] move scratchpad
 for_window [instance="explorer.exe"] move scratchpad
+# Automatic floating
+for_window [title="Friends List"] floating enable
+for_window [title="Friends List"] [floating] resize set 300 600
 
 #Toggle picom
 bindsym $mod+c exec --no-startup-id "picom"

@@ -1,5 +1,4 @@
 configuration {
-    show-icons:          true;
     icon-theme:          "Papirus";
     drun-display-format: "{icon} {name}";
     threads:             0;

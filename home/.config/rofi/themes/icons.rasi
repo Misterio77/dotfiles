@@ -2,7 +2,7 @@
 
 * {
   /* General */
-  text-font:                            "Fira Sans 11";
+  text-font:                            "Fira Sans 32";
   icon-font:                            "Fira Code Nerd Font 32";
   icon-font-small:                      "Fira Code Nerd Font 24";
 

@@ -66,7 +66,7 @@ element {
 }
 
 element-icon {
-    size:                           256px;
+    size:                           32px;
     border:                         0px;
 }
 
