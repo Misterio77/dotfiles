@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [[ -z "$@" ]]; then
-    setcolor -L
+    flavours list -l
 else
-    ~/bin/setcolor $@
+    flavours apply $@
 fi
 exit

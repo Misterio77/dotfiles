@@ -3,11 +3,11 @@
 function try_scheme() {
 	newscheme=$1
 	currentscheme=$2
-	setcolor -L | grep -x "$newscheme" >> /dev/null
+	flavours list -l | grep -x "$newscheme" >> /dev/null
 
 	if [ $? -eq 0 ] && [ "$newscheme" != "$currentscheme" ]; then
 		echo "applying $newscheme"
-		setcolor $1
+		flavours apply $1
 		exit 0
 	else
 		echo "not applying $newscheme"
@@ -15,7 +15,7 @@ function try_scheme() {
 	fi
 }
 
-scheme=$(setcolor -Q)
+scheme=$(flavours current)
 
 if [[ $scheme =~ "light" ]]; then
 	attempt=${scheme/light/dark} # Try replacing light with dark

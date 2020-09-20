@@ -1,5 +1,5 @@
-/* %%base16_template: styles##css-variables %%
-/* Pasque by Gabriel Fontes (https://github.com/Misterio77) */
+/* start flavours */
+/* {Pasque} by {Gabriel Fontes (https://github.com/Misterio77)} */
 
 :root {
   --base00: #271C3A;
@@ -19,9 +19,7 @@
   --base0E: #953B9D;
   --base0F: #59325C;
 }
-
-/* %%base16_template_end%%
-*/
+/* end flavours */
 
 
 /* Accent = 02

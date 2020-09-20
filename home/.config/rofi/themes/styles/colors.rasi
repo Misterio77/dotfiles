@@ -1,5 +1,4 @@
-/* %%base16_template: rofi##colors %%
-
+/**
  * Base16 Pasque ROFI Color theme
  *
  * Authors
@@ -36,6 +35,3 @@
     alternate-urgent-foreground: @red;
     alternate-urgent-background: @lightbg;
 }
-
-/* %%base16_template_end%%
-*/

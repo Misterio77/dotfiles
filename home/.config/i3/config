@@ -4,7 +4,7 @@
 exec --no-startup-id ~/.fehbg
 
 # Colors
-# %%base16_template: i3##colors %%
+# start flavours
 ## Base16 Pasque
 # Author: Gabriel Fontes (https://github.com/Misterio77)
 #
@@ -26,8 +26,7 @@ set $base0C #7263AA
 set $base0D #8E7DC6
 set $base0E #953B9D
 set $base0F #59325C
-
-# %%base16_template_end%%
+# end flavours
 
 #colors
 # class                  border  backgr. text    indicator child_border
@@ -138,7 +137,7 @@ bindsym Shift+ $m3 exec kitty -1 --listen-on=unix:@reloadkitty zsh -c 'cd /srv/m
 
 # M4
 bindsym        $m4 exec rofimenu colors right  
-bindsym Shift+ $m4 exec --no-startup-id setcolor -R
+bindsym Shift+ $m4 exec --no-startup-id flavours apply
 bindsym $alt+  $m4 exec --no-startup-id toggledark || notify-send "Couldn't switch color" "This scheme doesn't have a dark/light version" -t 3000
 
 # M5
@@ -269,6 +268,7 @@ for_window [instance="explorer.exe"] move scratchpad
 # Automatic floating
 for_window [title="Friends List"] floating enable
 for_window [title="Friends List"] [floating] resize set 300 600
+for_window [instance="scrcpy"] floating enable
 
 #Toggle picom
 bindsym $mod+c exec --no-startup-id "picom"

@@ -20,3 +20,4 @@ nnoremap <CR> G
 set title
 set clipboard+=unnamedplus
 let g:suda_smart_edit = 1
+let g:ale_rust_cargo_use_clippy = 1

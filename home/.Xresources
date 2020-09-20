@@ -1,4 +1,3 @@
-# %%base16_template: xresources##default-256 %%
 ! Base16 Pasque
 ! Scheme: Gabriel Fontes (https://github.com/Misterio77)
 
@@ -53,5 +52,3 @@
 *color19:      base02
 *color20:      base04
 *color21:      base06
-
-%%base16_template_end%%
