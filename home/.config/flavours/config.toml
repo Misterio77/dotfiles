@@ -1,0 +1,79 @@
+# Example item, with default values
+# [[item]]
+# file = '~/.config/example' (required)
+# template = 'example' (required)
+# subtemplate = 'default'
+# rewrite = false
+# start = '# Start flavours'
+# end = '# End flavours'
+# hook = ''
+
+[[item]]
+file = '~/.config/kitty/colors.conf'
+template = 'kitty'
+subtemplate = 'default-256'
+hook = 'kitty @ --to unix:@reloadkitty set-colors -a -c "~/.config/kitty/colors.conf"'
+rewrite = true
+
+[[item]]
+file = '~/.config/i3/config'
+template = 'i3'
+subtemplate = 'colors'
+hook = 'i3-msg reload'
+rewrite = false
+
+[[item]]
+file= '~/.config/zathura/zathurarc'
+template = 'zathura'
+rewrite = false
+
+[[item]]
+file = '~/.Xresources'
+template = 'xresources'
+subtemplate = 'default-256'
+rewrite = true
+
+[[item]]
+file = '~/.config/rofi/themes/styles/colors.rasi'
+template = 'rofi'
+subtemplate = 'colors'
+rewrite = true
+
+[[item]]
+file = '~/.config/polybar/colors.ini'
+template = 'polybar'
+rewrite = true
+hook = 'polybar-msg cmd restart'
+
+[[item]]
+file = '~/.config/dunst/dunstrc'
+template = 'dunst'
+hook = 'killall dunst'
+rewrite = false
+
+[[item]]
+file = '~/.themes/FlatColor/colors3'
+template = 'gtk-flatcolor'
+subtemplate = 'gtk-3'
+rewrite = true
+hook = 'systemctl restart --user xsettingsd'
+
+[[item]]
+file = '~/.themes/FlatColor/colors2'
+template = 'gtk-flatcolor'
+subtemplate = 'gtk-2'
+rewrite = true
+hook = 'gtkrc-reload'
+
+[[item]]
+file = '~/.config/beautifuldiscord/style.css'
+template = 'styles'
+subtemplate = 'css-variables'
+rewrite = false
+start= '/* Start flavours */'
+end = '/* End flavours */'
+
+[[item]]
+file = '~/.config/spicetify/Themes/base16/color.ini'
+template = 'spicetify'
+rewrite = true

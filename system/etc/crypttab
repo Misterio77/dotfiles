@@ -1,1 +1,9 @@
-home /dev/sda7
+# Configuration for encrypted block devices.
+# See crypttab(5) for details.
+
+# NOTE: Do not list your root (/) partition here, it must be set up
+#       beforehand by the initramfs (/etc/mkinitcpio.conf).
+
+# <name>       <device>						<password>	<options>
+home		UUID=b9bca0d7-63d2-4ed9-b05b-7cdda09eba0f	none	discard
+media		UUID=c5f67eb1-0953-4352-bade-663cfb6762b1	none

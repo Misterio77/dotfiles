@@ -114,9 +114,9 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Media player controls
-bindsym XF86AudioPlay exec --no-startup-id mpris-ctl pp
-bindsym XF86AudioNext exec --no-startup-id mpris-ctl next
-bindsym XF86AudioPrev exec --no-startup-id mpris-ctl prev
+bindsym XF86AudioPlay exec --no-startup-id mpris-ctl --player $(currentplayer) pp
+bindsym XF86AudioNext exec --no-startup-id mpris-ctl --player $(currentplayer) next
+bindsym XF86AudioPrev exec --no-startup-id mpris-ctl --player $(currentplayer) prev
 
 ## Macro keys ##
 set $m1 XF86Tools

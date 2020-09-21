@@ -1,9 +1,13 @@
-/dev/sda2		/boot/efi	vfat		defaults							0	2
-
-/dev/mapper/home	/home		ext4		defaults							0	2
-
+# Root and ESP (SSD)
 LABEL=Thanatos		/		ext4		defaults							0	1
-LABEL=Aion		/media/Windows	ntfs-3g		defaults,uid=1000,gid=1000,umask=002,big_writes,hide_hid_files,hide_dot_files	0	0
-LABEL=Media		/media/Media	ntfs-3g		defaults,uid=1000,gid=1000,umask=002,big_writes,hide_hid_files,hide_dot_files	0	0
+LABEL=ESP		/boot		vfat		defaults							0	2
+
+# Home (SSD)
+/dev/mapper/home	/home		ext4		defaults							0	2
+# Media (HDD)
+/dev/mapper/media	/media/Media	ext4		defaults							0	2
 
 LABEL=Swap		none		swap		defaults							0	0
+
+#LABEL=Aion		/media/Windows	ntfs-3g		defaults,uid=1000,gid=1000,umask=002,big_writes,hide_hid_files,hide_dot_files	0	0
+#LABEL=Media		/media/Media	ntfs-3g		defaults,uid=1000,gid=1000,umask=002,big_writes,hide_hid_files,hide_dot_files	0	0

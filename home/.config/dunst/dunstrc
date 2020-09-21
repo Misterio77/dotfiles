@@ -42,7 +42,7 @@ separator_color = "#DEDCDF"
 [base16_low]
     msg_urgency = low
     background = "#271C3A"
-    foreground = "#5D5766"
+    foreground = "#BEBCBF"
 
 [base16_normal]
     msg_urgency = normal
@@ -51,8 +51,8 @@ separator_color = "#DEDCDF"
 
 [base16_critical]
     msg_urgency = critical
-    background = "#271C3A"
-    foreground = "#EDEAEF"
+    background = "#A92258"
+    foreground = "#271C3A"
 # end flavours
 
 [shortcuts]

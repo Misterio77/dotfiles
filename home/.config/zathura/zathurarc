@@ -33,13 +33,10 @@ set completion-highlight-fg     "#BBAADD"
 set completion-highlight-bg     "#8E7DC6"
 
 set recolor-lightcolor          "#271C3A"
-set recolor-darkcolor           "#EDEAEF"
+set recolor-darkcolor           "#DEDCDF"
 
 set recolor                     "false"
 set recolor-keephue             "false"
 # end flavours
-
-set recolor true
-_template_end%%
 
 set recolor true
