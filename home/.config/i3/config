@@ -269,6 +269,7 @@ for_window [instance="explorer.exe"] move scratchpad
 for_window [title="Friends List"] floating enable
 for_window [title="Friends List"] [floating] resize set 300 600
 for_window [instance="scrcpy"] floating enable
+for_window [class="GStreamer"] floating enable
 
 #Toggle picom
 bindsym $mod+c exec --no-startup-id "picom"

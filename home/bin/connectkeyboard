@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+keystation=$(aconnect -o | grep 'Keystation 49' | head -n 1 | cut -d ':' -f1 | cut -d ' ' -f2)
+fluidsynth=$(aconnect -o | grep 'FLUID Synth' | cut -d ':' -f1 | cut -d ' ' -f2)
+aconnect $keystation:0 $fluidsynth:0 
