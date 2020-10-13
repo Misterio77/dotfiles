@@ -106,6 +106,12 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+p focus parent
 bindsym $mod+a focus parent
 
+# move workspace to another monitor
+bindsym $mod+$alt+$left move workspace to output left
+bindsym $mod+$alt+$right move workspace to output right
+bindsym $mod+$alt+Left move workspace to output left
+bindsym $mod+$alt+Right move workspace to output right
+
 #volume
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -229,12 +235,6 @@ mode "resize" {
         bindsym $up resize shrink height 30 px or 10 ppt
         bindsym $left resize grow width 30 px or 10 ppt
 
-        # resize gaps
-        bindsym minus       gaps outer current plus 10
-        bindsym plus        gaps outer current minus 10
-        bindsym Shift+minus gaps inner current plus 10
-        bindsym Shift+plus  gaps inner current minus 10
-
         # move windows
         bindsym Shift+$right move right 30
         bindsym Shift+$down  move down 30
@@ -246,14 +246,6 @@ mode "resize" {
 }
 
 mode "display" {
-
-        # toggle thinkpad modes
-        bindsym s exec dock-single
-        bindsym d exec dock-dual
-        bindsym t exec thinkpad
-
-        bindsym $left move workspace to output left
-        bindsym $right move workspace to output right
 
         bindsym Return mode "default"
         bindsym Escape mode "default"

@@ -27,7 +27,7 @@ case $menu in
         rofimodi="window"
         rofishow="window"
         ;;
-    "applications"|"apps")
+    "applications"|"apps"|"drun")
         rofimodi="drun"
         rofishow="drun"
 		flags="-show-icons"

@@ -9,6 +9,12 @@
 # hook = ''
 
 [[item]]
+file = '~/.Xresources'
+template = 'xresources'
+subtemplate = 'default-256'
+rewrite = true
+
+[[item]]
 file = '~/.config/kitty/colors.conf'
 template = 'kitty'
 subtemplate = 'default-256'
@@ -26,12 +32,6 @@ rewrite = false
 file= '~/.config/zathura/zathurarc'
 template = 'zathura'
 rewrite = false
-
-[[item]]
-file = '~/.Xresources'
-template = 'xresources'
-subtemplate = 'default-256'
-rewrite = true
 
 [[item]]
 file = '~/.config/rofi/themes/styles/colors.rasi'
@@ -75,5 +75,5 @@ end = '/* End flavours */'
 
 [[item]]
 file = '~/.config/spicetify/Themes/base16/color.ini'
-template = 'spicetify'
+template = 'spotify'
 rewrite = true
