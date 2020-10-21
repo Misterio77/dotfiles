@@ -14,7 +14,6 @@ function bw {
     source /tmp/bwtoken && /usr/bin/bw "$@"
 }
 
-
 # History
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
