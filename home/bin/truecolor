@@ -1,0 +1,20 @@
+#!/usr/bin/bash
+
+#Foreground
+if [ -n "$1" ]; then
+    red=$(printf "%d" 0x${1:0:2})
+    green=$(printf "%d" 0x${1:2:2})
+    blue=$(printf "%d" 0x${1:4:2})
+    printf "\x1b[38;2;${red};${green};${blue}m"
+fi
+if [ -n "$2" ]; then
+    red=$(printf "%d" 0x${2:0:2})
+    green=$(printf "%d" 0x${2:2:2})
+    blue=$(printf "%d" 0x${2:4:2})
+    printf "\x1b[48;2;${red};${green};${blue}m"
+fi
+
+#Background
+
+tee -
+printf "\x1b[0m"
