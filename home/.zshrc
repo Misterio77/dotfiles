@@ -13,8 +13,6 @@ setopt appendhistory
 zstyle ':completion:*' completer _complete
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
 autoload -U +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-source ~/.bash_completion/setcolor.bash
 
 # Starship
 eval "$(starship init zsh)"

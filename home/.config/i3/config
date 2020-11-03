@@ -30,7 +30,7 @@ set $base0F #59325C
 
 #colors
 # class                  border  backgr. text    indicator child_border
-client.focused           $base02 $base00 $base05 $base02 $base02
+client.focused           $base03 $base00 $base05 $base02 $base03
 client.unfocused         $base00 $base00 $base04 $base00 $base00
 client.focused_inactive  $base00 $base00 $base04 $base00 $base00
 
