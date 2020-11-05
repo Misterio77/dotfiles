@@ -1,0 +1,118 @@
+#!/usr/bin/bash
+
+setcolor_base() {
+    echo "rgb $1""ff" > /tmp/ckbpipe000
+    echo "rgb $1""ff" > /tmp/ckbpipe001
+    echo "rgb $1""ff" > /tmp/ckbpipe002
+    echo "rgb $1""ff" > /tmp/ckbpipe003
+    echo "rgb $1""ff" > /tmp/ckbpipe004
+    echo "rgb $1""ff" > /tmp/ckbpipe005
+    echo "rgb $1""ff" > /tmp/ckbpipe011
+    echo "rgb $1""ff" > /tmp/ckbpipe012
+    echo "rgb $1""ff" > /tmp/ckbpipe013
+    echo "rgb $1""ff" > /tmp/ckbpipe014
+    echo "rgb $1""ff" > /tmp/ckbpipe015
+    echo "rgb $1""ff" > /tmp/ckbpipe016
+    echo "rgb $1""ff" > /tmp/ckbpipe017
+    echo "rgb $1""ff" > /tmp/ckbpipe018
+    echo "rgb $1""ff" > /tmp/ckbpipe019
+    echo "rgb $1""ff" > /tmp/ckbpipe010
+}
+setcolor_vim() {
+    echo "rgb $1""ff" > /tmp/ckbpipe002
+}
+setcolor_player() {
+    echo "rgb $1""ff" > /tmp/ckbpipe003
+}
+setcolor_workspace() {
+    echo "rgb $1""ff" > /tmp/ckbpipe01$2
+}
+setcolor_print() {
+    echo "rgb $1""ff" > /tmp/ckbpipe004
+}
+setcolor_lock() {
+    echo "rgb $1""ff" > /tmp/ckbpipe005
+}
+
+daemon_vim() {
+    # Vim Colors
+    id=$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
+    name=$(xprop -id $id 2> /dev/null | awk '/_NET_WM_NAME/{$1=$2="";print}' | cut -d'"' -f2)
+    if [[ $name == *"NVIM"* ]]; then
+        setcolor_vim $1 & \
+    else
+        setcolor_vim $2 & \
+    fi
+}
+daemon_workspaces() {
+    # Workspace Colors
+    declare -a workspaces=()
+    while read line; do
+        info=$(echo $line | cut -d '"' -f2)
+        num=$(echo $info | cut -d ':' -f1)
+        if [ "$num" = "10" ]; then
+            num="0"
+        fi
+
+        if [ "$(echo $info | cut -d ':' -f2)" = "true" ]; then
+            workspaces[$num]=$1
+       elif [ "$(echo $info | cut -d ':' -f3)" = "true" ]; then
+            workspaces[$num]=$2
+        elif [ "$(echo $info | cut -d ':' -f4)" = "true" ]; then
+            workspaces[$num]=$3
+        else
+            workspaces[$num]=$4
+        fi
+    done <<<$(i3-msg -t get_workspaces | jq '.[] | @sh "\(.num):\(.urgent):\(.focused):\(.visible)"' | tr " " "\n")
+    for num in $(seq 0 9); do
+        color=${workspaces[$num]}
+        if [ -z "$color" ]; then
+            color=$5
+        fi
+        setcolor_workspace $color $num
+    done
+}
+daemon_player() {
+    # Playing color
+    status=$(mpris-ctl --player $(/home/bin/misterio/currentplayer) status 2>&1)
+    if [[ $status == "Playing" ]]; then
+        setcolor_player $1
+    elif [[ $status == "Paused" ]]; then
+        setcolor_player $2
+    else
+        setcolor_player $3
+    fi
+}
+daemon_print() {
+    if pgrep -x slop > /dev/null; then
+        setcolor_print $1
+    else
+        setcolor_print $2
+    fi
+}
+daemon_lock() {
+    if pgrep -x i3lock > /dev/null; then
+        setcolor_lock $1
+    elif pgrep -f multilockscreen > /dev/null; then
+        setcolor_lock $3
+    else
+        setcolor_lock $2
+    fi
+}
+
+source ~/.config/corsairkb/colors.conf
+color_base=$(pastel mix $base00 $base05 | pastel saturate 0.6 | pastel format hex | cut -d '#' -f2)
+color_trim=$(pastel saturate 0.6 $base0B | pastel format hex | cut -d '#' -f2)
+
+color_urgent=$(pastel saturate 0.6 $base09 | pastel format hex | cut -d '#' -f2)
+color_visible=$(pastel lighten 0.1 $base05 | pastel format hex | cut -d '#' -f2)
+color_unfocused=$(pastel lighten 0.1 $base03 | pastel format hex | cut -d '#' -f2)
+
+setcolor_base $color_base & \
+while sleep 0.2; do
+    daemon_vim $color_trim $color_base
+    daemon_workspaces $color_urgent $color_trim $color_visible $color_unfocused $color_base
+    daemon_player $color_trim $color_visible $color_base
+    daemon_print $color_visible $color_base
+    daemon_lock $color_trim $color_base "000000"
+done

@@ -1,0 +1,13 @@
+[Unit]
+Description="Corsair colors daemon"
+
+[Service]
+StartLimitBurst=20
+StartLimitIntervalSec=5
+Type=exec
+WorkingDirectory=/home/misterio
+ExecStart=/home/misterio/bin/corsairkb
+Restart=no
+
+[Install]
+WantedBy=default.target

@@ -114,42 +114,15 @@ bindsym $mod+$alt+Right move workspace to output right
 
 #volume
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Media player controls
 bindsym XF86AudioPlay exec --no-startup-id mpris-ctl --player $(currentplayer) pp
 bindsym XF86AudioNext exec --no-startup-id mpris-ctl --player $(currentplayer) next
 bindsym XF86AudioPrev exec --no-startup-id mpris-ctl --player $(currentplayer) prev
-
-## Macro keys ##
-set $m1 XF86Tools
-set $m2 XF86Launch5
-set $m3 XF86Launch6
-set $m4 XF86Launch7
-set $m5 XF86Launch8
-
-# M1
-bindsym        $m1 exec rofimenu applications left 舘
-
-# M2
-bindsym        $m2 exec rofimenu run center \>
-
-# M3
-bindsym        $m3 exec servidor=$(~/.config/polybar/scripts/minecraft-detailed.sh) && kitty -1 --listen-on=unix:@reloadkitty sudo -u minecraft /srv/minecraft/bin/minecraftd $servidor console
-bindsym Shift+ $m3 exec kitty -1 --listen-on=unix:@reloadkitty zsh -c 'cd /srv/minecraft && sudo su minecraft'
-
-# M4
-bindsym        $m4 exec rofimenu colors right  
-bindsym Shift+ $m4 exec --no-startup-id flavours apply
-bindsym $alt+  $m4 exec --no-startup-id toggledark || notify-send "Couldn't switch color" "This scheme doesn't have a dark/light version" -t 3000
-
-# M5
-bindsym        $m5  exec rofimenu wallpapers right  
-bindsym Shift+ $m5  exec --no-startup-id setwallpaper -R
-
 
 ### Shortcuts ###
 # Open app menu
@@ -167,14 +140,6 @@ bindsym $alt+Tab     exec rofimenu window center 
 
 # Run dialog
 bindsym $alt+F2      exec rofimenu run center \>
-
-# Power menu
-bindsym Pause        exec rofimenu power icons $(whoami)@$(hostname) 
-
-#lockscreen
-bindsym $mod+control+l exec --no-startup-id bwlock & multilockscreen -l
-bindsym $mod+Pause     exec --no-startup-id bwlock & multilockscreen -l
-bindsym Shift+Pause    exec --no-startup-id bwlock & multilockscreen -l
 
 # Close windows
 bindsym $alt+F4      kill

@@ -10,6 +10,6 @@ export PATH=$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$HOME/.cargo/bin:/usr/local/
 source /etc/profile.d/jre.sh
 
 /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
-setxkbmap -layout us -variant intl
+setxkbmap br
 exec multilockscreen -l & \
 exec i3

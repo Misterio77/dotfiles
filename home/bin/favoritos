@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+source /tmp/favoritos 2>/dev/null \
+    || echo "index=0" > /tmp/favoritos && source /tmp/favoritos
+
+declare -a favoritos=("pasque" "paraiso" "silk-dark" "atlas" "equilibrium-dark")
+
+tema=${favoritos[$index]}
+
+flavours apply $tema & favoritoswallpaper $tema
+
+index=$(($(($index + 1)) % ${#favoritos[@]}))
+echo "index=$index" > /tmp/favoritos
+

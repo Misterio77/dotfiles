@@ -1,0 +1,23 @@
+#!/usr/bin/bash
+case $1 in
+    "pasque")
+        wallpaper="forest-pixelart-purple-gold-pasque.png"
+        ;;
+
+    "paraiso")
+        wallpaper="gate-autumn-orange-gray.jpg"
+        ;;
+
+    "silk-dark")
+        wallpaper="forest-sunset-cartoon-cyan-gold.png"
+        ;;
+
+    "atlas")
+        wallpaper="no-mans-sky-orange-cyan.jpg"
+        ;;
+
+    "equilibrium-dark")
+        wallpaper="orange-blue-mountains-witcher.jpg"
+        ;;
+esac
+setwallpaper $wallpaper & \

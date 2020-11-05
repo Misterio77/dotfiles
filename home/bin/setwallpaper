@@ -23,4 +23,4 @@ fi
 
 
 feh --bg-scale --no-xinerama ${wallpaper}
-multilockscreen -u $(grep feh ~/.fehbg | cut -d \' -f 2) --span --fx >> /dev/null &
+multilockscreen -u $(grep feh ~/.fehbg | cut -d \' -f 2) --span --fx > /dev/null &
