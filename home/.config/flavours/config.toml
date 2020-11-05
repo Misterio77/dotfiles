@@ -7,6 +7,7 @@
 # start = '# Start flavours'
 # end = '# End flavours'
 # hook = ''
+
 [[item]]
 file = '~/.config/polybar/colors.ini'
 template = 'polybar'
@@ -48,6 +49,7 @@ rewrite = true
 file = '~/.config/dunst/dunstrc'
 template = 'dunst'
 rewrite = false
+hook = 'killall dunst'
 
 [[item]]
 file = '~/.themes/FlatColor/colors3'
