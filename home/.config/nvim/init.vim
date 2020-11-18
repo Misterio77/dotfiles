@@ -7,6 +7,7 @@ Plug 'lambdalisue/suda.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'cespare/vim-toml'
+Plug 'zxqfl/tabnine-vim'
 
 call plug#end()
 colorscheme noctu

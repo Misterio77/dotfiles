@@ -114,29 +114,30 @@ bindsym $mod+$alt+Right move workspace to output right
 
 #volume
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up
+bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down
+bindsym XF86AudioMute exec --no-startup-id pulseaudio-ctl mute
+bindsym XF86AudioMicMute exec --no-startup-id pulseaudio-ctl mute-input
 
 # Media player controls
-bindsym XF86AudioPlay exec --no-startup-id mpris-ctl --player $(currentplayer) pp
-bindsym XF86AudioNext exec --no-startup-id mpris-ctl --player $(currentplayer) next
-bindsym XF86AudioPrev exec --no-startup-id mpris-ctl --player $(currentplayer) prev
+bindsym XF86AudioPlay exec --no-startup-id mpris-ctl pp
+bindsym XF86AudioNext exec --no-startup-id mpris-ctl next
+bindsym XF86AudioPrev exec --no-startup-id mpris-ctl prev
 
 ### Shortcuts ###
+# Change color
+set $profile XF86Tools
+bindsym $profile exec --no-startup-id rofimenu wallpapers right 
+bindsym $alt+$profile exec --no-startup-id setwallpaper -R
+bindsym Shift+$profile exec --no-startup-id darkmode
+
+# Lockscreen
+set $lock XF86Launch5
+bindsym $lock exec --no-startup-id multilockscreen -l
+
 # Open app menu
 exec_always --no-startup-id killall xcape; xcape -t 150 -e 'Super_L=Super_L|Escape'
 bindsym $mod+Escape exec rofimenu applications left 舘
-
-# Get a password from bitwarden
-bindsym Scroll_Lock            exec (bwpass | cpc)
-# Login bitwarden
-bindsym Shift+Scroll_Lock      exec bwunlock
-# Logout bitwarden
-bindsym $alt+Scroll_Lock       exec bwlock
-# Change Window
-bindsym $alt+Tab     exec rofimenu window center  
 
 # Run dialog
 bindsym $alt+F2      exec rofimenu run center \>
@@ -233,6 +234,8 @@ bindsym $mod+c exec --no-startup-id "picom"
 bindsym $mod+Shift+c exec --no-startup-id "killall picom"
 
 ### Startup programs ###
+# start ckb
+exec --no-startup-id ckb-next --background & sleep 1 && systemctl --user restart corsaircolors
 
 # start compositor
 exec --no-startup-id picom

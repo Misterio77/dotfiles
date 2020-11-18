@@ -9,10 +9,9 @@
 # hook = ''
 
 [[item]]
-file = '~/.config/polybar/colors.ini'
+file = '~/.config/polybar/config.ini'
 template = 'polybar'
-rewrite = true
-hook = 'polybar-msg cmd restart &'
+rewrite = false
 
 [[item]]
 file = '~/.Xresources'
@@ -31,7 +30,7 @@ rewrite = true
 file = '~/.config/i3/config'
 template = 'i3'
 subtemplate = 'colors'
-hook = 'i3-msg reload &'
+hook = 'i3-msg reload'
 rewrite = false
 
 [[item]]
@@ -56,14 +55,14 @@ file = '~/.themes/FlatColor/colors3'
 template = 'gtk-flatcolor'
 subtemplate = 'gtk-3'
 rewrite = true
-hook = 'systemctl restart --user xsettingsd &'
+hook = 'systemctl restart --user xsettingsd'
 
 [[item]]
 file = '~/.themes/FlatColor/colors2'
 template = 'gtk-flatcolor'
 subtemplate = 'gtk-2'
 rewrite = true
-hook = 'gtkrc-reload &'
+#hook = 'gtkrc-reload'
 
 [[item]]
 file = '~/.config/beautifuldiscord/style.css'
@@ -82,4 +81,4 @@ rewrite = true
 file = '~/.config/corsairkb/colors.conf'
 template = 'corsairkb'
 rewrite = true
-hook = 'systemctl --user restart corsaircolors &'
+hook = 'systemctl --user restart corsaircolors'

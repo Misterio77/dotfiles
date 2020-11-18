@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+
+if [[ $* == *toggle* ]]; then
+    if [[ -f "/tmp/dark" ]]; then
+        rm /tmp/dark
+    else
+        touch /tmp/dark
+    fi
+    exit
+fi
+    
+
+if [[ -f "/tmp/dark" ]]; then
+    echo "dark"
+else
+    echo "light"
+fi
+

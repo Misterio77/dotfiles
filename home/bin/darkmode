@@ -1,0 +1,81 @@
+#!/usr/bin/bash
+function try_scheme() {
+    if [ -z "$1" ] || [ -z "$2" ]; then
+        return 1
+    fi
+	newscheme=$1
+	currentscheme=$2
+	flavours list -l | grep -x "$newscheme" >> /dev/null
+
+	if [ $? -eq 0 ] && [ "$newscheme" != "$currentscheme" ]; then
+        echo $newscheme
+		return 0
+	else
+		return 1
+	fi
+}
+
+function which_scheme() {
+    scheme=$1
+    if [[ $scheme =~ "light" ]]; then
+        ((try_scheme "${scheme/light/dark}" $scheme || \
+        try_scheme "${scheme#"light"}" $scheme || \
+        try_scheme "${scheme#"light-"}" $scheme || \
+        try_scheme "${scheme%"light"}" $scheme || \
+        try_scheme "${scheme%"-light"}" $scheme) && echo "dark" && return 0) || return 1
+
+    elif [[ $scheme =~ "dark" ]]; then 
+
+        ((try_scheme "${scheme/dark/light}" $scheme || \
+        try_scheme "${scheme#"dark"}" $scheme || \
+        try_scheme "${scheme#"dark-"}" $scheme || \
+        try_scheme "${scheme%"dark"}" $scheme || \
+        try_scheme "${scheme%"-dark"}" $scheme) && echo "light" && return 0) || return 1
+
+    else
+        (try_scheme "${scheme}-dark" $scheme || try_scheme "dark-${scheme}"  $scheme)  && echo "dark"  && return 0
+        (try_scheme "${scheme}-light" $scheme|| try_scheme "light-${scheme}" $scheme)  && echo "light" && return 0
+        return 1
+    fi
+    exit 1
+}
+
+function current() {
+    if [[ -f /tmp/dark ]]; then
+        echo "dark"
+    else
+        echo "light"
+    fi
+}
+
+function toggle() {
+    if [[ -f /tmp/dark ]]; then
+        rm /tmp/dark
+    else
+        touch /tmp/dark
+    fi
+}
+
+if [[ $* =~ "q" ]]; then
+    current
+    exit 0
+fi
+
+if [[ $(flavours current) =~ "generated" ]]; then
+    toggle
+    flavours generate $(lightdark) $(cw)
+    flavours apply generated
+    exit
+else
+    current=$(flavours current)
+    output=$(which_scheme $current)
+    new_mode=$(echo $output | cut -d ' ' -f2)
+    new_scheme=$(echo $output | cut -d ' ' -f1)
+    if [ -z "$new_scheme" ]; then
+        exit 1
+    fi
+    if [ "$(current)" != "$new_mode" ]; then
+        toggle
+    fi
+    flavours apply $new_scheme
+fi
