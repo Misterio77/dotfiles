@@ -7,7 +7,7 @@ configuration {
     fullscreen:          false;
     hide-scrollbar:      true;
     run-command: "zsh -i -c '{cmd}'";
-    run-shell-command: "kitty -1 --listen-on=unix:@reloadkitty '{cmd}'";
+    run-shell-command: "alacritty -e '{cmd}'";
     font: "Fira Sans 12";
 }
 
