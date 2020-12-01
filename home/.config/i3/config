@@ -149,6 +149,9 @@ bindsym $mod+Shift+q kill
 bindsym $mod+t       exec alacritty
 bindsym $mod+Return  exec alacritty
 
+# Browser
+bindsym $mod+b       exec qutebrowser
+
 # Screenshot
 # Entire Screen
 #bindsym --release Print        exec --no-startup-id shotgun - | save_clip
@@ -227,6 +230,8 @@ for_window [title="Friends List"] floating enable
 for_window [title="Friends List"] [floating] resize set 300 600
 for_window [instance="scrcpy"] floating enable
 for_window [class="GStreamer"] floating enable
+# Disable qutebrowser focus stealing
+focus_on_window_activation none
 
 #Toggle picom
 bindsym $mod+c exec --no-startup-id "picom"

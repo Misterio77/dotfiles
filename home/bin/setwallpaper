@@ -24,6 +24,7 @@ fi
 
 multilockscreen -u ${wallpaper} --span --fx > /dev/null &
 if [[ $(flavours current) == "generated" ]]; then
-    flavours generate $(lightdark) ${wallpaper} && flavours apply generated
+    flavours generate $(lightdark) ${wallpaper} && \
+    nohup flavours apply generated & \
 fi
 feh --bg-scale --no-xinerama ${wallpaper} &  \

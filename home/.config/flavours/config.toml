@@ -25,6 +25,12 @@ template = 'alacritty'
 subtemplate = 'default-256'
 
 [[item]]
+file = '~/.config/qutebrowser/config.py'
+template = 'qutebrowser'
+subtemplate = 'minimal'
+hook = 'reloadqb'
+
+[[item]]
 file = '~/.config/i3/config'
 template = 'i3'
 subtemplate = 'colors'

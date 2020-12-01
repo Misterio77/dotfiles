@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+ps -C qutebrowser && qutebrowser :config-source
