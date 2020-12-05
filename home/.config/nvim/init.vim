@@ -8,6 +8,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'cespare/vim-toml'
 Plug 'zxqfl/tabnine-vim'
+Plug 'vim-scripts/restore_view.vim'
 
 call plug#end()
 colorscheme noctu
@@ -22,7 +23,6 @@ let g:suda_smart_edit = 1
 let g:ale_rust_cargo_use_clippy = 1
 "Nerdtree plugin
 map <C-o> :NERDTreeToggle<CR>
-
 
 "Sensible defaults
 set autoindent

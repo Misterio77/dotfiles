@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+scheme=$1
+digit=$(flavours info -r $(flavours current) | cat | head -n 3 | tail -n 1 | head -c 2 | tail -c 1)
+if [[ $digit < 5 ]]; then
+    true
+else
+    false
+fi

@@ -139,7 +139,7 @@ exec_always --no-startup-id killall xcape; xcape -t 150 -e 'Super_L=Super_L|Esca
 bindsym $mod+Escape exec rofimenu applications left 舘
 
 # Run dialog
-bindsym $alt+F2      exec rofimenu run center \>
+bindsym $alt+F2      exec --no-startup-id rofimenu run center \>
 
 # Close windows
 bindsym $alt+F4      kill
@@ -157,8 +157,8 @@ bindsym $mod+b       exec qutebrowser
 #bindsym --release Print        exec --no-startup-id shotgun - | save_clip
 #bindsym --release Shift+Print  exec --no-startup-id shotgun - | save_file
 # Selection
-bindsym --release $mod+Print       exec --no-startup-id sel=$(slopblur) && shotgun $sel - | save_clip
-bindsym --release $mod+Shift+Print exec --no-startup-id sel=$(slopblur) && shotgun $sel - | save_file
+bindsym --release $mod+Print       exec --no-startup-id sel=$(slopblur) && shotgun $(echo $sel) - | save_clip
+bindsym --release $mod+Shift+Print exec --no-startup-id sel=$(slopblur) && shotgun $(echo $sel) - | save_file
 
 
 # scratchpad

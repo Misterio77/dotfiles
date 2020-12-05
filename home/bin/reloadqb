@@ -1,2 +1,9 @@
 #!/usr/bin/bash
+scheme=$(flavours current)
+if isdark $scheme; then
+    echo "miau"
+    sed 's/c.colors.webpage.prefers_color_scheme_dark = False/c.colors.webpage.prefers_color_scheme_dark = True/' .config/qutebrowser/config.py
+else
+    sed 's/c.colors.webpage.prefers_color_scheme_dark = True/c.colors.webpage.prefers_color_scheme_dark = False/' .config/qutebrowser/config.py
+fi
 ps -C qutebrowser && qutebrowser :config-source

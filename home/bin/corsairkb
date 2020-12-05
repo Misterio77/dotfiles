@@ -109,10 +109,10 @@ color_visible=$(pastel saturate 0.1 $base0F | pastel format hex | cut -d '#' -f2
 color_unfocused=$(pastel lighten 0.1 $base05 | pastel format hex | cut -d '#' -f2)
 
 setcolor_base $color_base & \
-while sleep 0.2; do
+while sleep 0.5; do
     daemon_vim $color_trim $color_base
     #daemon_workspaces $color_urgent $color_trim $color_visible $color_unfocused $color_base
     daemon_player $color_trim $color_visible $color_base
-    #daemon_print $color_visible $color_base
+    daemon_print $color_trim $color_base
     daemon_lock $color_trim $color_base "000000"
 done
