@@ -9,17 +9,6 @@
 # hook = ''
 
 [[item]]
-file = '~/.config/polybar/config.ini'
-template = 'polybar'
-rewrite = false
-
-[[item]]
-file = '~/.Xresources'
-template = 'xresources'
-subtemplate = 'default-256'
-rewrite = true
-
-[[item]]
 file = '~/.config/alacritty/alacritty.yml'
 template = 'alacritty'
 subtemplate = 'default-256'
@@ -31,11 +20,18 @@ subtemplate = 'minimal'
 hook = 'reloadqb'
 
 [[item]]
-file = '~/.config/i3/config'
+file = '~/.config/sway/config'
 template = 'i3'
 subtemplate = 'colors'
-hook = 'i3-msg reload'
+hook = 'swaymsg reload'
 rewrite = false
+
+[[item]]
+file = '~/.themes/FlatColor/colors3'
+template = 'gtk-flatcolor'
+subtemplate = 'gtk-3'
+rewrite = true
+hook = 'bash -c "gsettings set org.gnome.desktop.interface gtk-theme FlatColor && gsettings set org.gnome.desktop.interface gtk-theme dummy"'
 
 [[item]]
 file= '~/.config/zathura/zathurarc'
@@ -43,41 +39,9 @@ template = 'zathura'
 rewrite = false
 
 [[item]]
-file = '~/.config/rofi/themes/styles/colors.rasi'
-template = 'rofi'
-subtemplate = 'colors'
-rewrite = true
-
-[[item]]
-file = '~/.config/dunst/dunstrc'
-template = 'dunst'
-rewrite = false
-hook = 'killall dunst'
-
-[[item]]
-file = '~/.themes/FlatColor/colors3'
-template = 'gtk-flatcolor'
-subtemplate = 'gtk-3'
-rewrite = true
-hook = 'systemctl restart --user xsettingsd'
-
-[[item]]
 file = '~/.themes/FlatColor/colors2'
 template = 'gtk-flatcolor'
 subtemplate = 'gtk-2'
-rewrite = true
-
-[[item]]
-file = '~/.config/beautifuldiscord/style.css'
-template = 'styles'
-subtemplate = 'css-variables'
-rewrite = false
-start= '/* Start flavours */'
-end = '/* End flavours */'
-
-[[item]]
-file = '~/.config/spicetify/Themes/base16/color.ini'
-template = 'spotify'
 rewrite = true
 
 [[item]]

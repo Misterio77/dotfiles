@@ -7,16 +7,16 @@ setcolor_base() {
     echo "rgb $1""ff" > /tmp/ckbpipe003
     echo "rgb $1""ff" > /tmp/ckbpipe004
     echo "rgb $1""ff" > /tmp/ckbpipe005
-    echo "rgb $1""ff" > /tmp/ckbpipe011
-    echo "rgb $1""ff" > /tmp/ckbpipe012
-    echo "rgb $1""ff" > /tmp/ckbpipe013
-    echo "rgb $1""ff" > /tmp/ckbpipe014
-    echo "rgb $1""ff" > /tmp/ckbpipe015
-    echo "rgb $1""ff" > /tmp/ckbpipe016
-    echo "rgb $1""ff" > /tmp/ckbpipe017
-    echo "rgb $1""ff" > /tmp/ckbpipe018
-    echo "rgb $1""ff" > /tmp/ckbpipe019
-    echo "rgb $1""ff" > /tmp/ckbpipe010
+    #echo "rgb $1""ff" > /tmp/ckbpipe011
+    #echo "rgb $1""ff" > /tmp/ckbpipe012
+    #echo "rgb $1""ff" > /tmp/ckbpipe013
+    #echo "rgb $1""ff" > /tmp/ckbpipe014
+    #echo "rgb $1""ff" > /tmp/ckbpipe015
+    #echo "rgb $1""ff" > /tmp/ckbpipe016
+    #echo "rgb $1""ff" > /tmp/ckbpipe017
+    #echo "rgb $1""ff" > /tmp/ckbpipe018
+    #echo "rgb $1""ff" > /tmp/ckbpipe019
+    #echo "rgb $1""ff" > /tmp/ckbpipe010
 }
 setcolor_vim() {
     echo "rgb $1""ff" > /tmp/ckbpipe002
@@ -36,13 +36,13 @@ setcolor_lock() {
 
 daemon_vim() {
     # Vim Colors
-    id=$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
-    name=$(xprop -id $id 2> /dev/null | awk '/_NET_WM_NAME/{$1=$2="";print}' | cut -d'"' -f2)
-    if [[ $name == *"NVIM"* ]]; then
+    #id=$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
+    #name=$(xprop -id $id 2> /dev/null | awk '/_NET_WM_NAME/{$1=$2="";print}' | cut -d'"' -f2)
+    #if [[ $name == *"NVIM"* ]]; then
         setcolor_vim $1 & \
-    else
-        setcolor_vim $2 & \
-    fi
+    #else
+        #setcolor_vim $2 & \
+    #fi
 }
 daemon_workspaces() {
     # Workspace Colors
@@ -84,14 +84,14 @@ daemon_player() {
     fi
 }
 daemon_print() {
-    if pgrep -x slop > /dev/null; then
+    if pgrep -x slurp > /dev/null; then
         setcolor_print $1
     else
         setcolor_print $2
     fi
 }
 daemon_lock() {
-    if pgrep -x i3lock > /dev/null; then
+    if pgrep -x swaylock > /dev/null; then
         setcolor_lock $1
     elif pgrep -f multilockscreen > /dev/null; then
         setcolor_lock $3

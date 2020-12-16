@@ -32,6 +32,9 @@ elif [ -f "${HOME}/.xinitrc" ]; then
 elif [ -f "${HOME}/.xsession" ]; then
 	ui="$(tail -n 1 "${HOME}/.xsession" | cut -d ' ' -f 2)"
 	uitype='WM'
+elif [ -f "${HOME}/.zlogin" ]; then
+	ui="$(tail -n 2 "${HOME}/.zlogin" | head -n 1 | cut -d ' ' -f 2)"
+	uitype='WM'
 else
 	ui='unknown'
 	uitype='UI'

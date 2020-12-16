@@ -63,7 +63,7 @@ fi
 
 if [[ $(flavours current) =~ "generated" ]]; then
     toggle
-    flavours generate $(lightdark) $(cw)
+    flavours generate $(lightdark) $(cat ~/.bg)
     flavours apply generated
     exit
 else

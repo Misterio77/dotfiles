@@ -1,5 +1,5 @@
 set selection-clipboard clipboard
-set font "Fira Sans 11"
+set font "Fira Sans 12"
 
 # start flavours
 # Base16 Pasque

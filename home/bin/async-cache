@@ -1,7 +1,0 @@
-#!/usr/bin/bash
-run=$*
-
-cat $run.cache
-if ! pgrep -f "/usr/bin/bash $run" >/dev/null; then
-    nohup /usr/bin/bash "$run" >$run.cache 2>/dev/null &
-fi

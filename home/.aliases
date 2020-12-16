@@ -1,8 +1,3 @@
 # aliases
-alias spotify='spicetify apply watch -l'
-alias top='ytop'
-alias ls='exa'
 alias yay='paru'
-alias gitl='git log --oneline --graph --decorate --all'
-alias uget='pipenv run python uget-mdm-cli -e LC049s28jj'
-alias cat='cat.sh'
+alias ls='ls --color=always'

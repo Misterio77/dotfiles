@@ -1,7 +1,9 @@
 add_newline = true
+
 [character]
-symbol = "->"
-vicmd_symbol = "-<"
+success_symbol = "[->](bold green)"
+error_symbol = "[~>](bold red)"
+vicmd_symbol = "[<-](bold yellow)"
 
 [username]
 show_always = true

@@ -1,2 +1,0 @@
-#!/usr/bin/bash
-slop -f "-i %i -g %g" -r blur1,blur2 -b 10000 > /dev/stdout

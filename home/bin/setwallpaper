@@ -1,7 +1,7 @@
 #!/bin/bash
 # Query
 if [[ $* == *-Q* ]]; then
-    basename $(grep feh ~/.fehbg | tail -n 1 | cut -d \' -f 2)
+    basename $(cat ~/.bg)
     exit
 fi
 
@@ -21,10 +21,10 @@ else
     wallpaper=~/Pictures/Wallpapers/$1
 fi
 
-
-multilockscreen -u ${wallpaper} --span --fx > /dev/null &
 if [[ $(flavours current) == "generated" ]]; then
     flavours generate $(lightdark) ${wallpaper} && \
-    nohup flavours apply generated & \
+    flavours apply generated & \
 fi
-feh --bg-scale --no-xinerama ${wallpaper} &  \
+
+echo $wallpaper > ~/.bg
+systemctl --user restart swaybg

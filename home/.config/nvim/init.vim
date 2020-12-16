@@ -3,11 +3,9 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'lervag/vimtex'
 Plug 'airblade/vim-gitgutter'
 Plug 'dense-analysis/ale'
-Plug 'lambdalisue/suda.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'cespare/vim-toml'
-Plug 'zxqfl/tabnine-vim'
 Plug 'vim-scripts/restore_view.vim'
 
 call plug#end()
