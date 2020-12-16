@@ -21,7 +21,7 @@ hook = 'reloadqb'
 
 [[item]]
 file = '~/.config/sway/config'
-template = 'i3'
+template = 'sway'
 subtemplate = 'colors'
 hook = 'swaymsg reload'
 rewrite = false
@@ -45,7 +45,7 @@ subtemplate = 'gtk-2'
 rewrite = true
 
 [[item]]
-file = '~/.config/corsairkb/colors.conf'
-template = 'corsairkb'
+file = '~/.colors'
+template = 'bash'
 rewrite = true
-hook = 'systemctl --user restart corsaircolors'
+hook = 'systemctl --user restart rgbdaemon'

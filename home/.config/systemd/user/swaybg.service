@@ -6,7 +6,7 @@ StartLimitBurst=20
 StartLimitIntervalSec=1
 Type=exec
 WorkingDirectory=/home/misterio
-ExecStart=bash -c "/usr/bin/swaybg -i $(cat /home/misterio/.bg)"
+ExecStart=bash -c "/usr/bin/swaybg -m center -i $(cat /home/misterio/.bg)"
 Restart=no
 
 [Install]

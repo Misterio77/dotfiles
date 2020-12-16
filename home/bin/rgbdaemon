@@ -100,7 +100,7 @@ daemon_lock() {
     fi
 }
 
-source ~/.config/corsairkb/colors.conf
+source ~/.colors
 color_base=$(pastel mix $base00 $base05 | pastel darken 0.1 | pastel saturate 0.5 | pastel format hex | cut -d '#' -f2)
 color_trim=$(pastel darken 0.1 $base0B | pastel saturate 0.8 | pastel format hex | cut -d '#' -f2)
 
@@ -108,6 +108,8 @@ color_urgent=$(pastel saturate 0.6 $base09 | pastel format hex | cut -d '#' -f2)
 color_visible=$(pastel saturate 0.1 $base0F | pastel format hex | cut -d '#' -f2)
 color_unfocused=$(pastel lighten 0.1 $base05 | pastel format hex | cut -d '#' -f2)
 
+echo $color_base
+openrgb --client --device=0 --color $color_base & \
 setcolor_base $color_base & \
 while sleep 0.5; do
     daemon_vim $color_trim $color_base

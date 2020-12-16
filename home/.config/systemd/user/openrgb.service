@@ -1,0 +1,9 @@
+[Unit]
+Description=OpenRGB control
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/openrgb --server
+
+[Install]
+WantedBy=multi-user.target

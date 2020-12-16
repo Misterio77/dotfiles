@@ -1,11 +1,11 @@
 [Unit]
-Description="Corsair colors daemon"
+Description="Misterio rgb daemon"
 
 [Service]
 StartLimitBurst=20
 Type=exec
 WorkingDirectory=/home/misterio
-ExecStart=/home/misterio/bin/corsairkb
+ExecStart=/home/misterio/bin/rgbdaemon
 Restart=no
 
 [Install]
