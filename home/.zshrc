@@ -2,6 +2,8 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export QT_QPA_PLATFORMTHEME=gtk2
 export PATH=$PATH:~/bin
+export XDG_SESSION_TYPE=wayland
+export XDG_CURRENT_DESKTOP=sway
 
 # Bitwarden token
 function bw {

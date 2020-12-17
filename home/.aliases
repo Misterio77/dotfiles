@@ -1,3 +1,4 @@
 # aliases
 alias yay='paru'
 alias ls='ls --color=always'
+alias top='btm'

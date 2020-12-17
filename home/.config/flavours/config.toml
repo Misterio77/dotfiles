@@ -50,6 +50,10 @@ template = 'bash'
 rewrite = true
 hook = 'systemctl --user restart rgbdaemon'
 
+[[item]]
+file = '~/.config/waybar/colors.css'
+template = 'waybar'
+rewrite = true
 
 [[item]]
 file = '~/.config/beautifuldiscord/style.css'

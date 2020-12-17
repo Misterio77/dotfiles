@@ -1,10 +1,21 @@
-# Sway configuration
+#### Sway configuration ####
 
-# Lock screen (and transparency)
+### Startup programs ###
+## Bar ##
+bar {
+    swaybar_command waybar
+}
+## Once at startup ##
+# Lock screen (and transparency, only after unlocked)
 exec --no-startup-id 'lockscreen -i; killall -9 swayinactives; sleep 5 && swayinactives'
+
+# wallpaper
+exec --no-startup-id systemctl --user restart swaybg.service
+
+# flashfocus
 exec --no-startup-id 'killall flashfocus; flashfocus'
 
-# Layout
+### Keyboard layout
 input "6940:6985:Corsair_CORSAIR_K70_RGB_MK.2_Mechanical_Gaming_Keyboard" {
     xkb_layout br
 }
@@ -12,7 +23,9 @@ input "6940:6985:ckb1:_CORSAIR_K70_RGB_MK.2_Mechanical_Gaming_Keyboard_vKB" {
     xkb_layout br
 }
 
-# start flavours
+### Appearance ###
+## Colors ##
+# Start flavours
 ## Base16 Pasque
 # Author: Gabriel Fontes (https://github.com/Misterio77)
 
@@ -32,25 +45,12 @@ set $base0C #7263AA
 set $base0D #8E7DC6
 set $base0E #953B9D
 set $base0F #59325C
-# end flavours
-
-#colors
-# class                  border  backgr. text    indicator child_border
+# End flavours
 client.focused           $base02 $base00 $base05 $base02 $base03
 client.unfocused         $base00 $base00 $base04 $base00 $base00
 client.focused_inactive  $base00 $base00 $base04 $base00 $base00
 
-# Modifier keys
-set $mod Mod4
-set $alt Mod1
-
-# vim keybinds
-set $left   h
-set $down   j
-set $up     k
-set $right  l
-
-# Font
+## Font ##
 font pango:Fira Sans Regular 11
 
 # Gaps
@@ -58,124 +58,97 @@ gaps horizontal 20
 gaps vertical 0 
 #gaps top 65
 gaps inner 20
+
+# Border
 default_border pixel 2
 for_window [class=".*"] border pixel 2
 
-###### KEYBINDINGS #######
+### Keybinds ###
 
+## Keys definition ##
+# Modifier keys
+set $mod Mod4
+set $alt Mod1
+
+# Vim direction keys
+set $left   h
+set $down   j
+set $up     k
+set $right  l
+
+# Profile key
+set $profile XF86Tools
+# Light key
+set $light XF86Launch6
+# Lock key
+set $lock XF86Launch5
+
+## Window manager keys ##
+# Close containers
+bindsym $alt+F4      kill
+bindsym $mod+Shift+q kill
+
+# Key for dragging floating windows around
 floating_modifier $mod
 
-# change focus
+# Focus containers
 bindsym $mod+$left  focus left
-bindsym $mod+$down  focus down
-bindsym $mod+$up    focus up
-bindsym $mod+$right focus right
-
-# alternatively, you can use the cursor keys:
 bindsym $mod+Left  focus left
+
+bindsym $mod+$down  focus down
 bindsym $mod+Down  focus down
+
+bindsym $mod+$up    focus up
 bindsym $mod+Up    focus up
+
+bindsym $mod+$right focus right
 bindsym $mod+Right focus right
 
-# move focused window
+# Move containers
 bindsym $mod+Shift+$left  move left
-bindsym $mod+Shift+$down  move down
-bindsym $mod+Shift+$up    move up
-bindsym $mod+Shift+$right move right
-
-# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left  move left
+
+bindsym $mod+Shift+$down  move down
 bindsym $mod+Shift+Down  move down
+
+bindsym $mod+Shift+$up    move up
 bindsym $mod+Shift+Up    move up
+
+bindsym $mod+Shift+$right move right
 bindsym $mod+Shift+Right move right
 
-# split in horizontal and vertical orientation
+# Split orientation
 bindsym $mod+minus     split v
 bindsym $mod+backslash split h
 
-# enter fullscreen mode for the focused container
+# Fullscreen focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
+# Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+Shift+t layout tabbed
 bindsym $mod+Shift+s layout stacked
 bindsym $mod+Shift+e layout toggle split
-
-# toggle tiling / floating
+# Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-bindsym $mod+o sticky toggle
 
-# change focus between tiling / floating windows
+# Change focus between floating and tilled
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
+# Focus the parent container
 bindsym $mod+p focus parent
 bindsym $mod+a focus parent
 
-# move workspace to another monitor
+# Move entire workspace to another monitor
 bindsym $mod+$alt+$left move workspace to output left
 bindsym $mod+$alt+$right move workspace to output right
 bindsym $mod+$alt+Left move workspace to output left
 bindsym $mod+$alt+Right move workspace to output right
 
-#volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up
-bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down
-bindsym XF86AudioMute exec --no-startup-id pulseaudio-ctl mute
-bindsym XF86AudioMicMute exec --no-startup-id pulseaudio-ctl mute-input
-
-# Media player controls
-bindsym XF86AudioPlay exec --no-startup-id mpris-ctl pp
-bindsym XF86AudioNext exec --no-startup-id mpris-ctl next
-bindsym XF86AudioPrev exec --no-startup-id mpris-ctl prev
-
-### Shortcuts ###
-# Change color
-set $profile XF86Tools
-bindsym $profile       exec --no-startup-id flavours apply
-bindsym Shift+$profile exec --no-startup-id setwallpaper -R
-
-set $light XF86Launch6
-bindsym $light exec --no-startup-id darkmode
-
-# Lockscreen
-set $lock XF86Launch5
-bindsym $lock exec --no-startup-id lockscreen
-
-# Bitwarden
-bindsym Scroll_Lock         exec bwpass | wl-copy
-bindsym Shift+Scroll_Lock   exec [ -f /tmp/bwtoken ] && bwlock || bwunlock
-
-# Open app menu
-exec --no-startup-id killall xcape; xcape -t 150 -e 'Super_L=Super_L|Escape'
-bindsym $mod+Escape exec wofi --show dmenu
-
-# Run dialog
-bindsym $alt+F2      exec --no-startup-id wofi --show run
-
-# Close windows
-bindsym $alt+F4      kill
-bindsym $mod+Shift+q kill
-
-# Terminal
-bindsym $mod+t       exec alacritty
-bindsym $mod+Return  exec alacritty
-
-# Browser
-bindsym $mod+b       exec qutebrowser
-
-# Screenshot
-# Entire Screen
-bindsym --release Print        exec --no-startup-id grim - | wl-copy
-# Selection
-bindsym --release $mod+Print   exec --no-startup-id grim -g "$(slurp)" - | wl-copy
-
-
-# scratchpad
+# Scratchpad
 bindsym $mod+u       scratchpad show
 bindsym $mod+Shift+u move scratchpad
 
-# switch to workspace
+# Switch workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
@@ -187,7 +160,7 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
-# move focused container to workspace
+# Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
@@ -199,17 +172,20 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+# Reload sway
 bindsym $mod+Shift+r exec swaymsg reload
+# Exit sway
 bindsym $mod+Shift+x exec --no-startup-id zenity --question --text="Do you really want to exit?" --no-wrap --icon-name=exit && swaymsg exit
 
+# Resize mode
 mode "resize" {
-        # resize windows
+        # Resize windows
         bindsym $right resize shrink width 30 px or 10 ppt
         bindsym $down resize grow height 30 px or 10 ppt
         bindsym $up resize shrink height 30 px or 10 ppt
         bindsym $left resize grow width 30 px or 10 ppt
 
-        # move windows
+        # Move windows
         bindsym Shift+$right move right 30
         bindsym Shift+$down  move down 30
         bindsym Shift+$up    move up 30
@@ -218,28 +194,72 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
-mode "display" {
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
 bindsym $mod+r mode "resize"
-bindsym $mod+d mode "display"
 
-# Move origin out of the way
+## Media and volume ##
+# Volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up
+bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down
+bindsym XF86AudioMute exec --no-startup-id pulseaudio-ctl mute
+bindsym XF86AudioMicMute exec --no-startup-id pulseaudio-ctl mute-input
+
+# Media player controls
+bindsym XF86AudioPlay exec --no-startup-id mpris-ctl pp
+bindsym XF86AudioNext exec --no-startup-id mpris-ctl next
+bindsym XF86AudioPrev exec --no-startup-id mpris-ctl prev
+
+## Services keybinds ##
+# Lock the screen
+bindsym $lock exec --no-startup-id lockscreen
+
+# Start screencast
+bindsym $mod+s exec --no-startup-id systemctl --user is-active screencast --quiet && systemctl --user stop screencast || systemctl --user start screencast
+
+# Change color scheme (flavours)
+bindsym $profile       exec --no-startup-id flavours apply
+# Change wallpaper (also updates schme if current is generated)
+bindsym Shift+$profile exec --no-startup-id setwallpaper -R
+# Toggle dark/light mode
+bindsym $light exec --no-startup-id darkmode
+
+# Get bitwarden password (or other item)
+bindsym Scroll_Lock         exec bwpass | wl-copy
+# Lock/unlock bitwarden vault
+bindsym Shift+Scroll_Lock   exec [ -f /tmp/bwtoken ] && bwlock || bwunlock
+
+## Launch app keys ##
+# Open app menu
+exec --no-startup-id killall xcape; xcape -t 150 -e 'Super_L=Super_L|Escape'
+bindsym $mod+Escape exec wofi --show dmenu
+
+# Run dialog
+bindsym $alt+F2      exec --no-startup-id wofi --show run
+
+# Launch terminal
+bindsym $mod+t       exec alacritty
+bindsym $mod+Return  exec alacritty
+# Launch but on floating mode
+bindsym $mod+Shift+Return exec alacritty & sleep 0.1 && swaymsg floating toggle
+
+# Launch browser
+bindsym $mod+b       exec qutebrowser
+
+# Screenshot entire Screen
+bindsym --release Print        exec --no-startup-id grim - | wl-copy
+# Screenshot selection
+bindsym --release $mod+Print   exec --no-startup-id grim -g "$(slurp)" - | wl-copy
+
+### Window overrides ###
+
+## Scratchpad (hidden stuff) ##
+# Origin
 for_window [instance="origin.exe"] move scratchpad
+# Wine explorer
 for_window [instance="explorer.exe"] move scratchpad
-# Automatic floating
+
+## Floating ##
+# Zenity
 for_window [app_id="zenity"] floating enable
+# Steam
 for_window [title="Friends List"] floating enable
 for_window [title="Friends List"] [floating] resize set 300 600
-for_window [instance="scrcpy"] floating enable
-for_window [class="GStreamer"] floating enable
-# Disable qutebrowser focus stealing
-focus_on_window_activation none
-
-### Startup programs ###
-# wallpaper
-exec --no-startup-id systemctl --user restart swaybg.service
