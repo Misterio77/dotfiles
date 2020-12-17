@@ -143,7 +143,7 @@ bindsym Shift+$profile exec --no-startup-id darkmode
 
 # Lockscreen
 set $lock XF86Launch5
-bindsym $lock exec --no-startup-id multilockscreen -l
+bindsym $lock exec --no-startup-id lockscreen
 
 # Open app menu
 exec --no-startup-id killall xcape; xcape -t 150 -e 'Super_L=Super_L|Escape'
@@ -167,7 +167,7 @@ bindsym $mod+b       exec qutebrowser
 # Entire Screen
 bindsym --release Print        exec --no-startup-id grim - | wl-copy
 # Selection
-bindsym --release $mod+Print       exec --no-startup-id grim -g "$(slurp)" - | wl-copy
+bindsym --release $mod+Print   exec --no-startup-id grim -g "$(slurp)" - | wl-copy
 
 
 # scratchpad
@@ -241,7 +241,8 @@ focus_on_window_activation none
 
 ### Startup programs ###
 # start ckb
-exec --no-startup-id ckb-next --background & sleep 1 && systemctl --user restart rgbdaemon
+exec --no-startup-id 'killall ckb-next; ckb-next --background'
+exec --no-startup-id 'sleep 2 && systemctl --user restart openrgb && systemctl --user restart rgbdaemon'
 
 # wallpaper
 exec --no-startup-id systemctl --user restart swaybg.service

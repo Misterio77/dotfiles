@@ -1,9 +1,14 @@
 [Unit]
 Description=OpenRGB control
+[Unit]
+Description="OpenRGB daemon"
 
 [Service]
+StartLimitBurst=20
 Type=exec
+WorkingDirectory=/home/misterio
 ExecStart=/usr/bin/openrgb --server
+Restart=no
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
