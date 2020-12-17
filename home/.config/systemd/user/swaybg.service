@@ -3,7 +3,6 @@ Description="Sway background"
 
 [Service]
 StartLimitBurst=20
-StartLimitIntervalSec=1
 Type=exec
 WorkingDirectory=/home/misterio
 ExecStart=bash -c "/usr/bin/swaybg -m center -i $(cat /home/misterio/.bg)"

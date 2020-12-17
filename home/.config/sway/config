@@ -1,7 +1,7 @@
 # Sway configuration
 
 # Lock screen (and transparency)
-exec --no-startup-id 'lockscreen -i; killall swayinactives; sleep 1 && swayinactives'
+exec --no-startup-id 'lockscreen -i; killall -9 swayinactives; sleep 5 && swayinactives'
 exec --no-startup-id 'killall flashfocus; flashfocus'
 
 # Layout
@@ -240,9 +240,5 @@ for_window [class="GStreamer"] floating enable
 focus_on_window_activation none
 
 ### Startup programs ###
-# start ckb
-exec --no-startup-id 'killall ckb-next; ckb-next --background'
-exec --no-startup-id 'sleep 2 && systemctl --user restart openrgb && systemctl --user restart rgbdaemon'
-
 # wallpaper
 exec --no-startup-id systemctl --user restart swaybg.service

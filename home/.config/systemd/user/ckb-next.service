@@ -1,0 +1,11 @@
+[Unit]
+Description="Ckb-next daemon"
+
+[Service]
+Type=exec
+WorkingDirectory=/home/misterio
+ExecStart=/usr/bin/ckb-next --background
+Restart=no
+
+[Install]
+WantedBy=default.target
