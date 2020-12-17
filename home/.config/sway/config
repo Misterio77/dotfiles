@@ -61,11 +61,6 @@ gaps inner 20
 default_border pixel 2
 for_window [class=".*"] border pixel 2
 
-# Opacity
-set $opacity 0.9
-for_window [class=".*"] opacity $opacity
-for_window [app_id=".*"] opacity $opacity
-
 ###### KEYBINDINGS #######
 
 floating_modifier $mod
@@ -137,13 +132,19 @@ bindsym XF86AudioPrev exec --no-startup-id mpris-ctl prev
 ### Shortcuts ###
 # Change color
 set $profile XF86Tools
-bindsym $profile exec --no-startup-id rofimenu wallpapers right 
-bindsym $alt+$profile exec --no-startup-id setwallpaper -R
-bindsym Shift+$profile exec --no-startup-id darkmode
+bindsym $profile       exec --no-startup-id flavours apply
+bindsym Shift+$profile exec --no-startup-id setwallpaper -R
+
+set $light XF86Launch6
+bindsym $light exec --no-startup-id darkmode
 
 # Lockscreen
 set $lock XF86Launch5
 bindsym $lock exec --no-startup-id lockscreen
+
+# Bitwarden
+bindsym Scroll_Lock         exec bwpass | wl-copy
+bindsym Shift+Scroll_Lock   exec [ -f /tmp/bwtoken ] && bwlock || bwunlock
 
 # Open app menu
 exec --no-startup-id killall xcape; xcape -t 150 -e 'Super_L=Super_L|Escape'

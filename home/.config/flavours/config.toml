@@ -49,3 +49,12 @@ file = '~/.colors'
 template = 'bash'
 rewrite = true
 hook = 'systemctl --user restart rgbdaemon'
+
+
+[[item]]
+file = '~/.config/beautifuldiscord/style.css'
+template = 'styles'
+subtemplate = 'css-variables'
+rewrite = false
+start= '/* Start flavours */'
+end = '/* End flavours */'

@@ -7,7 +7,6 @@ Type=exec
 WorkingDirectory=/home/misterio
 ExecStart=/home/misterio/bin/rgbdaemon
 Restart=no
-After=openrgb.service ckb-next.service
 
 [Install]
 WantedBy=default.target

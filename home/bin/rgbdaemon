@@ -1,49 +1,70 @@
 #!/usr/bin/bash
 
 setcolor_base() {
-    echo "rgb $1""ff" > /tmp/ckbpipe000
-    echo "rgb $1""ff" > /tmp/ckbpipe001
-    echo "rgb $1""ff" > /tmp/ckbpipe002
-    echo "rgb $1""ff" > /tmp/ckbpipe003
-    echo "rgb $1""ff" > /tmp/ckbpipe004
-    echo "rgb $1""ff" > /tmp/ckbpipe005
-    #echo "rgb $1""ff" > /tmp/ckbpipe011
-    #echo "rgb $1""ff" > /tmp/ckbpipe012
-    #echo "rgb $1""ff" > /tmp/ckbpipe013
-    #echo "rgb $1""ff" > /tmp/ckbpipe014
-    #echo "rgb $1""ff" > /tmp/ckbpipe015
-    #echo "rgb $1""ff" > /tmp/ckbpipe016
-    #echo "rgb $1""ff" > /tmp/ckbpipe017
-    #echo "rgb $1""ff" > /tmp/ckbpipe018
-    #echo "rgb $1""ff" > /tmp/ckbpipe019
-    #echo "rgb $1""ff" > /tmp/ckbpipe010
-}
-setcolor_vim() {
-    echo "rgb $1""ff" > /tmp/ckbpipe002
+    echo "rgb $1" > $keyboard
+    echo "rgb $1" > $mouse
+
+    accents_kb="h,j,k,l,w,a,s,d,m3,g11,profswitch"
+    echo "rgb $accents_kb:$2" > $keyboard
+    accents_mouse="wheel,thumb"
+    echo "rgb $accents_mouse:$2" > $mouse
 }
 setcolor_player() {
-    echo "rgb $1""ff" > /tmp/ckbpipe003
+    echo "rgb play:$1" > $keyboard
 }
 setcolor_workspace() {
-    echo "rgb $1""ff" > /tmp/ckbpipe01$2
+    echo "rgb $2:$1" > $keyboard
 }
 setcolor_print() {
-    echo "rgb $1""ff" > /tmp/ckbpipe004
+    echo "rgb prtscn:$1" > $keyboard
 }
 setcolor_lock() {
-    echo "rgb $1""ff" > /tmp/ckbpipe005
+    echo "rgb lock:$1" > $keyboard
+}
+setcolor_tty() {
+    echo "rgb f$1:$2" > $keyboard
+}
+setcolor_bw() {
+    echo "rgb scroll:$1" > $keyboard
+}
+setcolor_mute() {
+    echo "rgb mute:$1" > $keyboard
+}
+setcolor_light() {
+    echo "rgb light:$1" > $keyboard
 }
 
-daemon_vim() {
-    # Vim Colors
-    #id=$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
-    #name=$(xprop -id $id 2> /dev/null | awk '/_NET_WM_NAME/{$1=$2="";print}' | cut -d'"' -f2)
-    #if [[ $name == *"NVIM"* ]]; then
-        setcolor_vim $1 & \
-    #else
-        #setcolor_vim $2 & \
-    #fi
+daemon_dark() {
+    if /home/misterio/bin/isdark; then
+        setcolor_light $2
+    else
+        setcolor_light $1
+    fi
 }
+daemon_mute() {
+    if [[ $(pulseaudio-ctl full-status | awk '{print $2}') == "yes" ]]; then
+        setcolor_mute $1
+    else
+        setcolor_mute $2
+    fi
+}
+daemon_bw() {
+    if [[ -f /tmp/bwtoken ]]; then
+        setcolor_bw $1
+    else
+        setcolor_bw $2
+    fi
+}
+daemon_tty() {
+    for n in 1 2 3 4 5 6; do
+        if ttystatus=$(ps -e | grep tty$n) && ! echo $ttystatus | grep "agetty"; then
+            setcolor_tty $n $1
+        else
+            setcolor_tty $n $2
+        fi
+    done
+}
+
 daemon_workspaces() {
     # Workspace Colors
     declare -a workspaces=()
@@ -93,12 +114,26 @@ daemon_print() {
 daemon_lock() {
     if pgrep -x swaylock > /dev/null; then
         setcolor_lock $1
-    elif pgrep -f multilockscreen > /dev/null; then
-        setcolor_lock $3
-    else
+    elif pgrep -x swaylock-blur > /dev/null; then
         setcolor_lock $2
+    else
+        setcolor_lock $3
     fi
 }
+bindings() {
+    echo "bind profswitch:f13" > $keyboard
+    echo "bind lock:f14" > $keyboard
+    echo "bind light:f15" > $keyboard
+}
+
+if ! pgrep -x ckb-next-daemon > /dev/null; then
+    echo "Error: Ckb-next is not running" >&2
+    exit -1
+fi
+if ! pgrep -x openrgb > /dev/null; then
+    echo "Error: OpenRGB is not running" >&2
+    exit -2
+fi
 
 source ~/.colors
 color_base=$(pastel mix $base00 $base05 | pastel darken 0.1 | pastel saturate 0.5 | pastel format hex | cut -d '#' -f2)
@@ -108,12 +143,23 @@ color_urgent=$(pastel saturate 0.6 $base09 | pastel format hex | cut -d '#' -f2)
 color_visible=$(pastel saturate 0.1 $base0F | pastel format hex | cut -d '#' -f2)
 color_unfocused=$(pastel lighten 0.1 $base05 | pastel format hex | cut -d '#' -f2)
 
-openrgb --client --device=0 --color $color_base & \
-setcolor_base $color_base & \
-while sleep 0.5; do
-    daemon_vim $color_trim $color_base
-    #daemon_workspaces $color_urgent $color_trim $color_visible $color_unfocused $color_base
-    daemon_player $color_trim $color_visible $color_base
+(openrgb --client; openrgb --client --device=0 --color $color_base --mode static) & \
+
+keyboard="/dev/input/ckb1/cmd"
+mouse="/dev/input/ckb2/cmd"
+echo active > $keyboard
+echo active > $mouse
+bindings
+
+setcolor_base $color_base $color_trim & \
+while true; do
+    #daemon_workspaces $color_urgent $color_trim $color_visible $color_unfocused $color_base & \
+    daemon_mute "000000" $color_base & \
+    daemon_bw $color_trim $color_visible & \
+    daemon_tty $color_trim $color_base & \
+    daemon_lock $color_trim "000000" $color_base & \
+    daemon_dark $color_visible $color_trim & \
+    daemon_player $color_trim $color_visible $color_base & \
     daemon_print $color_trim $color_base
-    daemon_lock $color_trim $color_base "000000"
+    sleep 0.4
 done

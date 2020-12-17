@@ -1,8 +1,7 @@
 #!/usr/bin/zsh
 source /tmp/bwtoken
 
-bwstatus=$(bw status --pretty | grep "status" | cut -d '"' -f 4)
-if [[ $bwstatus = "locked" ]]; then
+if ! [ -f /tmp/bwtoken ]; then
     notify-send "Error" "Your vault is locked" -t 4000
     exit -2
 fi
