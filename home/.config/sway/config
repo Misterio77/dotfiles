@@ -1,10 +1,9 @@
 #### Sway configuration ####
-
 ### Startup programs ###
 ## Bar ##
-#bar {
-    #swaybar_command waybar
-#}
+bar {
+    swaybar_command waybar
+}
 ## Once at startup ##
 # Lock screen (and transparency, only after unlocked)
 exec 'lockscreen -i; killall -9 swayinactives; sleep 1 && swayinactives'
@@ -46,9 +45,9 @@ set $base0D #8E7DC6
 set $base0E #953B9D
 set $base0F #59325C
 # End flavours
-client.focused           $base02 $base00 $base05 $base02 $base03
-client.unfocused         $base00 $base00 $base04 $base00 $base00
-client.focused_inactive  $base00 $base00 $base04 $base00 $base00
+client.focused           $base04 $base00 $base05 $base02 $base03
+client.unfocused         $base02 $base00 $base04 $base00 $base00
+client.focused_inactive  $base02 $base00 $base04 $base00 $base00
 
 ## Font ##
 font pango:Fira Sans Regular 12
@@ -58,14 +57,14 @@ gaps horizontal 20
 gaps inner 40
 
 # Border
-default_border pixel 0
-for_window [class=".*"] border pixel 0
+default_border pixel 2
+for_window [class=".*"] border pixel 2
 
 # Rounded borders
-border_images.focused ~/.config/sway/border.png
-border_images.focused_inactive ~/.config/sway/border.png
-border_images.unfocused ~/.config/sway/border.png
-border_images.urgent ~/.config/sway/border.png
+#border_images.focused ~/.config/sway/border.png
+#border_images.focused_inactive ~/.config/sway/border.png
+#border_images.unfocused ~/.config/sway/border.png
+#border_images.urgent ~/.config/sway/border.png
 
 ### Keybinds ###
 
@@ -97,29 +96,29 @@ floating_modifier $mod
 
 # Focus containers
 bindsym $mod+$left  focus left
-bindsym $mod+Left  focus left
+bindsym $mod+left  focus left
 
 bindsym $mod+$down  focus down
-bindsym $mod+Down  focus down
+bindsym $mod+down  focus down
 
 bindsym $mod+$up    focus up
-bindsym $mod+Up    focus up
+bindsym $mod+up    focus up
 
 bindsym $mod+$right focus right
-bindsym $mod+Right focus right
+bindsym $mod+right focus right
 
 # Move containers
 bindsym $mod+Shift+$left  move left
-bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+left  move left
 
 bindsym $mod+Shift+$down  move down
-bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+down  move down
 
 bindsym $mod+Shift+$up    move up
-bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+up    move up
 
 bindsym $mod+Shift+$right move right
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+right move right
 
 # Split orientation
 bindsym $mod+minus     split v
@@ -144,9 +143,9 @@ bindsym $mod+a focus parent
 
 # Move entire workspace to another monitor
 bindsym $mod+$alt+$left move workspace to output left
+bindsym $mod+$alt+left move workspace to output left
 bindsym $mod+$alt+$right move workspace to output right
-bindsym $mod+$alt+Left move workspace to output left
-bindsym $mod+$alt+Right move workspace to output right
+bindsym $mod+$alt+right move workspace to output right
 
 # Scratchpad
 bindsym $mod+u       scratchpad show
@@ -185,15 +184,23 @@ bindsym $mod+Shift+x exec zenity --question --text="Do you really want to exit?"
 mode "resize" {
         # Resize windows
         bindsym $right resize shrink width 30 px or 10 ppt
+        bindsym right resize shrink width 30 px or 10 ppt
         bindsym $down resize grow height 30 px or 10 ppt
+        bindsym down resize grow height 30 px or 10 ppt
         bindsym $up resize shrink height 30 px or 10 ppt
+        bindsym up resize shrink height 30 px or 10 ppt
         bindsym $left resize grow width 30 px or 10 ppt
+        bindsym left resize grow width 30 px or 10 ppt
 
         # Move windows
         bindsym Shift+$right move right 30
+        bindsym Shift+right move right 30
         bindsym Shift+$down  move down 30
+        bindsym Shift+down  move down 30
         bindsym Shift+$up    move up 30
+        bindsym Shift+up    move up 30
         bindsym Shift+$left  move left 30
+        bindsym Shift+left  move left 30
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -233,8 +240,8 @@ bindsym Shift+Scroll_Lock   exec [ -f /tmp/bwtoken ] && bwlock || bwunlock
 
 ## Launch app keys ##
 # Open app menu
-bindsym --release super_l exec wofi --show dmenu
-bindsym --release super_r exec wofi --show dmenu
+#bindsym --release super_l exec wofi --show dmenu
+#bindsym --release super_r exec wofi --show dmenu
 
 # Run dialog
 bindsym $alt+F2   exec wofi --show run
@@ -267,3 +274,20 @@ for_window [app_id="zenity"] floating enable
 # Steam
 for_window [title="Friends List"] floating enable
 for_window [title="Friends List"] [floating] resize set 300 600
+
+### Monitors ###
+set $mleft   DP-1
+set $mcenter HDMI-A-1
+set $mright  DPI-2
+
+output $mleft   res 1920x1080@75Hz pos 0    0
+output $mcenter res 2560x1080@75Hz pos 1920 48
+output $mright  res 1920x1080@75Hz pos 4480 0
+
+## Toggles
+bindsym $mod+control+left  output $mleft   toggle
+bindsym $mod+control+down  output $mcenter toggle
+bindsym $mod+control+right output $mright  toggle
+
+### Start systemd target and pass enviroment ###
+exec "systemctl --user import-environment; systemctl --user start sway-session.target"

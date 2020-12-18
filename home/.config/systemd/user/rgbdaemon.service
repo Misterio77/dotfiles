@@ -9,4 +9,4 @@ ExecStart=/home/misterio/bin/rgbdaemon
 Restart=no
 
 [Install]
-WantedBy=default.target
+WantedBy=sway-session.target

@@ -9,7 +9,7 @@
 
 window#waybar {
     background-color: @base00;
-    border-bottom: 3px solid @base02;
+    border-bottom: 2px solid @base04;
     color: @base05;
     transition-property: background-color;
     transition-duration: .5s;
@@ -38,6 +38,11 @@ window#waybar.chromium {
 
 #workspaces button:hover {
     box-shadow: inherit;
+    background-color: @base02;
+    border-bottom: 3px solid @base0A;
+}
+
+#workspaces button.visible {
     background-color: @base02;
     border-bottom: 3px solid @base0A;
 }

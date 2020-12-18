@@ -1,18 +1,8 @@
-# Example item, with default values
-# [[item]]
-# file = '~/.config/example' (required)
-# template = 'example' (required)
-# subtemplate = 'default'
-# rewrite = false
-# start = '# Start flavours'
-# end = '# End flavours'
-# hook = ''
-
-[[item]]
-file = '~/.config/sway/border.svg'
-template = 'svg-circle'
-rewrite = true
-hook = 'renderborder'
+#[[item]]
+#file = '~/.config/sway/border.svg'
+#template = 'svg-circle'
+#rewrite = true
+#hook = 'renderborder'
 
 [[item]]
 file = '~/.config/alacritty/alacritty.yml'
@@ -29,19 +19,18 @@ hook = 'reloadqb'
 file = '~/.config/sway/config'
 template = 'sway'
 subtemplate = 'colors'
-rewrite = false
+hook = 'swaymsg reload'
 
 [[item]]
 file = '~/.themes/FlatColor/colors3'
 template = 'gtk-flatcolor'
 subtemplate = 'gtk-3'
 rewrite = true
-hook = 'bash -c "gsettings set org.gnome.desktop.interface gtk-theme FlatColor && gsettings set org.gnome.desktop.interface gtk-theme dummy"'
+hook = 'bash -c "gsettings set org.gnome.desktop.interface gtk-theme dummy && gsettings set org.gnome.desktop.interface gtk-theme FlatColor"'
 
 [[item]]
 file= '~/.config/zathura/zathurarc'
 template = 'zathura'
-rewrite = false
 
 [[item]]
 file = '~/.themes/FlatColor/colors2'

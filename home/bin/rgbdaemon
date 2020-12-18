@@ -9,62 +9,69 @@ setcolor_base() {
     accents_mouse="wheel,thumb"
     echo "rgb $accents_mouse:$2" > $mouse
 }
-setcolor_player() {
-    echo "rgb play:$1" > $keyboard
-}
-setcolor_workspace() {
-    echo "rgb $2:$1" > $keyboard
-}
-setcolor_print() {
-    echo "rgb prtscn:$1" > $keyboard
-}
-setcolor_lock() {
-    echo "rgb lock:$1" > $keyboard
-}
-setcolor_tty() {
-    echo "rgb f$1:$2" > $keyboard
-}
-setcolor_bw() {
-    echo "rgb scroll:$1" > $keyboard
-}
-setcolor_mute() {
-    echo "rgb mute:$1" > $keyboard
-}
-setcolor_light() {
-    echo "rgb light:$1" > $keyboard
+setcolor_key() {
+    echo "rgb $1:$2" > $keyboard
 }
 
+daemon_monitors() {
+    swayconfig="$HOME/.config/sway/config"
+    left=$(grep "set \$mleft" $swayconfig | awk '{printf $3}')
+    center=$(grep "set \$mcenter" $swayconfig | awk '{printf $3}')
+    right=$(grep "set \$mright" $swayconfig | awk '{printf $3}')
+
+    outputs=$(swaymsg -t get_outputs)
+    left_status=$(swaymsg -t get_outputs | jq ".[] | select(.name==\"$left\").active")
+    if [[ "${left_status}"  == "true" ]]; then
+        setcolor_key "left" $1
+    else
+        setcolor_key "left" $2
+    fi
+
+    center_status=$(swaymsg -t get_outputs | jq ".[] | select(.name==\"$center\").active")
+    if [[ "${center_status}"  == "true" ]]; then
+        setcolor_key "down" $1
+    else
+        setcolor_key "down" $2
+    fi
+
+    right_status=$(swaymsg -t get_outputs | jq ".[] | select(.name==\"$right\").active")
+    if [[ "${right_status}"  == "true" ]]; then
+        setcolor_key "right" $1
+    else
+        setcolor_key "right" $2
+    fi
+}
 daemon_dark() {
     if /home/misterio/bin/isdark; then
-        setcolor_light $2
+        setcolor_key "light" $2
     else
-        setcolor_light $1
+        setcolor_key "light" $1
     fi
 }
 daemon_mute() {
     if [[ $(pulseaudio-ctl full-status | awk '{print $2}') == "yes" ]]; then
-        setcolor_mute $1
+        setcolor_key "mute" $1
     else
-        setcolor_mute $2
+        setcolor_key "mute" $2
     fi
 }
 daemon_bw() {
     if [[ -f /tmp/bwtoken ]]; then
-        setcolor_bw $1
+        setcolor_key "scroll" $1
     else
-        setcolor_bw $2
+        setcolor_key "scroll" $2
     fi
 }
 daemon_tty() {
     for n in 1 2 3 4 5 6; do
         if ttystatus=$(w | grep tty$n) && ! echo $ttystatus | grep "agetty"; then
             if echo $ttystatus | grep "way"; then
-                setcolor_tty $n $1
+                setcolor_key "f$n" $1
             else
-                setcolor_tty $n $2
+                setcolor_key "f$n" $2
             fi
         else
-            setcolor_tty $n $3
+            setcolor_key "f$n" $3
         fi
     done
 }
@@ -94,34 +101,34 @@ daemon_workspaces() {
         if [ -z "$color" ]; then
             color=$5
         fi
-        setcolor_workspace $color $num
+        setcolor_key $num $color
     done
 }
 daemon_player() {
     # Playing color
     status=$(mpris-ctl status 2>/dev/null)
     if [[ $status == "Playing" ]]; then
-        setcolor_player $1
+        setcolor_key "play" $1
     elif [[ $status == "Paused" ]]; then
-        setcolor_player $2
+        setcolor_key "play" $2
     else
-        setcolor_player $3
+        setcolor_key "play" $3
     fi
 }
 daemon_print() {
     if pgrep -x slurp > /dev/null; then
-        setcolor_print $1
+        setcolor_key "prtscn" $1
     else
-        setcolor_print $2
+        setcolor_key "prtscn" $2
     fi
 }
 daemon_lock() {
     if pgrep -x swaylock > /dev/null; then
-        setcolor_lock $1
+        setcolor_key "lock" $1
     elif pgrep -x swaylock-blur > /dev/null; then
-        setcolor_lock $2
+        setcolor_key "lock" $2
     else
-        setcolor_lock $3
+        setcolor_key "lock" $3
     fi
 }
 bindings() {
@@ -164,6 +171,7 @@ while true; do
     daemon_lock $color_trim "000000" $color_base & \
     daemon_dark $color_visible $color_trim & \
     daemon_player $color_trim $color_visible $color_base & \
-    daemon_print $color_trim $color_base
+    daemon_print $color_trim $color_base & \
+    daemon_monitors $color_trim $color_base
     sleep 0.4
 done

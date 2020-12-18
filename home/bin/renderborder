@@ -8,4 +8,3 @@ png="$dir/border.png"
 
 inkscape --export-type="png" $svg -w $size -h $size
 convert $png -draw 'fill transparent color $middle,$middle point' $png
-swaymsg reload
