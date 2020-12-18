@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+size=21
+middle=$((($size/2)+1))
+
+dir="/home/misterio/.config/sway/"
+svg="$dir/border.svg"
+png="$dir/border.png"
+
+inkscape --export-type="png" $svg -w $size -h $size
+convert $png -draw 'fill transparent color $middle,$middle point' $png
+swaymsg reload

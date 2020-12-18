@@ -9,6 +9,12 @@
 # hook = ''
 
 [[item]]
+file = '~/.config/sway/border.svg'
+template = 'svg-circle'
+rewrite = true
+hook = 'renderborder'
+
+[[item]]
 file = '~/.config/alacritty/alacritty.yml'
 template = 'alacritty'
 subtemplate = 'default-256'
@@ -23,7 +29,6 @@ hook = 'reloadqb'
 file = '~/.config/sway/config'
 template = 'sway'
 subtemplate = 'colors'
-hook = 'swaymsg reload'
 rewrite = false
 
 [[item]]

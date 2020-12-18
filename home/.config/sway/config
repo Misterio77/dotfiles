@@ -2,18 +2,18 @@
 
 ### Startup programs ###
 ## Bar ##
-bar {
-    swaybar_command waybar
-}
+#bar {
+    #swaybar_command waybar
+#}
 ## Once at startup ##
 # Lock screen (and transparency, only after unlocked)
-exec --no-startup-id 'lockscreen -i; killall -9 swayinactives; sleep 5 && swayinactives'
+exec 'lockscreen -i; killall -9 swayinactives; sleep 1 && swayinactives'
 
 # wallpaper
-exec --no-startup-id systemctl --user restart swaybg.service
+exec_always ~/.config/sway/swaybg.sh
 
 # flashfocus
-exec --no-startup-id 'killall flashfocus; flashfocus'
+exec 'killall flashfocus; flashfocus'
 
 ### Keyboard layout
 input "6940:6985:Corsair_CORSAIR_K70_RGB_MK.2_Mechanical_Gaming_Keyboard" {
@@ -51,17 +51,21 @@ client.unfocused         $base00 $base00 $base04 $base00 $base00
 client.focused_inactive  $base00 $base00 $base04 $base00 $base00
 
 ## Font ##
-font pango:Fira Sans Regular 11
+font pango:Fira Sans Regular 12
 
 # Gaps
 gaps horizontal 20
-gaps vertical 0 
-#gaps top 65
-gaps inner 20
+gaps inner 40
 
 # Border
-default_border pixel 2
-for_window [class=".*"] border pixel 2
+default_border pixel 0
+for_window [class=".*"] border pixel 0
+
+# Rounded borders
+border_images.focused ~/.config/sway/border.png
+border_images.focused_inactive ~/.config/sway/border.png
+border_images.unfocused ~/.config/sway/border.png
+border_images.urgent ~/.config/sway/border.png
 
 ### Keybinds ###
 
@@ -175,7 +179,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 # Reload sway
 bindsym $mod+Shift+r exec swaymsg reload
 # Exit sway
-bindsym $mod+Shift+x exec --no-startup-id zenity --question --text="Do you really want to exit?" --no-wrap --icon-name=exit && swaymsg exit
+bindsym $mod+Shift+x exec zenity --question --text="Do you really want to exit?" --no-wrap --icon-name=exit && swaymsg exit
 
 # Resize mode
 mode "resize" {
@@ -198,29 +202,29 @@ bindsym $mod+r mode "resize"
 
 ## Media and volume ##
 # Volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up
-bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down
-bindsym XF86AudioMute exec --no-startup-id pulseaudio-ctl mute
-bindsym XF86AudioMicMute exec --no-startup-id pulseaudio-ctl mute-input
+bindsym XF86AudioRaiseVolume exec pulseaudio-ctl up
+bindsym XF86AudioLowerVolume exec pulseaudio-ctl down
+bindsym XF86AudioMute exec pulseaudio-ctl mute
+bindsym XF86AudioMicMute exec pulseaudio-ctl mute-input
 
 # Media player controls
-bindsym XF86AudioPlay exec --no-startup-id mpris-ctl pp
-bindsym XF86AudioNext exec --no-startup-id mpris-ctl next
-bindsym XF86AudioPrev exec --no-startup-id mpris-ctl prev
+bindsym XF86AudioPlay exec mpris-ctl pp
+bindsym XF86AudioNext exec mpris-ctl next
+bindsym XF86AudioPrev exec mpris-ctl prev
 
 ## Services keybinds ##
 # Lock the screen
-bindsym $lock exec --no-startup-id lockscreen
+bindsym $lock exec lockscreen
 
 # Start screencast
-bindsym $mod+s exec --no-startup-id systemctl --user is-active screencast --quiet && systemctl --user stop screencast || systemctl --user start screencast
+bindsym $mod+s exec systemctl --user is-active screencast --quiet && systemctl --user stop screencast || systemctl --user start screencast
 
 # Change color scheme (flavours)
-bindsym $profile       exec --no-startup-id flavours apply
+bindsym $profile       exec flavours apply
 # Change wallpaper (also updates schme if current is generated)
-bindsym Shift+$profile exec --no-startup-id setwallpaper -R
+bindsym Shift+$profile exec setwallpaper -R
 # Toggle dark/light mode
-bindsym $light exec --no-startup-id darkmode
+bindsym $light exec darkmode
 
 # Get bitwarden password (or other item)
 bindsym Scroll_Lock         exec bwpass | wl-copy
@@ -229,11 +233,11 @@ bindsym Shift+Scroll_Lock   exec [ -f /tmp/bwtoken ] && bwlock || bwunlock
 
 ## Launch app keys ##
 # Open app menu
-exec --no-startup-id killall xcape; xcape -t 150 -e 'Super_L=Super_L|Escape'
-bindsym $mod+Escape exec wofi --show dmenu
+bindsym --release super_l exec wofi --show dmenu
+bindsym --release super_r exec wofi --show dmenu
 
 # Run dialog
-bindsym $alt+F2      exec --no-startup-id wofi --show run
+bindsym $alt+F2   exec wofi --show run
 
 # Launch terminal
 bindsym $mod+t       exec alacritty
@@ -245,9 +249,9 @@ bindsym $mod+Shift+Return exec alacritty & sleep 0.1 && swaymsg floating toggle
 bindsym $mod+b       exec qutebrowser
 
 # Screenshot entire Screen
-bindsym --release Print        exec --no-startup-id grim - | wl-copy
+bindsym --release Print        exec grim - | wl-copy
 # Screenshot selection
-bindsym --release $mod+Print   exec --no-startup-id grim -g "$(slurp)" - | wl-copy
+bindsym --release $mod+Print   exec grim -g "$(slurp)" - | wl-copy
 
 ### Window overrides ###
 

@@ -9,7 +9,7 @@ c.tabs.padding = {
         "bottom": 10,
         "top": 10,
 }
-c.colors.webpage.prefers_color_scheme_dark = True
+c.colors.webpage.prefers_color_scheme_dark = False
 # Start flavours
 # base16-qutebrowser (https://github.com/theova/base16-qutebrowser)
 # Base16 qutebrowser template by theova and Daniel Mulford

@@ -57,10 +57,14 @@ daemon_bw() {
 }
 daemon_tty() {
     for n in 1 2 3 4 5 6; do
-        if ttystatus=$(ps -e | grep tty$n) && ! echo $ttystatus | grep "agetty"; then
-            setcolor_tty $n $1
+        if ttystatus=$(w | grep tty$n) && ! echo $ttystatus | grep "agetty"; then
+            if echo $ttystatus | grep "way"; then
+                setcolor_tty $n $1
+            else
+                setcolor_tty $n $2
+            fi
         else
-            setcolor_tty $n $2
+            setcolor_tty $n $3
         fi
     done
 }
@@ -156,7 +160,7 @@ while true; do
     #daemon_workspaces $color_urgent $color_trim $color_visible $color_unfocused $color_base & \
     daemon_mute "000000" $color_base & \
     daemon_bw $color_trim $color_visible & \
-    daemon_tty $color_trim $color_base & \
+    daemon_tty $color_trim $color_visible $color_base & \
     daemon_lock $color_trim "000000" $color_base & \
     daemon_dark $color_visible $color_trim & \
     daemon_player $color_trim $color_visible $color_base & \

@@ -27,4 +27,4 @@ if [[ $(flavours current) == "generated" ]]; then
 fi
 
 echo $wallpaper > ~/.bg
-systemctl --user restart swaybg
+~/.config/sway/swaybg.sh

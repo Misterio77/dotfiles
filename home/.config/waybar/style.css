@@ -2,10 +2,9 @@
 * {
     border: none;
     border-radius: 0;
-    /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    min-height: 0;
+    font-family: Fira Sans;
+    font-size: 12pt;
+    min-height: 26px;
 }
 
 window#waybar {
@@ -30,31 +29,33 @@ window#waybar.chromium {
 }
 
 #workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;
-    border-bottom: 3px solid transparent;
+    margin: 0 0;
+    padding: 0 10px;
+    color: @base05;
+    background-color: @base00;
+    border-bottom: 3px solid @base04;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
     box-shadow: inherit;
-    border-bottom: 3px solid #ffffff;
+    background-color: @base02;
+    border-bottom: 3px solid @base0A;
 }
 
 #workspaces button.focused {
-    background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
+    color: @base00;
+    background-color: @base05;
+    border-bottom: 3px solid @base0B;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: @base02;
+    border-bottom: 3px solid @base08;
 }
 
 #mode {
-    background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
+    background-color: @base02;
+    border-bottom: 3px solid @base05;
 }
 
 #clock,
@@ -72,33 +73,19 @@ window#waybar.chromium {
 #mpd {
     padding: 0 10px;
     margin: 0 4px;
-    color: #ffffff;
-}
-
-#clock {
-    background-color: @base08;
+    color: @base00;
 }
 
 #battery {
     background-color: #ffffff;
-    color: #000000;
 }
 
 #battery.charging {
-    color: #ffffff;
     background-color: #26A65B;
-}
-
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
 }
 
 #battery.critical:not(.charging) {
     background-color: #f53c3c;
-    color: #ffffff;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -112,7 +99,6 @@ label:focus {
 
 #cpu {
     background-color: #2ecc71;
-    color: #000000;
 }
 
 #memory {
@@ -133,17 +119,14 @@ label:focus {
 
 #pulseaudio {
     background-color: #f1c40f;
-    color: #000000;
 }
 
 #pulseaudio.muted {
     background-color: #90b1b1;
-    color: #2a5c45;
 }
 
 #custom-media {
     background-color: #66cc99;
-    color: #2a5c45;
     min-width: 100px;
 }
 
@@ -173,12 +156,10 @@ label:focus {
 
 #idle_inhibitor.activated {
     background-color: #ecf0f1;
-    color: #2d3436;
 }
 
 #mpd {
     background-color: #66cc99;
-    color: #2a5c45;
 }
 
 #mpd.disconnected {
