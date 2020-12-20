@@ -4,7 +4,7 @@ Description="Wf screencast"
 [Service]
 Type=exec
 WorkingDirectory=/home/misterio
-ExecStart=wf-recorder --muxer=v4l2 --codec=rawvideo --pixel-format=yuv420p --file=/dev/video0 --geometry="0,0 1920x1080"
+ExecStart=/home/misterio/bin/screencast
 Restart=no
 
 [Install]

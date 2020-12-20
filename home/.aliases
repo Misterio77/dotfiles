@@ -2,3 +2,4 @@
 alias yay='paru'
 alias ls='ls --color=always'
 alias top='btm'
+alias doco="docker-compose"

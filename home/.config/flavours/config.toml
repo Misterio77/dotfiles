@@ -33,6 +33,11 @@ file= '~/.config/zathura/zathurarc'
 template = 'zathura'
 
 [[item]]
+file= '~/.config/mako/config'
+template = 'mako'
+hook = 'killall mako'
+
+[[item]]
 file = '~/.themes/FlatColor/colors2'
 template = 'gtk-flatcolor'
 subtemplate = 'gtk-2'

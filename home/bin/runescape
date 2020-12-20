@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+gamemoderun MESA_NO_ERROR='1' PULSE_LATENCY_MSEC='20' MESA_GLSL_CACHE_DIR=~/'Jagex' runescape-launcher

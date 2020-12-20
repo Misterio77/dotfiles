@@ -1,15 +1,36 @@
 {
-    "layer": "top",
-    "height": 30, // Waybar height (to be removed for auto height)
-    // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
+    "layer": "bottom",
+    "height": 45,
+    "width": 10,
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/player"],
     "modules-center": ["sway/window"],
-    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "clock", "tray"],
-    "idle_inhibitor": {
-        "format": "{icon}",
+    "modules-right": ["tray", "pulseaudio", "network", "cpu", "memory", "temperature#cpu", "temperature#gpu", "clock"],
+    "margin-left": 25,
+    "margin-right": 25,
+    "margin-top": 20,
+    "custom/player": {
+        "exec-if": "[[ $(mpris-ctl list) ]]",
+        "exec": "pkill -SIGRTMIN+8 waybar; mpris-ctl info '{\"text\": \"%track_name - %artist_name\",\"alt\": \"%play_status\"}'",
+        "return-type": "json",
+        "interval": 2,
+        "signal": 8,
+        "on-click": "mpris-ctl pp",
+        "on-click-right": "mpris-ctl stop",
+        "on-click-middle": "mpris-ctl play",
+        "on-scroll-up": "mpris-ctl previous",
+        "on-scroll-down": "mpris-ctl next",
+        "format": "{icon}   {}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "Playing": "契",
+            "Paused": "",
+            "Stopped": "栗"
+        }
+    },
+    "sway/workspaces": {
+        "format": "{icon} {name}",
+        "format-icons": {
+            "focused": "綠",
+            "default": "祿"
         }
     },
     "tray": {
@@ -20,50 +41,37 @@
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": "{usage}% ",
         "tooltip": false
     },
     "memory": {
-        "format": "{}% "
+        "format": "{used:0.2f}GB "
     },
-    "temperature": {
+    "temperature#cpu": {
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "format": "{temperatureC}°C",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "temperature#gpu": {
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
         "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+        "format-icons": ["", "", "", "", ""]
     },
     "network": {
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-wifi": "{essid} ",
+        "format-ethernet": "{ipaddr} ",
+        "format-linked": "(No IP) ",
+        "format-disconnected": "Disconnected ⚠"
     },
     "pulseaudio": {
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
+        "format": "{volume}% {icon}",
+        "format-muted": "0%  ",
         "format-icons": {
             "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
+            "headset": "",
             "portable": "",
-            "car": "",
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
-    },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
     }
 }

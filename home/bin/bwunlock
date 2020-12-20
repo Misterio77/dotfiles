@@ -6,7 +6,7 @@ while [ $(echo $?) -eq 0 ]; do
     fi
     token=$(bw unlock --raw $password)
     if [ $(echo $?) -eq 0 ]; then
-        notify-send "Unlocked" "Vault unlocked, session token added" -t 10000
+        notify-send "Unlocked" "Vault unlocked, session token added" -t 4000
         echo "export BW_SESSION=$token" > /tmp/bwtoken
         exit 0
     fi

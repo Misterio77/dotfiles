@@ -135,6 +135,20 @@ bindings() {
     echo "bind profswitch:f13" > $keyboard
     echo "bind lock:f14" > $keyboard
     echo "bind light:f15" > $keyboard
+    echo "bind thumb1:1" > $mouse
+    echo "bind thumb2:2" > $mouse
+    echo "bind thumb3:3" > $mouse
+    echo "bind thumb4:4" > $mouse
+    echo "bind thumb5:5" > $mouse
+    echo "bind thumb6:6" > $mouse
+    echo "bind thumb7:7" > $mouse
+    echo "bind thumb8:8" > $mouse
+    echo "bind thumb9:9" > $mouse
+    echo "bind thumb10:0" > $mouse
+    echo "bind thumb11:minus" > $mouse
+    echo "bind thumb12:equal" > $mouse
+    echo "bind dpiup:mouse4" > $mouse
+    echo "bind dpidn:mouse5" > $mouse
 }
 
 if ! pgrep -x ckb-next-daemon > /dev/null; then
@@ -173,5 +187,5 @@ while true; do
     daemon_player $color_trim $color_visible $color_base & \
     daemon_print $color_trim $color_base & \
     daemon_monitors $color_trim $color_base
-    sleep 0.4
+    sleep 0.5
 done

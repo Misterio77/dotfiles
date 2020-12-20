@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+if ! v4l2-ctl --list-devices; then
+    pass modprobe v4l2loopback exclusive_caps=1 card_label=WfRecorder
+fi
+wf-recorder --muxer=v4l2 --codec=rawvideo --pixel-format=yuv420p --file=/dev/video0 --geometry="0,0 1920x1080"
+

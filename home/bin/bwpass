@@ -27,8 +27,12 @@ fi
 
 result=$(bw get $field $query --nointeraction)
 if [ $(echo $?) -eq 0 ]; then
-    notify-send "$field for $query:" "$result" -t 4000
-    echo $result
+    if ! systemctl --user is-active --quiet screencast.service; then
+        notify-send "$field for $query:" "$result" -t 4000
+    else
+        notify-send "$field for $query:" "<hidden>" -t 4000
+        echo $result
+    fi
 else
     notify-send "Error" "Couldn't find $field for $query" -t 4000
     exit -1
