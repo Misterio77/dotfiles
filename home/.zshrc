@@ -48,9 +48,6 @@ export MODE_CURSOR_VISUAL="steady bar"
 export MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL"
 export MODE_INDICATOR_VICMD=">-"
 
-# disable certain expansions
-export ZSH_EXPAND_ALL_DISABLE=alias
-
 # aliases
 source "$HOME/.aliases"
 

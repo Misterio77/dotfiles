@@ -19,8 +19,6 @@ workspace 2 output $mleft
 exec swaymsg focus output $mcenter
 
 ### Startup programs ###
-# Bar
-exec waybar
 # Lock screen (and transparency, only after unlocked)
 exec 'lockscreen -i; killall -9 swayinactives; systemctl --user restart rgbdaemon && sleep 1 && swayinactives'
 
@@ -36,6 +34,10 @@ input "6940:6985:Corsair_CORSAIR_K70_RGB_MK.2_Mechanical_Gaming_Keyboard" {
 }
 input "6940:6985:ckb1:_CORSAIR_K70_RGB_MK.2_Mechanical_Gaming_Keyboard_vKB" {
     xkb_layout br
+}
+### Mouse sensitivity
+input "6940:7051:ckb2:_CORSAIR_SCIMITAR_RGB_ELITE_Gaming_Mouse_vM" {
+    pointer_accel 0.8 
 }
 
 ### Appearance ###
@@ -309,4 +311,4 @@ for_window [title="Friends List"] [floating] resize set 300 600
 exec "systemctl --user import-environment; systemctl --user start sway-session.target"
 
 ### Set xwayland primary monitor
-exec_always "(pgrep Xwayland > /dev/null) && (xrandr --output $(xrandr | grep "XWAYLAND.*2560x1080" | awk '{printf $1}') --primary)"
+exec_always "xrandr --output $(xrandr | grep "XWAYLAND.*2560x1080" | awk '{printf $1}') --primary"

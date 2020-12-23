@@ -57,7 +57,7 @@
         "tooltip": false
     },
     "memory": {
-        "format": "{used:0.2f}GB "
+        "format": "{}% "
     },
     "temperature#cpu": {
         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
