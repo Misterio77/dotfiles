@@ -1,0 +1,14 @@
+configuration {
+    icon-theme:          "Papirus";
+    drun-display-format: "{icon} {name}";
+    threads:             0;
+    scroll-method:       0;
+    disable-history:     true;
+    fullscreen:          false;
+    hide-scrollbar:      true;
+    run-command: "zsh -i -c '{cmd}'";
+    run-shell-command: "alacritty -e zsh -i -c '{cmd}'";
+    font: "Fira Sans 12";
+}
+
+@import "/home/misterio/.config/rofi/themes/run.rasi"

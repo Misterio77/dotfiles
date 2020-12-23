@@ -7,6 +7,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'cespare/vim-toml'
 Plug 'vim-scripts/restore_view.vim'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 colorscheme noctu

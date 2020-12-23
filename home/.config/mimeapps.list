@@ -1,0 +1,6 @@
+[Added Associations]
+
+[Default Applications]
+application/pdf=org.pwmt.zathura.desktop;
+inode/directory=ranger.desktop;
+text/plain=nvim.desktop;

@@ -29,6 +29,7 @@ result=$(bw get $field $query --nointeraction)
 if [ $(echo $?) -eq 0 ]; then
     if ! systemctl --user is-active --quiet screencast.service; then
         notify-send "$field for $query:" "$result" -t 4000
+        echo $result
     else
         notify-send "$field for $query:" "<hidden>" -t 4000
         echo $result

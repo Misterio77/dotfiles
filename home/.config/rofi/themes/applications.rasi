@@ -1,0 +1,111 @@
+@import "colors.rasi"
+
+window {
+    background-color:   @background;
+    text-color:         @foreground;
+    width:              600;
+    height:             800;
+    x-offset:           0;
+    y-offset:           0;
+}
+
+prompt {
+    enabled:            true;
+    padding:            0% 0.5% 0% 0%;
+    background-color:   @background;
+    text-color:         @red;
+    font:               "FiraCode Nerd Font 13";
+}
+
+
+inputbar {
+    background-color:   @background;
+    text-color:         @foreground;
+    expand:             false;
+    position:           center;
+}
+
+
+entry {
+    background-color:   @background;
+    text-color:         @foreground;
+    placeholder-color:  @foreground;
+    expand:             true;
+    horizontal-align:   0;
+    padding:            0.15% 0% 0% 0%;
+    blink:              false;
+}
+
+case-indicator {
+    background-color:               @background;
+    text-color:                     @foreground;
+    spacing:                        0;
+}
+
+
+listview {
+    background-color:               @background;
+    columns:                        5;
+    spacing:                        1%;
+    cycle:                          false;
+    dynamic:                        true;
+    layout:                         vertical;
+}
+
+mainbox {
+    background-color:               @background;
+    children:                       [ inputbar, listview ];
+    spacing:                        2%;
+    padding:                        2% 2% 2% 2%;
+}
+
+element {
+    background-color:               @background;
+    text-color:                     @foreground;
+    orientation:                    vertical;
+    border-radius:                  0%;
+    padding:                        1% 0% 1% 0%;
+}
+
+element-icon {
+    size:                           48px;
+    border:                         0px;
+}
+
+element-text {
+    expand:                         true;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    margin:                         0.5% 1% 0% 1%;
+}
+
+element normal.urgent,
+element alternate.urgent {
+    background-color:               @urgent-background;
+    text-color:                     @urgent-foreground;
+    border-radius:                  1%;
+}
+
+element normal.active,
+element alternate.active {
+    background-color:               @active-background;
+    text-color:                     @active-foreground;
+}
+
+element selected {
+    background-color:               @selected-normal-background;
+    text-color:                     @selected-normal-foreground;
+    border:                         0% 0% 0.3% 0%;
+    border-radius:                  0% 0% 0% 0%;
+    border-color:                   @border-color;
+}
+
+element selected.urgent {
+    background-color:               @selected-urgent-background;
+    text-color:                     @selected-urgent-foreground;
+}
+
+element selected.active {
+    background-color:               @selected-active-background;
+    color:                          @selected-active-foreground;
+}

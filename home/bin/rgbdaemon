@@ -64,8 +64,8 @@ daemon_bw() {
 }
 daemon_tty() {
     for n in 1 2 3 4 5 6; do
-        if ttystatus=$(w | grep tty$n) && ! echo $ttystatus | grep "agetty"; then
-            if echo $ttystatus | grep "way"; then
+        if ttystatus=$(w | grep tty$n) && ! echo $ttystatus | grep "agetty" > /dev/null; then
+            if echo $ttystatus | grep "way" > /dev/null; then
                 setcolor_key "f$n" $1
             else
                 setcolor_key "f$n" $2
@@ -80,22 +80,21 @@ daemon_workspaces() {
     # Workspace Colors
     declare -a workspaces=()
     while read line; do
-        info=$(echo $line | cut -d '"' -f2)
-        num=$(echo $info | cut -d ':' -f1)
+        num=$(echo $line | awk '{printf $2}')
         if [ "$num" = "10" ]; then
             num="0"
         fi
 
-        if [ "$(echo $info | cut -d ':' -f2)" = "true" ]; then
+        if echo $line | grep "urgent" -q; then
             workspaces[$num]=$1
-       elif [ "$(echo $info | cut -d ':' -f3)" = "true" ]; then
+        elif echo $line | grep "focused" -q; then
             workspaces[$num]=$2
-        elif [ "$(echo $info | cut -d ':' -f4)" = "true" ]; then
-            workspaces[$num]=$3
-        else
+        elif echo $line | grep "off-screen" -q; then
             workspaces[$num]=$4
+        else
+            workspaces[$num]=$3
         fi
-    done <<<$(i3-msg -t get_workspaces | jq '.[] | @sh "\(.num):\(.urgent):\(.focused):\(.visible)"' | tr " " "\n")
+    done <<<$(swaymsg -t get_workspaces -p | grep Workspace)
     for num in $(seq 0 9); do
         color=${workspaces[$num]}
         if [ -z "$color" ]; then
@@ -106,7 +105,7 @@ daemon_workspaces() {
 }
 daemon_player() {
     # Playing color
-    status=$(mpris-ctl status 2>/dev/null)
+    status=$(mpris-ctl status 2>/dev/null | head -n 1)
     if [[ $status == "Playing" ]]; then
         setcolor_key "play" $1
     elif [[ $status == "Paused" ]]; then
@@ -163,7 +162,6 @@ fi
 source ~/.colors
 color_base=$(pastel mix $base00 $base05 | pastel darken 0.1 | pastel saturate 0.5 | pastel format hex | cut -d '#' -f2)
 color_trim=$(pastel darken 0.1 $base0B | pastel saturate 0.8 | pastel format hex | cut -d '#' -f2)
-
 color_urgent=$(pastel saturate 0.6 $base09 | pastel format hex | cut -d '#' -f2)
 color_visible=$(pastel saturate 0.1 $base0F | pastel format hex | cut -d '#' -f2)
 color_unfocused=$(pastel lighten 0.1 $base05 | pastel format hex | cut -d '#' -f2)
@@ -181,11 +179,11 @@ while true; do
     #daemon_workspaces $color_urgent $color_trim $color_visible $color_unfocused $color_base & \
     daemon_mute "000000" $color_base & \
     daemon_bw $color_trim $color_visible & \
-    daemon_tty $color_trim $color_visible $color_base & \
+    #daemon_tty $color_trim $color_visible $color_base & \
     daemon_lock $color_trim "000000" $color_base & \
     daemon_dark $color_visible $color_trim & \
-    daemon_player $color_trim $color_visible $color_base & \
-    daemon_print $color_trim $color_base & \
-    daemon_monitors $color_trim $color_base
-    sleep 0.5
+    daemon_player $color_trim $color_visible $color_base &  \
+    daemon_print $color_trim $color_base &  \
+    #daemon_monitors $color_trim $color_base  
+    sleep 0.8
 done

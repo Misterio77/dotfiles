@@ -53,6 +53,7 @@ hook = 'systemctl --user restart rgbdaemon'
 file = '~/.config/waybar/colors.css'
 template = 'waybar'
 rewrite = true
+hook = 'pkill -SIGRTMIN+7 waybar'
 
 [[item]]
 file = '~/.config/beautifuldiscord/style.css'
@@ -61,3 +62,9 @@ subtemplate = 'css-variables'
 rewrite = false
 start= '/* Start flavours */'
 end = '/* End flavours */'
+
+[[item]]
+file = '~/.config/rofi/themes/colors.rasi'
+template = 'rofi'
+subtemplate = 'colors'
+rewrite = true
