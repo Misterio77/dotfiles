@@ -1,0 +1,18 @@
+[Unit]
+Description=Minecraft server docker-compose (%I)
+Requires=docker.service
+After=docker.service
+
+[Service]
+User=misterio
+Group=misterio
+Restart=always
+WorkingDirectory=/srv/minecraft/server
+ExecStartPre=/usr/bin/git-annex unlock servers/%I
+#ExecStart=/usr/bin/docker-compose up -V --build --force-recreate %I
+ExecStart=/usr/bin/docker-compose up --build %I
+#ExecStop=/usr/bin/docker-compose rm -svf %I
+ExecStop=/usr/bin/docker-compose stop %I
+
+[Install]
+WantedBy=multi-user.target

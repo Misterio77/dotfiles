@@ -1,8 +1,2 @@
-# Configuration for encrypted block devices.
-# See crypttab(5) for details.
-
-# NOTE: Do not list your root (/) partition here, it must be set up
-#       beforehand by the initramfs (/etc/mkinitcpio.conf).
-
-# <name>       <device>                                     <password>              <options>
-home           UUID=b18442f8-e8f2-482b-a4dc-4065724f7b31    none     discard
+data           UUID=b18442f8-e8f2-482b-a4dc-4065724f7b31    none     discard
+backups        UUID=c5f67eb1-0953-4352-bade-663cfb6762b1    none

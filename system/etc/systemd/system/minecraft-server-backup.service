@@ -1,0 +1,12 @@
+[Unit]
+Description=Minecraft Server World Backup
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/srv/minecraft/server/backup.sh
+User=misterio
+Group=misterio
+
+[Install]
+WantedBy=multi-user.target

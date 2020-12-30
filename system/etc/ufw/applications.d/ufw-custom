@@ -1,0 +1,9 @@
+[steam-link]
+title=Steam link
+description=Ports for steam link remote play
+ports=27031:27036/udp|27036/tcp
+
+[minecraft]
+title=Minecraft server
+description=Minecraft game server, for both java and bedrock (through geyser)
+ports=4445,19132,25565/udp|25565/tcp

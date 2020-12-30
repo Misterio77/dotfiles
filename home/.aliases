@@ -5,3 +5,4 @@ alias top='btm'
 alias doco="docker-compose"
 alias cat=''
 alias runescape-launcher="gamemoderun MESA_NO_ERROR='1' PULSE_LATENCY_MSEC='20' MESA_GLSL_CACHE_DIR=/home/misterio/'Jagex' runescape-launcher"
+alias lzd="lazydocker"
