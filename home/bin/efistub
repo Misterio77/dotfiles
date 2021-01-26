@@ -9,7 +9,7 @@ while read line; do
 	sudo efibootmgr -b $entry -B
 done
 
-rootuuid=$(lsblk -o LABEL,UUID | grep $disk | cut -d ' ' -f3)
+rootuuid=$(lsblk -o LABEL,UUID | grep $disk | awk '{printf $2}')
 
 sudo efibootmgr -c -L "$label (Zen)" -l /vmlinuz-linux-zen -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\initramfs-linux-zen.img $parameters" --verbose
 sudo efibootmgr -c -L "$label (Vanilla)" -l /vmlinuz-linux -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\initramfs-linux.img $parameters" --verbose

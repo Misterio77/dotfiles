@@ -1,0 +1,6 @@
+*.db
+*credentials*
+gce
+logs
+config_sentinel
+.last_survey_prompt.yaml

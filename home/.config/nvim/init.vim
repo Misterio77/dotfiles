@@ -56,7 +56,7 @@ endif
 
 "Tabs
 set tabstop=4 "How many spaces equals a tab
-set softtabstop=4 "How manu columns when you hit tab
+set softtabstop=4 "How many columns when you hit tab
 set shiftwidth=4 "How many to indent with reindent ops
 
 set expandtab "Use spaces

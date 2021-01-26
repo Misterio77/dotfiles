@@ -261,7 +261,7 @@ bindsym Shift+$profile exec setwallpaper -R
 # Toggle dark/light mode
 bindsym $light exec darkmode
 # Toggle keyboard and mouse lights
-bindsym Shift+$light exec systemctl --user is-active --quiet rgbdaemon && (systemctl --user stop rgbdaemon && echo "rgb 000000" > /dev/input/ckb1/cmd && echo "rgb 000000" > /dev/input/ckb2/cmd) || systemctl --user start rgbdaemon
+bindsym Shift+$light exec systemctl --user is-active --quiet rgbdaemon && (systemctl --user stop rgbdaemon && rgboff) || systemctl --user start rgbdaemon
 
 # Get bitwarden password (or other item)
 bindsym Scroll_Lock         exec (bwpass | wl-copy)
@@ -301,6 +301,7 @@ for_window [instance="explorer.exe"] move scratchpad
 ## Floating ##
 # Zenity
 for_window [app_id="zenity"] floating enable
+for_window [app_id="yad"] floating enable
 # Gnome Calculator
 for_window [app_id="gnome-calculator"] floating enable
 # Steam

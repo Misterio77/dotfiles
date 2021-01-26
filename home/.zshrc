@@ -1,10 +1,13 @@
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export QT_QPA_PLATFORMTHEME=gtk2
-export PATH=$PATH:~/bin
+export PATH=$PATH:~/bin:~/.cargo/bin
+export QT_SCALE_FACTOR=1
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+export GDK_BACKEND=wayland
 export QT_QPA_PLATFORM=wayland
 export XDG_SESSION_TYPE=wayland
 export XDG_CURRENT_DESKTOP=sway
+#export QT_QPA_PLATFORMTHEME=gtk2
 
 # Bitwarden token
 function bw {
@@ -25,6 +28,9 @@ autoload -U +X compinit && compinit
 # Starship
 eval "$(starship init zsh)"
 HYPHEN_INSENSITIVE="true"
+
+# Direnv
+eval "$(direnv hook zsh)"
 
 # Zinit
 source "$HOME/.zinit/bin/zinit.zsh"

@@ -1,0 +1,97 @@
+gui:
+  scrollHeight: 2
+  theme:
+    activeBorderColor:
+    - green
+    - bold
+    inactiveBorderColor:
+    - white
+    optionsTextColor:
+    - blue
+  returnImmediately: true
+  wrapMainPanel: false
+reporting: "off"
+confirmOnQuit: false
+commandTemplates:
+  restartService: '{{ .DockerCompose }} restart {{ .Service.Name }}'
+  startService: '{{ .DockerCompose }} start {{ .Service.Name }}'
+  dockerCompose: docker-compose
+  stopService: '{{ .DockerCompose }} stop {{ .Service.Name }}'
+  serviceLogs: '{{ .DockerCompose }} logs --since=60m --follow {{ .Service.Name }}'
+  viewServiceLogs: '{{ .DockerCompose }} logs --follow {{ .Service.Name }}'
+  rebuildService: '{{ .DockerCompose }} up -d --build --force-recreate {{ .Service.Name }}'
+  recreateService: '{{ .DockerCompose }} up -d --force-recreate {{ .Service.Name }}'
+  viewContainerLogs: docker logs --timestamps --follow --since=60m {{ .Container.ID
+    }}
+  containerLogs: docker logs --timestamps --follow --since=60m {{ .Container.ID }}
+  allLogs: '{{ .DockerCompose }} logs --tail=300 --follow'
+  viewAlLogs: '{{ .DockerCompose }} logs'
+  dockerComposeConfig: '{{ .DockerCompose }} config'
+  checkDockerComposeConfig: '{{ .DockerCompose }} config --quiet'
+  serviceTop: '{{ .DockerCompose }} top {{ .Service.Name }}'
+customCommands:
+  containers:
+  - name: bash
+    attach: true
+    command: docker exec -it {{ .Container.ID }} /bin/bash
+    serviceNames: []
+  - name: RCON
+    attach: true
+    command: docker exec -it {{ .Container.ID }} rcon-cli
+    serviceNames: []
+bulkCommands:
+  containers: []
+  services:
+  - name: up
+    attach: false
+    command: '{{ .DockerCompose }} up -d'
+  - name: up (attached)
+    attach: false
+    command: '{{ .DockerCompose }} up'
+  - name: stop
+    attach: false
+    command: '{{ .DockerCompose }} stop'
+  - name: pull
+    attach: false
+    command: '{{ .DockerCompose }} pull'
+  - name: build
+    attach: false
+    command: '{{ .DockerCompose }} build --parallel --force-rm'
+  - name: down
+    attach: false
+    command: '{{ .DockerCompose }} down'
+  - name: down with volumes
+    attach: false
+    command: '{{ .DockerCompose }} down --volumes'
+  - name: down with images
+    attach: false
+    command: '{{ .DockerCompose }} down --rmi all'
+  - name: down with volumes and images
+    attach: false
+    command: '{{ .DockerCompose }} down --volumes --rmi all'
+  images: []
+  volumes: []
+oS:
+  openCommand: sh -c "xdg-open {{filename}} >/dev/null"
+  openLinkCommand: sh -c "xdg-open {{link}} >/dev/null"
+update:
+  dockerRefreshInterval: 100ms
+stats:
+  graphs:
+  - min: 0
+    max: 0
+    height: 0
+    caption: CPU (%)
+    statPath: DerivedStats.CPUPercentage
+    color: cyan
+    minType: ""
+    maxType: ""
+  - min: 0
+    max: 0
+    height: 0
+    caption: Memory (%)
+    statPath: DerivedStats.MemoryPercentage
+    color: green
+    minType: ""
+    maxType: ""
+  maxDuration: 3m0s

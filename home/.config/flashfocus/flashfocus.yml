@@ -6,7 +6,7 @@
 flash-opacity: 0.85
 
 # Windows are restored to this opacity value at the end of a flash.
-default-opacity: 0.95
+default-opacity: 0.98
 
 # Length of flash in milliseconds.
 time: 200

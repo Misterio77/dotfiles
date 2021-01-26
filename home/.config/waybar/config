@@ -73,7 +73,8 @@
         "format-wifi": "{essid} ",
         "format-ethernet": "{ipaddr} ",
         "format-linked": "(No IP) ",
-        "format-disconnected": "Disconnected ⚠"
+        "format-disconnected": "Disconnected ⚠",
+        "interval": 5
     },
     "pulseaudio": {
         "format": "{volume}% {icon}",

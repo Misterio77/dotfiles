@@ -6,10 +6,17 @@ if ! [ -f /tmp/bwtoken ]; then
     exit -2
 fi
 
+startingquery=""
+# Check if focused app is qutebrowser
+if swaymsg -t get_tree | grep "\"focused\": true" -B 10 | grep "qutebrowser" -q; then
+    qutebrowser :yank
+    startingquery=$(wl-paste | cut -d '/' -f3 | sed s/"www."//)
+fi
+
 if [ -n "$2" ]; then
 	query=$2
 else
-    query=$(zenity --entry --text="Account/site to search on bitwarden")
+    query=$(zenity --entry --text="Account/site to search on bitwarden" --entry-text=$startingquery)
     if [ $(echo $?) -ne 0 ]; then
         exit -1
     fi
