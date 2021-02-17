@@ -1,15 +1,31 @@
 #!/usr/bin/bash
+efibootmgr
+
 disk="Arch"
 label="Arch Linux"
-parameters="quiet splash loglevel=0 rd.systemd.show_status=auto rd.udev.log_priority=3 vt.global_cursor_default=0 amd_iommu=off"
+parameters="quiet splash loglevel=0 rd.systemd.show_status=auto rd.udev.log_priority=3 vt.global_cursor_default=0 amd_iommu=off amdgpu.ppfeaturemask=0xffffffff"
+echo ""
+echo "Using parameters: $parameters"
+echo ""
 
+echo "Searching for old '$label' entries"
 efibootmgr | grep "$label" | cut -d '*' -f1 | \
 while read line; do
     entry=$(echo $line | cut -d 't' -f2)
-	sudo efibootmgr -b $entry -B
+    echo "Removing entry: $entry..."
+	sudo efibootmgr -b $entry -B > /dev/null && echo "done"
 done
+echo ""
 
 rootuuid=$(lsblk -o LABEL,UUID | grep $disk | awk '{printf $2}')
+echo "Using disk $rootuuid"
+echo ""
 
-sudo efibootmgr -c -L "$label (Zen)" -l /vmlinuz-linux-zen -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\initramfs-linux-zen.img $parameters" --verbose
-sudo efibootmgr -c -L "$label (Vanilla)" -l /vmlinuz-linux -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\initramfs-linux.img $parameters" --verbose
+echo "Adding zen entry"
+sudo efibootmgr -c -L "$label (Zen)" -l /vmlinuz-linux-zen -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\initramfs-linux-zen.img $parameters" > /dev/null
+echo ""
+echo "Adding vanilla entry"
+sudo efibootmgr -c -L "$label (Vanilla)" -l /vmlinuz-linux -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\initramfs-linux.img $parameters" > /dev/null
+echo ""
+
+efibootmgr -v
