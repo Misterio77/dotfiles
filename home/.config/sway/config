@@ -8,6 +8,7 @@ set $mleft   DP-1
 ## Resolution and disposition
 output $mleft   res 1920x1080@60Hz pos 0    0
 output $mcenter res 2560x1080@75Hz pos 1920 48
+#adaptive_sync on max_render_time 1
 #output $mright  res 1920x1080@60Hz pos 4480 0
 
 ## Workspaces
@@ -256,8 +257,11 @@ bindsym $mod+s exec systemctl --user is-active --quiet screencast && (systemctl 
 
 # Change color scheme (flavours)
 bindsym $profile       exec flavours apply
-# Change wallpaper (also updates schme if current is generated)
+# Change wallpaper (also updates scheme if current is generated)
 bindsym Shift+$profile exec setwallpaper -R
+# Generates color scheme based on wallpaper and changes to it
+bindsym $alt+$profile exec flavours generate $(lightdark) $(cat ~/.bg) && flavours apply generated
+
 # Toggle dark/light mode
 bindsym $light exec darkmode
 # Toggle keyboard and mouse lights
@@ -279,8 +283,6 @@ bindsym $alt+F2   exec rofimenu run \> run
 # Launch terminal
 bindsym $mod+t       exec alacritty
 bindsym $mod+Return  exec alacritty
-# Launch but on floating mode
-bindsym $mod+Shift+Return exec alacritty & sleep 0.1 && swaymsg floating toggle
 
 # Launch browser
 bindsym $mod+b       exec qutebrowser
@@ -307,6 +309,8 @@ for_window [app_id="gnome-calculator"] floating enable
 # Steam
 for_window [title="Friends List"] floating enable
 for_window [title="Friends List"] [floating] resize set 300 600
+# Discord updater
+for_window [title="Discord Updater"] floating enable
 
 ### Start systemd target and pass enviroment ###
 exec "systemctl --user import-environment; systemctl --user start sway-session.target"
