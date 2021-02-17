@@ -50,9 +50,9 @@ daemon_dark() {
 }
 daemon_mute() {
     if [[ $(pulseaudio-ctl full-status | awk '{print $2}') == "yes" ]]; then
-        setcolor_key "mute" $1
-    else
         setcolor_key "mute" $2
+    else
+        setcolor_key "mute" $1
     fi
 }
 daemon_bw() {
@@ -177,10 +177,10 @@ bindings
 
 setcolor_base $color_base $color_trim & \
 while true; do
-    #daemon_workspaces $color_urgent $color_trim $color_visible $color_unfocused $color_base & \
+    daemon_workspaces $color_urgent $color_trim $color_visible $color_unfocused $color_base & \
     daemon_mute "000000" $color_base & \
     daemon_bw $color_trim $color_visible & \
-    #daemon_tty $color_trim $color_visible $color_base & \
+    daemon_tty $color_trim $color_visible $color_base & \
     daemon_lock $color_trim "000000" $color_base & \
     daemon_dark $color_visible $color_trim & \
     daemon_player $color_trim $color_visible $color_base &  \
