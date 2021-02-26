@@ -7,3 +7,13 @@ ports=27031:27036/udp|27036/tcp
 title=Minecraft server
 description=Minecraft game server, for both java and bedrock (through geyser)
 ports=4445,19132,25565/udp|25565/tcp
+
+[knockd]
+title=Knock Daemon
+description=Knocking ports for temporarily allowing SSH connections
+ports=2112,1609/tcp
+
+[valheim]
+title=Valheim Server
+description=A sandbox rpg game
+ports=2456,2457,2458/udp|2456,2457,2458/tcp
