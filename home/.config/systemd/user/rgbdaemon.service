@@ -6,6 +6,8 @@ StartLimitBurst=20
 Type=exec
 WorkingDirectory=/home/misterio
 ExecStart=/home/misterio/bin/rgbdaemon
+ExecStopPost=/home/misterio/bin/rgboff
+ExecReload=kill -HUP $MAINPID
 Restart=no
 
 [Install]

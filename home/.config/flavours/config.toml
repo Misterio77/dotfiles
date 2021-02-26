@@ -47,7 +47,7 @@ rewrite = true
 file = '~/.colors'
 template = 'bash'
 rewrite = true
-hook = 'systemctl --user restart rgbdaemon'
+hook = 'systemctl --user reload rgbdaemon'
 
 [[item]]
 file = '~/.config/waybar/colors.css'
