@@ -8,9 +8,19 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'cespare/vim-toml'
 Plug 'vim-scripts/restore_view.vim'
 Plug 'tpope/vim-surround'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'plasticboy/vim-markdown'
+Plug 'rust-lang/rust.vim'
+Plug 'junegunn/rainbow_parentheses.vim'
 
 call plug#end()
 colorscheme noctu
+
+"Enable rainbow parenthesis
+let g:rainbow_active = 1
+
+"Markdown preview title
+let g:mkdp_page_title = '${name}'
 
 "Vimtex use zathura
 let g:vimtex_view_method = 'zathura'
@@ -22,6 +32,39 @@ let g:suda_smart_edit = 1
 let g:ale_rust_cargo_use_clippy = 1
 "Nerdtree plugin
 map <C-o> :NERDTreeToggle<CR>
+
+"Folding
+set foldmethod=syntax
+let g:rust_fold = 1
+"Set fold level to highest in file
+"so everything starts out unfolded at just the right level
+autocmd BufWinEnter * let &foldlevel = max(map(range(1, line('$')), 'foldlevel(v:val)'))
+
+"Conceal
+set conceallevel=2
+
+"Tabs
+set tabstop=4 "How many spaces equals a tab
+set softtabstop=4 "How many columns when you hit tab
+set shiftwidth=4 "How many to indent with reindent ops
+
+set expandtab "Use spaces
+"set noexpandtab "Use tabs
+
+"Line numbers
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set number norelativenumber
+augroup END
+
+set <up>=^[OA
+set <down>=^[OB
+set <right>=^[OC
+set <left>=^[OD
+nnoremap <CR> G
+syntax match Tab /\t/
+set title
 
 "Sensible defaults
 set autoindent
@@ -53,27 +96,3 @@ endif
 if empty(mapcheck('<C-W>', 'i'))
   inoremap <C-W> <C-G>u<C-W>
 endif
-
-"Tabs
-set tabstop=4 "How many spaces equals a tab
-set softtabstop=4 "How many columns when you hit tab
-set shiftwidth=4 "How many to indent with reindent ops
-
-set expandtab "Use spaces
-"set noexpandtab "Use tabs
-
-"Line numbers
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set number norelativenumber
-augroup END
-
-set <up>=^[OA
-set <down>=^[OB
-set <right>=^[OC
-set <left>=^[OD
-nnoremap <CR> G
-syntax match Tab /\t/
-set title
-set clipboard+=unnamedplus
