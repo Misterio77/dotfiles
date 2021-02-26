@@ -8,3 +8,6 @@ alias runescape-launcher="gamemoderun MESA_NO_ERROR='1' PULSE_LATENCY_MSEC='20' 
 alias lzd="lazydocker"
 alias jqless="jq -C | less -R"
 alias beep="paplay /usr/share/sounds/freedesktop/stereo/complete.oga"
+alias dragon="dragon-drag-and-drop"
+alias fzf="fzf --color=16"
+alias v="vi"
