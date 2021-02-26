@@ -6,8 +6,6 @@ fi
 monitors=$(swaymsg -t get_outputs -r | jq 'map(.id,.name) | join (" ")' | cut -d '"' -f2)
 
 
-if monitor=$(zenity --list --text="Selecione o monitor" --radiolist --column="Select" --column="Monitor" $monitors); then
-    wf-recorder --muxer=v4l2 --codec=rawvideo --pixel-format=yuv420p --file=/dev/video0 --output $monitor
-else
-    exit 1
-fi
+monitor=$(zenity --list --text="Selecione o monitor" --radiolist --column="Select" --column="Monitor" $monitors) && \
+    wf-recorder --muxer=v4l2 --codec=rawvideo --pixel-format=yuv420p --file=/dev/video0 --output $monitor || \
+    exit -1

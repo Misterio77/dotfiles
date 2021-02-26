@@ -1,5 +1,10 @@
 #### Sway configuration ####
-#### Monitors ###
+
+### Lock screen ###
+# Execute as early as possible
+exec 'lockscreen -i'
+
+### Monitors ###
 ## Variables
 set $mcenter HDMI-A-1
 set $mleft   DP-1
@@ -18,28 +23,6 @@ workspace 2 output $mleft
 
 ## First focused workspace
 exec swaymsg focus output $mcenter
-
-### Startup programs ###
-# Lock screen (and transparency, only after unlocked)
-exec 'lockscreen -i; killall -9 swayinactives; systemctl --user restart rgbdaemon && sleep 1 && swayinactives'
-
-# wallpaper
-exec_always ~/.config/sway/swaybg.sh
-
-# flashfocus
-exec 'killall flashfocus; flashfocus'
-
-### Keyboard layout
-input "6940:6985:Corsair_CORSAIR_K70_RGB_MK.2_Mechanical_Gaming_Keyboard" {
-    xkb_layout br
-}
-input "6940:6985:ckb1:_CORSAIR_K70_RGB_MK.2_Mechanical_Gaming_Keyboard_vKB" {
-    xkb_layout br
-}
-### Mouse sensitivity
-input "6940:7051:ckb2:_CORSAIR_SCIMITAR_RGB_ELITE_Gaming_Mouse_vM" {
-    pointer_accel 0.8 
-}
 
 ### Appearance ###
 ## Colors ##
@@ -76,8 +59,8 @@ gaps horizontal 15
 gaps inner 30
 
 # Border
-default_border pixel 2
-for_window [class=".*"] border pixel 2
+default_border pixel 3
+for_window [class=".*"] border pixel 3
 
 # Rounded borders
 #border_images.focused ~/.config/sway/border.png
@@ -85,7 +68,19 @@ for_window [class=".*"] border pixel 2
 #border_images.unfocused ~/.config/sway/border.png
 #border_images.urgent ~/.config/sway/border.png
 
-### Keybinds ###
+### Keys and binds ###
+
+### Keyboard layout
+input "6940:6985:Corsair_CORSAIR_K70_RGB_MK.2_Mechanical_Gaming_Keyboard" {
+    xkb_layout br
+}
+input "6940:6985:ckb1:_CORSAIR_K70_RGB_MK.2_Mechanical_Gaming_Keyboard_vKB" {
+    xkb_layout br
+}
+### Mouse sensitivity
+input "6940:7051:ckb2:_CORSAIR_SCIMITAR_RGB_ELITE_Gaming_Mouse_vM" {
+    pointer_accel 0.8 
+}
 
 ## Keys definition ##
 # Modifier keys
@@ -236,6 +231,7 @@ bindsym $mod+r mode "resize"
 bindsym XF86AudioRaiseVolume exec pulseaudio-ctl up
 bindsym XF86AudioLowerVolume exec pulseaudio-ctl down
 bindsym XF86AudioMute exec pulseaudio-ctl mute
+bindsym Shift+XF86AudioMute exec pulseaudio-ctl mute-input
 bindsym XF86AudioMicMute exec pulseaudio-ctl mute-input
 
 # Media player controls
@@ -255,22 +251,33 @@ bindsym $lock exec lockscreen
 # Start screencast
 bindsym $mod+s exec systemctl --user is-active --quiet screencast && (systemctl --user stop screencast && notify-send "Broadcast stopped" -t 2000) || (systemctl --user start screencast && notify-send "Broadcast started" -t 2000)
 
-# Change color scheme (flavours)
-bindsym $profile       exec flavours apply
-# Change wallpaper (also updates scheme if current is generated)
+# Change color scheme (flavours), using fzf alacritty
+bindsym $light exec scheme=$(flavours list -l | alacrittyselector) && flavours apply $scheme
+# Change to random scheme
+bindsym Shift+$light exec flavours apply
+# Toggle dark/light mode
+bindsym $alt+$light exec darkmode
+
+
+# Change wallpaper (also updates scheme if current is generated), using fzf alacritty
+bindsym $profile exec wallpaper=$(setwallpaper -L | alacrittyselector) && setwallpaper $wallpaper
+# Change to random wallpaper
 bindsym Shift+$profile exec setwallpaper -R
 # Generates color scheme based on wallpaper and changes to it
-bindsym $alt+$profile exec flavours generate $(lightdark) $(cat ~/.bg) && flavours apply generated
+bindsym $alt+$profile exec flavours generate $(darkmode q) $(cat ~/.bg) && flavours apply generated
 
-# Toggle dark/light mode
-bindsym $light exec darkmode
 # Toggle keyboard and mouse lights
-bindsym Shift+$light exec systemctl --user is-active --quiet rgbdaemon && (systemctl --user stop rgbdaemon && rgboff) || systemctl --user start rgbdaemon
+bindsym control+$light exec systemctl --user is-active --quiet rgbdaemon && systemctl --user stop rgbdaemon || systemctl --user start rgbdaemon
 
 # Get bitwarden password (or other item)
 bindsym Scroll_Lock         exec (bwpass | wl-copy)
 # Lock/unlock bitwarden vault
 bindsym Shift+Scroll_Lock   exec [ -f /tmp/bwtoken ] && bwlock || bwunlock
+
+# Screenshot entire Screen
+bindsym --release Print        exec grim - | wl-copy
+# Screenshot selection
+bindsym --release $mod+Print   exec grim -g "$(slurp)" - | wl-copy
 
 ## Launch app keys ##
 # Open app menu
@@ -283,14 +290,14 @@ bindsym $alt+F2   exec rofimenu run \> run
 # Launch terminal
 bindsym $mod+t       exec alacritty
 bindsym $mod+Return  exec alacritty
+# Launch terminal floating
+bindsym $mod+Shift+Return  exec alacritty --class AlacrittyFloating
 
 # Launch browser
 bindsym $mod+b       exec qutebrowser
 
-# Screenshot entire Screen
-bindsym --release Print        exec grim - | wl-copy
-# Screenshot selection
-bindsym --release $mod+Print   exec grim -g "$(slurp)" - | wl-copy
+# Launch vim
+bindsym $mod+v      exec alacritty -e vim
 
 ### Window overrides ###
 
@@ -311,6 +318,25 @@ for_window [title="Friends List"] floating enable
 for_window [title="Friends List"] [floating] resize set 300 600
 # Discord updater
 for_window [title="Discord Updater"] floating enable
+# Alacritty floating
+for_window [app_id="AlacrittyFloating"] floating enable
+
+### Startup programs ###
+# wallpaper
+exec ~/.config/sway/swaybg.sh
+
+# Transparency
+exec 'swayinactives'
+exec 'killall flashfocus; flashfocus'
+
+## Idle Manager
+exec swayidle -w  \
+    timeout 300 'pulseaudio-ctl mute-input yes' resume 'pulseaudio-ctl mute-input no' \
+    timeout 300 'bwlock' \
+    timeout 600 'lockscreen' \
+    timeout 20 'pgrep -x swaylock && systemctl --user stop rgbdaemon' resume 'systemctl --user start rgbdaemon' \
+    timeout 20 'pgrep -x swaylock && swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
+
 
 ### Start systemd target and pass enviroment ###
 exec "systemctl --user import-environment; systemctl --user start sway-session.target"

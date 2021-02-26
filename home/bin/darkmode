@@ -5,9 +5,8 @@ function try_scheme() {
     fi
 	newscheme=$1
 	currentscheme=$2
-	flavours list -l | grep -x "$newscheme" >> /dev/null
 
-	if [ $? -eq 0 ] && [ "$newscheme" != "$currentscheme" ]; then
+    if (flavours list -l | grep -xq "$newscheme") && [ "$newscheme" != "$currentscheme" ]; then
         echo $newscheme
 		return 0
 	else
@@ -18,41 +17,35 @@ function try_scheme() {
 function which_scheme() {
     scheme=$1
     if [[ $scheme =~ "light" ]]; then
-        ((try_scheme "${scheme/light/dark}" $scheme || \
+        (try_scheme "${scheme/light/dark}" $scheme || \
         try_scheme "${scheme#"light"}" $scheme || \
         try_scheme "${scheme#"light-"}" $scheme || \
         try_scheme "${scheme%"light"}" $scheme || \
-        try_scheme "${scheme%"-light"}" $scheme) && echo "dark" && return 0) || return 1
+        try_scheme "${scheme%"-light"}" $scheme) && return 0
+        return 1
 
     elif [[ $scheme =~ "dark" ]]; then 
-
-        ((try_scheme "${scheme/dark/light}" $scheme || \
+        (try_scheme "${scheme/dark/light}" $scheme || \
         try_scheme "${scheme#"dark"}" $scheme || \
         try_scheme "${scheme#"dark-"}" $scheme || \
         try_scheme "${scheme%"dark"}" $scheme || \
-        try_scheme "${scheme%"-dark"}" $scheme) && echo "light" && return 0) || return 1
+        try_scheme "${scheme%"-dark"}" $scheme) && return 0
+        return 1
 
     else
-        (try_scheme "${scheme}-dark" $scheme || try_scheme "dark-${scheme}"  $scheme)  && echo "dark"  && return 0
-        (try_scheme "${scheme}-light" $scheme|| try_scheme "light-${scheme}" $scheme)  && echo "light" && return 0
+        (try_scheme "${scheme}-dark" $scheme || try_scheme "dark-${scheme}"  $scheme)  && return 0
+        (try_scheme "${scheme}-light" $scheme|| try_scheme "light-${scheme}" $scheme)  && return 0
         return 1
     fi
-    exit 1
 }
 
 function current() {
-    if [[ -f /tmp/dark ]]; then
+    bgcolor=$(flavours info -r $(flavours current) | sed -n '3 p')
+    character=${bgcolor:1:1}
+    if [[ $character < 5 ]]; then
         echo "dark"
     else
         echo "light"
-    fi
-}
-
-function toggle() {
-    if [[ -f /tmp/dark ]]; then
-        rm /tmp/dark
-    else
-        touch /tmp/dark
     fi
 }
 
@@ -61,21 +54,15 @@ if [[ $* =~ "q" ]]; then
     exit 0
 fi
 
-if [[ $(flavours current) =~ "generated" ]]; then
-    toggle
-    flavours generate $(lightdark) $(cat ~/.bg)
-    flavours apply generated
-    exit
+if [ "$(current)" = "dark" ]; then
+    newmode="light"
 else
-    current=$(flavours current)
-    output=$(which_scheme $current)
-    new_mode=$(echo $output | cut -d ' ' -f2)
-    new_scheme=$(echo $output | cut -d ' ' -f1)
-    if [ -z "$new_scheme" ]; then
-        exit 1
-    fi
-    if [ "$(current)" != "$new_mode" ]; then
-        toggle
-    fi
-    flavours apply $new_scheme
+    newmode="dark"
+fi
+
+if [[ $(flavours current) =~ "generated" ]]; then
+    flavours generate $newmode $(cat ~/.bg) && flavours apply generated
+else
+    newscheme=$(which_scheme $(flavours current)) && flavours apply $newscheme || \
+        { >&2 echo "Your current scheme doesn't have a $newmode variant"; exit 1; }
 fi

@@ -1,5 +1,4 @@
 #!/usr/bin/bash
-#(openrgb --client; openrgb --client --device=0 --color "000000" --mode static) & \
 openrgb --client --device=0 --color "000000" --mode static & \
-echo "rgb 000000" > /dev/input/ckb1/cmd
+echo "rgb 000000" > /dev/input/ckb1/cmd & \
 echo "rgb 000000" > /dev/input/ckb2/cmd

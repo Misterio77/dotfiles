@@ -21,10 +21,9 @@ else
     wallpaper=~/Pictures/Wallpapers/$1
 fi
 
-if [[ $(flavours current) == "generated" ]]; then
-    flavours generate $(lightdark) ${wallpaper} && \
-    flavours apply generated & \
-fi
-
 echo $wallpaper > ~/.bg
-~/.config/sway/swaybg.sh
+~/.config/sway/swaybg.sh & \
+
+if [[ $(flavours current) == "generated" ]]; then
+    flavours generate $(darkmode query) ${wallpaper} && flavours apply generated
+fi

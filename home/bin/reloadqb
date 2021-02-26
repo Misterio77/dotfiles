@@ -1,6 +1,5 @@
 #!/usr/bin/bash
-scheme=$(flavours current)
-if isdark $scheme; then
+if [ $(darkmode query) = "dark" ]; then
     sed -i 's/c.colors.webpage.prefers_color_scheme_dark = False/c.colors.webpage.prefers_color_scheme_dark = True/' .config/qutebrowser/config.py
 else
     sed -i 's/c.colors.webpage.prefers_color_scheme_dark = True/c.colors.webpage.prefers_color_scheme_dark = False/' .config/qutebrowser/config.py

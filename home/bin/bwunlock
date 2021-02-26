@@ -1,11 +1,7 @@
 #!/usr/bin/bash
 while [ $(echo $?) -eq 0 ]; do
-    password=$(zenity --password)
-    if [ $(echo $?) -ne 0 ]; then
-        exit -1
-    fi
-    token=$(bw unlock --raw $password)
-    if [ $(echo $?) -eq 0 ]; then
+    password=$(zenity --password) || exit -1
+    if token=$(bw unlock --raw $password); then
         notify-send "Unlocked" "Vault unlocked, session token added" -t 4000
         echo "export BW_SESSION=$token" > /tmp/bwtoken
         exit 0

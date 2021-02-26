@@ -16,19 +16,13 @@ fi
 if [ -n "$2" ]; then
 	query=$2
 else
-    query=$(zenity --entry --text="Account/site to search on bitwarden" --entry-text=$startingquery)
-    if [ $(echo $?) -ne 0 ]; then
-        exit -1
-    fi
+    query=$(zenity --entry --text="Account/site to search on bitwarden" --entry-text=$startingquery) || exit -1
 fi
 
 if [ -n "$1" ]; then
 	field=$1
 else
-	field=$(zenity --entry --text="Field to search on bitwarden" --entry-text="password")
-	if [ $(echo $?) -ne 0 ]; then
-		exit -1
-	fi
+	field=$(zenity --entry --text="Field to search on bitwarden" --entry-text="password") || exit -1
 fi
 
 

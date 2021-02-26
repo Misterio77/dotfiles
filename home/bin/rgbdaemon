@@ -42,14 +42,20 @@ daemon_monitors() {
     fi
 }
 daemon_dark() {
-    if /home/misterio/bin/isdark; then
+    if [ $(/home/misterio/bin/darkmode q) = "dark" ]; then
         setcolor_key "light" $2
     else
         setcolor_key "light" $1
     fi
 }
 daemon_mute() {
-    if [[ $(pulseaudio-ctl full-status | awk '{print $2}') == "yes" ]]; then
+    output_muted=$(pulseaudio-ctl full-status | awk '{print $2}')
+    input_muted=$(pulseaudio-ctl full-status | awk '{print $3}')
+    if [[ "$output_muted" == "yes" ]] && [[ "$input_muted" == "yes" ]]; then
+        setcolor_key "mute" "$4"
+    elif [[ "$input_muted" == "yes" ]]; then
+        setcolor_key "mute" $3
+    elif [[ "$output_muted" == "yes" ]]; then
         setcolor_key "mute" $2
     else
         setcolor_key "mute" $1
@@ -124,8 +130,6 @@ daemon_print() {
 daemon_lock() {
     if pgrep -x swaylock > /dev/null; then
         setcolor_key "lock" $1
-    elif pgrep -x swaylock-blur > /dev/null; then
-        setcolor_key "lock" $2
     else
         setcolor_key "lock" $3
     fi
@@ -150,6 +154,17 @@ bindings() {
     echo "bind dpidn:mouse5" > $mouse
 }
 
+function startup() {
+    source ~/.colors
+    export color_base=$(pastel mix $base00 $base05 | pastel darken 0.1 | pastel saturate 0.5 | pastel format hex | cut -d '#' -f2)
+    export color_trim=$(pastel darken 0.1 $base0B | pastel saturate 0.8 | pastel format hex | cut -d '#' -f2)
+    export color_urgent=$(pastel saturate 0.6 $base09 | pastel format hex | cut -d '#' -f2)
+    export color_visible=$(pastel saturate 0.1 $base0E | pastel format hex | cut -d '#' -f2)
+    export color_unfocused=$(pastel lighten 0.1 $base05 | pastel format hex | cut -d '#' -f2)
+    openrgb --client --device=0 --color $color_base --mode static & \
+    setcolor_base $color_base $color_trim & \
+}
+
 if ! pgrep -x ckb-next-daemon > /dev/null; then
     echo "Error: Ckb-next is not running" >&2
     exit -1
@@ -159,32 +174,25 @@ if ! pgrep -x openrgb > /dev/null; then
     exit -2
 fi
 
-source ~/.colors
-color_base=$(pastel mix $base00 $base05 | pastel darken 0.1 | pastel saturate 0.5 | pastel format hex | cut -d '#' -f2)
-color_trim=$(pastel darken 0.1 $base0B | pastel saturate 0.8 | pastel format hex | cut -d '#' -f2)
-color_urgent=$(pastel saturate 0.6 $base09 | pastel format hex | cut -d '#' -f2)
-color_visible=$(pastel saturate 0.1 $base0F | pastel format hex | cut -d '#' -f2)
-color_unfocused=$(pastel lighten 0.1 $base05 | pastel format hex | cut -d '#' -f2)
-
-#(openrgb --client; openrgb --client --device=0 --color $color_base --mode static) & \
-openrgb --client --device=0 --color $color_base --mode static & \
+trap startup SIGHUP
 
 keyboard="/dev/input/ckb1/cmd"
 mouse="/dev/input/ckb2/cmd"
 echo active > $keyboard
 echo active > $mouse
+
+startup
 bindings
 
-setcolor_base $color_base $color_trim & \
 while true; do
     daemon_workspaces $color_urgent $color_trim $color_visible $color_unfocused $color_base & \
-    daemon_mute "000000" $color_base & \
+    daemon_mute "000000" $color_base $color_visible $color_trim & \
     daemon_bw $color_trim $color_visible & \
     daemon_tty $color_trim $color_visible $color_base & \
-    daemon_lock $color_trim "000000" $color_base & \
+    daemon_lock $color_trim $color_base & \
     daemon_dark $color_visible $color_trim & \
     daemon_player $color_trim $color_visible $color_base &  \
     daemon_print $color_trim $color_base &  \
     #daemon_monitors $color_trim $color_base  
-    sleep 0.8
+    sleep 0.1
 done

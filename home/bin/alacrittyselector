@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+
+# This program runs fzf in a graphic-ish way, using alacritty
+# It takes input from stdin and stores it in a variable, then runs alacritty (with a special class, so it can be floating)
+# which itself pipes the variable value into fzf
+# The selection is then piped to /tmp/selected, the file is then deleted if fzf failed (exited with esc, for example)
+# If the file exists, then it is output to stdout
+
+input=$(cat)
+    
+(alacritty -t "Selector" --class AlacrittyFloating -e bash -c "echo \"$input\" | fzf --color=16 > /tmp/selected || rm /tmp/selected") &> /dev/null
+(selected=$(cat /tmp/selected) && echo $selected) 2> /dev/null
+rm /tmp/selected &> /dev/null
