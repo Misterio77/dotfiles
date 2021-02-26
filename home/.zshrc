@@ -7,11 +7,12 @@ export GDK_BACKEND=wayland
 export QT_QPA_PLATFORM=wayland
 export XDG_SESSION_TYPE=wayland
 export XDG_CURRENT_DESKTOP=sway
-#export QT_QPA_PLATFORMTHEME=gtk2
+export QT_QPA_PLATFORMTHEME=gtk2
 
 # Bitwarden token
 function bw {
-    source /tmp/bwtoken && /usr/bin/bw "$@"
+    source /tmp/bwtoken &> /dev/null
+    /usr/bin/bw "$@"
 }
 
 # History
@@ -42,8 +43,11 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-history-substring-search
 zinit light zsh-users/zsh-syntax-highlighting
-zinit light simnalamburt/zsh-expand-all
 zinit light softmoth/zsh-vim-mode
+zinit snippet OMZP::globalias
+
+# Disable certain expansions
+export GLOBALIAS_FILTER_VALUES=(dragon fzf)
 
 # vim mode appearance
 export MODE_CURSOR_VIINS="blinking bar"
