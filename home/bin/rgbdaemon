@@ -6,6 +6,7 @@ setcolor_base() {
 
     accents_kb="h,j,k,l,w,a,s,d,m3,g11,profswitch"
     echo "rgb $accents_kb:$2" > $keyboard
+
     accents_mouse="wheel,thumb"
     echo "rgb $accents_mouse:$2" > $mouse
 }
@@ -61,17 +62,17 @@ daemon_mute() {
         setcolor_key "mute" $1
     fi
 }
-daemon_bw() {
-    if [[ -f /tmp/bwtoken ]]; then
-        setcolor_key "scroll" $1
-    else
+daemon_gpg() {
+    if gpg -K | grep sec | head -1 | grep -q "#"; then
         setcolor_key "scroll" $2
+    else
+        setcolor_key "scroll" $1
     fi
 }
 daemon_tty() {
     for n in 1 2 3 4 5 6; do
-        if ttystatus=$(w | grep tty$n) && ! echo $ttystatus | grep "agetty" > /dev/null; then
-            if echo $ttystatus | grep "way" > /dev/null; then
+        if ttystatus=$(w | grep tty$n) && ! echo $ttystatus | grep -q "agetty" ; then
+            if echo $ttystatus | grep -q "way"; then
                 setcolor_key "f$n" $1
             else
                 setcolor_key "f$n" $2
@@ -127,11 +128,18 @@ daemon_print() {
         setcolor_key "prtscn" $2
     fi
 }
+daemon_screencast() {
+    if systemctl --user is-active --quiet screencast; then
+        setcolor_key "pause" $1
+    else
+        setcolor_key "pause" $2
+    fi
+}
 daemon_lock() {
     if pgrep -x swaylock > /dev/null; then
         setcolor_key "lock" $1
     else
-        setcolor_key "lock" $3
+        setcolor_key "lock" $2
     fi
 }
 bindings() {
@@ -154,15 +162,36 @@ bindings() {
     echo "bind dpidn:mouse5" > $mouse
 }
 
-function startup() {
+startup() {
+    kill $rgb_pid
+
     source ~/.colors
+
     export color_base=$(pastel mix $base00 $base05 | pastel darken 0.1 | pastel saturate 0.5 | pastel format hex | cut -d '#' -f2)
     export color_trim=$(pastel darken 0.1 $base0B | pastel saturate 0.8 | pastel format hex | cut -d '#' -f2)
     export color_urgent=$(pastel saturate 0.6 $base09 | pastel format hex | cut -d '#' -f2)
     export color_visible=$(pastel saturate 0.1 $base0E | pastel format hex | cut -d '#' -f2)
     export color_unfocused=$(pastel lighten 0.1 $base05 | pastel format hex | cut -d '#' -f2)
-    openrgb --client --device=0 --color $color_base --mode static & \
+
     setcolor_base $color_base $color_trim & \
+    openrgb --client --device=0 --color $color_base --mode static & \
+    rgb_daemon & rgb_pid=$!
+    wait
+}
+
+rgb_daemon() {
+    while sleep 0.5; do
+        daemon_workspaces $color_urgent $color_trim $color_visible $color_unfocused $color_base & \
+        daemon_mute "000000" $color_base $color_visible $color_trim & \
+        daemon_gpg $color_trim $color_unfocused & \
+        daemon_tty $color_trim $color_visible $color_base & \
+        daemon_lock $color_trim $color_base & \
+        daemon_dark $color_visible $color_trim & \
+        daemon_player $color_trim $color_visible $color_base &  \
+        daemon_print $color_trim $color_base &  \
+        daemon_screencast $color_unfocused $color_base &  \
+        #daemon_monitors $color_trim $color_base  
+    done
 }
 
 if ! pgrep -x ckb-next-daemon > /dev/null; then
@@ -181,18 +210,5 @@ mouse="/dev/input/ckb2/cmd"
 echo active > $keyboard
 echo active > $mouse
 
-startup
 bindings
-
-while true; do
-    daemon_workspaces $color_urgent $color_trim $color_visible $color_unfocused $color_base & \
-    daemon_mute "000000" $color_base $color_visible $color_trim & \
-    daemon_bw $color_trim $color_visible & \
-    daemon_tty $color_trim $color_visible $color_base & \
-    daemon_lock $color_trim $color_base & \
-    daemon_dark $color_visible $color_trim & \
-    daemon_player $color_trim $color_visible $color_base &  \
-    daemon_print $color_trim $color_base &  \
-    #daemon_monitors $color_trim $color_base  
-    sleep 0.1
-done
+startup

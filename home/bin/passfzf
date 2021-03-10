@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# Based on https://github.com/FunctionalHacker/fzf-pass
+
+cd ~/.password-store || exit 1
+./.fix_symlinks.sh
+
+focused="$(swaymsg -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.focused==true) | .app_id')"
+if [[ "${focused}" == "org.qutebrowser.qutebrowser" ]]; then
+    qutebrowser :yank
+    query=$(wl-paste | cut -d '/' -f3 | sed s/"www."//)
+    selected=$(find -L . -not -path '*\/.*' -path "*.gpg" -type f -printf '%P\n' | sed 's/.gpg$//g' | alacritty-fzf "-q $query") || exit 2 
+else
+    selected=$(find -L . -not -path '*\/.*' -path "*.gpg" -type f -printf '%P\n' | sed 's/.gpg$//g' | alacritty-fzf) || exit 2 
+fi
+
+username=$(echo "${selected}" | cut -d '/' -f2)
+url=$(echo "${selected}" | cut -d '/' -f1)
+
+fields="Password
+Username
+OTP
+URL"
+
+field=$(printf "${fields}" | alacritty-fzf) || field="Password"
+
+case "$field" in
+    "Password")
+        value="$(pass "${selected}" | head -n 1)" && [ -n "$value" ] || \
+            { notify-send "Error" "No password for ${selected}" -i error -t 6000; exit 3; }
+        ;;
+    "Username")
+        value="${username}"
+        ;;
+    "URL")
+        value="${url}"
+        ;;
+    "OTP")
+        value="$(pass otp "${selected}")" || \
+            { notify-send "Error" "No OTP for ${selected}" -i error -t 6000; exit 3; }
+        ;;
+    *)
+        exit 4
+esac
+
+wl-copy "${value}"
+notify-send "Copied ${field}:" "${value}" -i edit-copy -t 4000

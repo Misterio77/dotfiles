@@ -1,0 +1,46 @@
+source ~/.config/mutt/gpg.rc
+source ~/.config/mutt/vim-keys.rc
+
+set my_pass       = `gpg -dq ~/.config/mutt/password.gpg`
+set my_email      = eu@misterio.me
+
+set realname      = 'Gabriel Fontes'
+set from          = $my_email
+set use_from      = yes
+set ssl_force_tls = yes
+
+set smtp_url      = smtps://$my_email@smtp.mailbox.org:465/
+set smtp_pass     = $my_pass
+
+set folder        = imaps://$my_email@imap.mailbox.org:993/
+set imap_pass     = $my_pass
+
+set spoolfile     = +INBOX
+set postponed     = +Drafts
+set record        = +Sent
+
+set signature     = ~/.config/mutt/signature
+set mark_old      = no
+
+unset imap_passive
+set imap_check_subscribed
+set imap_keepalive = 300
+set mail_check = 120
+
+
+color hdrdefault blue black
+color quoted blue black
+color signature blue black
+color attachment red black
+color prompt brightmagenta black
+color message brightred black
+color error brightred black
+color indicator black red
+color status brightwhite black
+color tree white black
+color normal white black
+color markers red black
+color search white black
+color tilde brightmagenta black
+color index blue black ~F
+color index red black "~N|~O"

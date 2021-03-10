@@ -3,7 +3,7 @@
 
 include "/home/misterio/.gtkrc-2.0.mine"
 gtk-theme-name="FlatColor"
-gtk-icon-theme-name="Papirus"
+gtk-icon-theme-name="Papirus-Light"
 gtk-font-name="Fira Sans 12"
 gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=0

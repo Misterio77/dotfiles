@@ -1,9 +1,5 @@
 #### Sway configuration ####
 
-### Lock screen ###
-# Execute as early as possible
-exec 'lockscreen -i'
-
 ### Monitors ###
 ## Variables
 set $mcenter HDMI-A-1
@@ -59,14 +55,19 @@ gaps horizontal 15
 gaps inner 30
 
 # Border
-default_border pixel 3
-for_window [class=".*"] border pixel 3
+default_border pixel 2
+for_window [class=".*"] border pixel 2
 
 # Rounded borders
 #border_images.focused ~/.config/sway/border.png
 #border_images.focused_inactive ~/.config/sway/border.png
 #border_images.unfocused ~/.config/sway/border.png
 #border_images.urgent ~/.config/sway/border.png
+
+### Lock screen ###
+# Initial lock
+exec ~/.config/sway/swaylock.sh --image $(cat ~/.bg)
+
 
 ### Keys and binds ###
 
@@ -246,13 +247,14 @@ bindsym $mod+control+w exec makoctl invoke
 
 ## Services keybinds ##
 # Lock the screen
-bindsym $lock exec lockscreen
-
-# Start screencast
-bindsym $mod+s exec systemctl --user is-active --quiet screencast && (systemctl --user stop screencast && notify-send "Broadcast stopped" -t 2000) || (systemctl --user start screencast && notify-send "Broadcast started" -t 2000)
+bindsym $lock exec ~/.config/sway/swaylock.sh --screenshots
 
 # Change color scheme (flavours), using fzf alacritty
-bindsym $light exec scheme=$(flavours list -l | alacrittyselector) && flavours apply $scheme
+bindsym $light exec old="$(flavours current)" && \
+                    flavours list -l | alacritty-fzf --preview='flavours apply -l {}' || \
+                    flavours apply "${old}" && \
+                    flavours apply "$(flavours current)"
+
 # Change to random scheme
 bindsym Shift+$light exec flavours apply
 # Toggle dark/light mode
@@ -260,24 +262,37 @@ bindsym $alt+$light exec darkmode
 
 
 # Change wallpaper (also updates scheme if current is generated), using fzf alacritty
-bindsym $profile exec wallpaper=$(setwallpaper -L | alacrittyselector) && setwallpaper $wallpaper
+bindsym $profile exec wallpaper=$(setwallpaper -L | alacritty-fzf) && \
+                      setwallpaper $wallpaper
 # Change to random wallpaper
 bindsym Shift+$profile exec setwallpaper -R
 # Generates color scheme based on wallpaper and changes to it
-bindsym $alt+$profile exec flavours generate $(darkmode q) $(cat ~/.bg) && flavours apply generated
+bindsym $alt+$profile exec flavours generate $(darkmode q) $(cat ~/.bg) && \
+                           flavours apply generated
 
 # Toggle keyboard and mouse lights
-bindsym control+$light exec systemctl --user is-active --quiet rgbdaemon && systemctl --user stop rgbdaemon || systemctl --user start rgbdaemon
+bindsym control+$light exec systemctl --user is-active --quiet rgbdaemon && \
+                            systemctl --user stop rgbdaemon || \
+                            systemctl --user start rgbdaemon
 
-# Get bitwarden password (or other item)
-bindsym Scroll_Lock         exec (bwpass | wl-copy)
-# Lock/unlock bitwarden vault
-bindsym Shift+Scroll_Lock   exec [ -f /tmp/bwtoken ] && bwlock || bwunlock
+# Get passwordstore password (or other item)
+bindsym Scroll_Lock exec passfzf
+# Get passwordstore on qutebrowser
+bindsym control+Scroll_Lock exec passfill
+# Reload gpg agent (remove cached password)
+bindsym Shift+Scroll_Lock exec gpg-connect-agent reloadagent /bye && notify-send "Reloaded" "GPG Agent Reloaded successfully" -i lock -t 5000
 
-# Screenshot entire Screen
-bindsym --release Print        exec grim - | wl-copy
+# Screenshot a monitor
+bindsym --release Print        exec grim -g "$(slurp -ro)" - | wl-copy
+
+# Screenshot a window
+bindsym --release $alt+Print exec grim -g $(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp) - | wl-copy
+
 # Screenshot selection
 bindsym --release $mod+Print   exec grim -g "$(slurp)" - | wl-copy
+
+# Screencast
+bindsym --release Pause        exec systemctl --user is-active --quiet screencast && systemctl --user stop screencast || systemctl --user start screencast
 
 ## Launch app keys ##
 # Open app menu
@@ -297,7 +312,13 @@ bindsym $mod+Shift+Return  exec alacritty --class AlacrittyFloating
 bindsym $mod+b       exec qutebrowser
 
 # Launch vim
-bindsym $mod+v      exec alacritty -e vim
+bindsym $mod+v      exec alacritty -e nvim
+
+# Launch mutt
+bindsym $mod+m      exec alacritty -e neomutt
+
+# Launch ikhal
+bindsym $mod+c      exec alacritty -e ikhal
 
 ### Window overrides ###
 
@@ -330,16 +351,32 @@ exec 'swayinactives'
 exec 'killall flashfocus; flashfocus'
 
 ## Idle Manager
+# 10 minutes -> lock the screen
+# 10 seconds after locking -> mute inputs
+# 20 seconds after locking -> turn off display, rgb lights, expire gpg agent session
 exec swayidle -w  \
-    timeout 300 'pulseaudio-ctl mute-input yes' resume 'pulseaudio-ctl mute-input no' \
-    timeout 300 'bwlock' \
-    timeout 600 'lockscreen' \
-    timeout 20 'pgrep -x swaylock && systemctl --user stop rgbdaemon' resume 'systemctl --user start rgbdaemon' \
-    timeout 20 'pgrep -x swaylock && swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
+    timeout 600 '~/.config/sway/swaylock.sh --screenshots --daemonize' \
+    timeout 10 'pgrep -x swaylock && pulseaudio-ctl mute-input yes' \
+        resume 'pgrep -x swaylock && pulseaudio-ctl mute-input no' \
+    timeout 610 'pulseaudio-ctl mute-input yes' \
+        resume 'pulseaudio-ctl mute-input no' \
+    timeout 20  'pgrep -x swaylock && systemctl --user stop rgbdaemon' \
+        resume  'pgrep -x swaylock && systemctl --user start rgbdaemon' \
+    timeout 620 'systemctl --user stop rgbdaemon' \
+        resume  'systemctl --user start rgbdaemon' \
+    timeout 20  'pgrep -x swaylock && swaymsg "output * dpms off"' \
+        resume  'pgrep -x swaylock && swaymsg "output * dpms on"' \
+    timeout 620 'swaymsg "output * dpms off"' \
+        resume  'swaymsg "output * dpms on"' \
+    timeout 20  'pgrep -x swaylock && gpg-connect-agent reloadagent /bye' \
+    timeout 620 'gpg-connect-agent reloadagent /bye'
 
 
 ### Start systemd target and pass enviroment ###
 exec "systemctl --user import-environment; systemctl --user start sway-session.target"
 
-### Set xwayland primary monitor
-exec_always "xrandr --output $(xrandr | grep "XWAYLAND.*2560x1080" | awk '{printf $1}') --primary"
+### Kill gpg agent, so it can be restarted with the correct settings (ssh enabled)
+exec gpg-connect-agent killagent /bye
+
+### Set either light or dark icon theme, depending on color scheme
+exec_always seticons $(darkmode query)

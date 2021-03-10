@@ -1,21 +1,30 @@
 font="fira_sans 11"
+icon-path=/usr/share/icons/Papirus-Dark
+max-icon-size=32
+padding=10,20
+anchor=top-center
+default-timeout=8000
+width=400
+height=150
+border-size=3
+
 # Start flavours
 ## Base16 Pasque
 # Author: Gabriel Fontes (https://github.com/Misterio77)
 #
 # You can use these variables anywhere in the mako configuration file.
 
-background-color=#271C3A
-text-color=#DEDCDF
-border-color=#BEBCBF
+background-color=#271C3Add
+text-color=#DEDCDFdd
+border-color=#BEBCBFdd
 
 [urgency=low]
-background-color=#271C3A
-text-color=#804ead
-border-color=#BEBCBF
+background-color=#271C3Abb
+text-color=#804eadbb
+border-color=#BEBCBFbb
 
 [urgency=high]
-background-color=#271C3A
-text-color=#A92258
-border-color=#BEBCBF
+background-color=#271C3Aff
+text-color=#A92258ff
+border-color=#BEBCBFff
 # End flavours

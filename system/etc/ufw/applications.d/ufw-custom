@@ -17,3 +17,13 @@ ports=2112,1609/tcp
 title=Valheim Server
 description=A sandbox rpg game
 ports=2456,2457,2458/udp|2456,2457,2458/tcp
+
+[kdeconnect]
+title=KDE Connect
+description=KDE Connect daemon
+ports=1714:1764/tcp|1714:1764/udp
+
+[mindustry]
+title=Mindustry Server
+description=A factory and tower defence FOSS game
+ports=6567/tcp|6567/udp

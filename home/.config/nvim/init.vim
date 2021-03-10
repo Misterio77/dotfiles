@@ -8,13 +8,18 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'cespare/vim-toml'
 Plug 'vim-scripts/restore_view.vim'
 Plug 'tpope/vim-surround'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'tonyseek/markdown-preview.nvim', { 'do': 'cd app && yarn install', 'branch': 'feat/dark-mode-background' }
 Plug 'plasticboy/vim-markdown'
 Plug 'rust-lang/rust.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'KabbAmine/vCoolor.vim'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 call plug#end()
-colorscheme noctu
+
+"Color scheme
+colorscheme base16
+set termguicolors
 
 "Enable rainbow parenthesis
 let g:rainbow_active = 1
@@ -42,6 +47,10 @@ autocmd BufWinEnter * let &foldlevel = max(map(range(1, line('$')), 'foldlevel(v
 
 "Conceal
 set conceallevel=2
+
+"Fix nvim size according to terminal
+"(https://github.com/neovim/neovim/issues/11330)
+autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 
 "Tabs
 set tabstop=4 "How many spaces equals a tab

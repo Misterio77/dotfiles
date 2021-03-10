@@ -1,3 +1,0 @@
-#!/usr/bin/bash
-rm -f /tmp/bwtoken
-bw lock

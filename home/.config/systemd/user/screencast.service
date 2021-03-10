@@ -3,7 +3,6 @@ Description="Wf screencast"
 
 [Service]
 Type=exec
-WorkingDirectory=/home/misterio
 ExecStart=/home/misterio/bin/screencast
 Restart=no
 

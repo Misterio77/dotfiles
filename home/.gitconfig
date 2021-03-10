@@ -1,0 +1,12 @@
+[user]
+	email = eu@misterio.me
+	name = Misterio77
+	signingKey = CE707A2C17FAAC97907FF8EF2E54EA7BFE630916
+[push]
+	followTags = true
+[pull]
+	rebase = false
+[pass]
+	signcommits = true
+[commit]
+	gpgSign = true

@@ -1,5 +1,5 @@
 config.load_autoconfig()
-c.qt.args = ["ppapi-widevine-path=/usr/lib/qt/plugins/ppapi/libwidevinecdmadapter.so"]
+c.qt.args = ["enable-features=WebRTCPipeWireCapturer","ppapi-widevine-path=/usr/lib/qt/plugins/ppapi/libwidevinecdmadapter.so"]
 c.tabs.show = "multiple"
 c.tabs.position = "left"
 c.fonts.default_family = "Fira Sans"

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+nvr --serverlist | \
+while read line; do
+    nvr --nostart -c ':source $MYVIMRC' --servername $line & \
+done

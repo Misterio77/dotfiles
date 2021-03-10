@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+qutebrowser ":mode-enter passthrough"
+qutebrowser ":yank"
+sleep 0.2
+url="$(echo "$(wl-paste)" | cut -d '/' -f3)"
+
+~/.password-store/.fix-symlinks.sh
+username=$(pass ls "${url}" | tail -1 | xargs | cut -d ' ' -f2) && \
+ydotool type "${username}"
+
+ydotool key tab
+
+password=$(pass "${url}"/"${username}") && \
+ydotool type $password
+
+ydotool key tab
+ydotool key enter
+qutebrowser ":mode-enter normal"
+
+totp=$(pass otp "${url}"/"${username}") && \
+echo $totp | wl-copy && \
+notify-send "Copied totp:" "$totp" -t 4000

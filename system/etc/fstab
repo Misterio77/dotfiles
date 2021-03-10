@@ -1,9 +1,11 @@
-LABEL=Arch          /                ext4        rw,relatime                                                                                                0 1
 LABEL=ESP           /boot            vfat        rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro  0 2
+LABEL=Arch          /                ext4        rw,relatime   0 1
+LABEL=Swap          none             swap        defaults      0 0
 
-/dev/mapper/data    /mnt/data        ext4        rw                                                                                                         0 2
-/mnt/data/home      /home            none        defaults,bind                                                                                              0 0
-/mnt/data/srv       /srv             none        defaults,bind                                                                                              0 0
-/mnt/data/var       /var             none        defaults,bind                                                                                              0 0
+/dev/mapper/backups /mnt/backups     ext4        rw            0 2
+/dev/mapper/data    /mnt/data        ext4        rw            0 2
+/mnt/data/home      /home            none        defaults,bind 0 0
+/mnt/data/srv       /srv             none        defaults,bind 0 0
+/mnt/data/var       /var             none        defaults,bind 0 0
 
-/dev/mapper/backups /mnt/backups     ext4        rw                                                                                                         0 2
+LABEL=MISTERIOPGP   /home/misterio/.pgp_usb vfat nofail,x-systemd.automount,x-systemd.device-timeout=1ms,user,rw       0 2

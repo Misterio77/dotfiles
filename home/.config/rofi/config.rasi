@@ -1,5 +1,5 @@
 configuration {
-    icon-theme:          "Papirus";
+    icon-theme:          "Papirus-Dark";
     drun-display-format: "{icon} {name}";
     threads:             0;
     scroll-method:       0;

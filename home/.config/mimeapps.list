@@ -4,3 +4,5 @@
 application/pdf=org.pwmt.zathura.desktop;
 inode/directory=ranger.desktop;
 text/plain=nvim.desktop;
+x-scheme-handler/discord-443564201349218305=discord-443564201349218305.desktop
+x-scheme-handler/discord-610508934456934412=discord-610508934456934412.desktop

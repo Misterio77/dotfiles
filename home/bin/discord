@@ -1,0 +1,2 @@
+#!/bin/sh
+exec electron-beta /usr/lib/discord/app.asar --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland --enable-gpu

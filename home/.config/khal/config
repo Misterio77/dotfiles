@@ -1,0 +1,16 @@
+[calendars]
+
+[[misterio]]
+path = ~/.calendars/Y2FsOi8vMC8zMQ
+color = light magenta
+
+[[birthdays]]
+type = birthdays
+path = ~/.contacts/32
+
+[locale]
+timeformat = %H:%M
+dateformat = %d/%m/%Y
+longdateformat = %d/%m/%Y
+datetimeformat = %d/%m/%Y %H:%M
+longdatetimeformat = %d/%m/%Y %H:%M

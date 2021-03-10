@@ -1,13 +1,13 @@
-#[[item]]
-#file = '~/.config/sway/border.svg'
-#template = 'svg-circle'
-#rewrite = true
-#hook = 'renderborder'
-
 [[item]]
 file = '~/.config/alacritty/alacritty.yml'
 template = 'alacritty'
 subtemplate = 'default-256'
+
+[[item]]
+file = '~/.config/nvim/colors/base16.vim'
+template = 'vim'
+rewrite = true
+hook = 'reloadnvim'
 
 [[item]]
 file = '~/.config/qutebrowser/config.py'
@@ -20,6 +20,7 @@ file = '~/.config/sway/config'
 template = 'sway'
 subtemplate = 'colors'
 hook = 'swaymsg reload'
+light = false
 
 [[item]]
 file = '~/.themes/FlatColor/colors3'
