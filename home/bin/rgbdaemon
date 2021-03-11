@@ -50,8 +50,11 @@ daemon_dark() {
     fi
 }
 daemon_mute() {
-    output_muted=$(pulseaudio-ctl full-status | awk '{print $2}')
-    input_muted=$(pulseaudio-ctl full-status | awk '{print $3}')
+    audio_input=$(pactl info | grep "Default Source" | cut -f3 -d " ")
+    audio_output=$(pactl info | grep "Default Sink" | cut -f3 -d " ")
+    input_muted=$(pactl list sources | grep -A 10 "${audio_input}" | grep "Mute" | cut -d ":" -f2 | xargs)
+    output_muted=$(pactl list sinks | grep -A 10 "${audio_output}" | grep "Mute" | cut -d ":" -f2 | xargs)
+
     if [[ "$output_muted" == "yes" ]] && [[ "$input_muted" == "yes" ]]; then
         setcolor_key "mute" "$4"
     elif [[ "$input_muted" == "yes" ]]; then

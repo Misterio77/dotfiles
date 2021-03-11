@@ -229,11 +229,11 @@ bindsym $mod+r mode "resize"
 
 ## Media and volume ##
 # Volume
-bindsym XF86AudioRaiseVolume exec pulseaudio-ctl up
-bindsym XF86AudioLowerVolume exec pulseaudio-ctl down
-bindsym XF86AudioMute exec pulseaudio-ctl mute
-bindsym Shift+XF86AudioMute exec pulseaudio-ctl mute-input
-bindsym XF86AudioMicMute exec pulseaudio-ctl mute-input
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym Shift+XF86AudioMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Media player controls
 bindsym XF86AudioPlay exec mpris-ctl pp
@@ -356,10 +356,10 @@ exec 'killall flashfocus; flashfocus'
 # 20 seconds after locking -> turn off display, rgb lights, expire gpg agent session
 exec swayidle -w  \
     timeout 600 '~/.config/sway/swaylock.sh --screenshots --daemonize' \
-    timeout 10 'pgrep -x swaylock && pulseaudio-ctl mute-input yes' \
-        resume 'pgrep -x swaylock && pulseaudio-ctl mute-input no' \
-    timeout 610 'pulseaudio-ctl mute-input yes' \
-        resume 'pulseaudio-ctl mute-input no' \
+    timeout 10 'pgrep -x swaylock && pactl set-source-mute @DEFAULT_SOURCE@ yes' \
+        resume 'pgrep -x swaylock && pactl set-source-mute @DEFAULT_SOURCE@ no' \
+    timeout 610 'pactl set-source-mute @DEFAULT_SOURCE@ yes' \
+        resume 'pactl set-source-mute @DEFAULT_SOURCE@ no' \
     timeout 20  'pgrep -x swaylock && systemctl --user stop rgbdaemon' \
         resume  'pgrep -x swaylock && systemctl --user start rgbdaemon' \
     timeout 620 'systemctl --user stop rgbdaemon' \
