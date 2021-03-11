@@ -22,6 +22,11 @@ set record        = +Sent
 set signature     = ~/.config/mutt/signature
 set mark_old      = no
 
+# Use khard as address book
+set query_command = "khard email --parsable %s"
+bind editor <Tab> complete-query
+bind editor ^T    complete
+
 unset imap_passive
 set imap_check_subscribed
 set imap_keepalive = 300
