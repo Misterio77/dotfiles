@@ -3,7 +3,8 @@ efibootmgr
 
 disk="Arch"
 label="Arch Linux"
-parameters="quiet splash loglevel=0 rd.systemd.show_status=auto rd.udev.log_priority=3 vt.global_cursor_default=0 amd_iommu=off amdgpu.ppfeaturemask=0xffffffff"
+#parameters="quiet splash loglevel=0 rd.systemd.show_status=auto rd.udev.log_priority=3 vt.global_cursor_default=0 amd_iommu=off amdgpu.ppfeaturemask=0xffffffff"
+parameters="quiet splash loglevel=0 rd.systemd.show_status=auto rd.udev.log_priority=0 udev.log_priority=0 vt.global_cursor_default=0"
 echo ""
 echo "Using parameters: $parameters"
 echo ""

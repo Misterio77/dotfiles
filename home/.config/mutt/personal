@@ -1,0 +1,15 @@
+# Variables
+set my_personal_pass = `gpg -dq ~/.config/mutt/mailbox-password.gpg`
+set my_personal_email = eu@misterio.me
+
+# Send and receive options
+set from = $my_personal_email
+set smtp_url = "smtps://$my_personal_email@smtp.mailbox.org:465/"
+set smtp_pass = $my_personal_pass
+set folder = "imaps://$my_personal_email@imap.mailbox.org:993/"
+set imap_pass = $my_personal_pass
+
+# Folders
+set spoolfile = +INBOX
+set postponed = +Drafts
+set record = +Sent

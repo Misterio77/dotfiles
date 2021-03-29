@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+cat /dev/stdin > /tmp/muttmail.html && qutebrowser /tmp/muttmail.html

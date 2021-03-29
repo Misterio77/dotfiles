@@ -1,23 +1,13 @@
 source ~/.config/mutt/gpg.rc
 source ~/.config/mutt/vim-keys.rc
 
-set my_pass       = `gpg -dq ~/.config/mutt/password.gpg`
-set my_email      = eu@misterio.me
+# Default account one
+source ~/.config/mutt/personal 
+# Keybinds for switching identities
+macro index <f2> '<enter-command>source ~/.config/mutt/personal<enter>'
+macro index <f3> '<enter-command>source ~/.config/mutt/college<enter>'
 
-set realname      = 'Gabriel Fontes'
-set from          = $my_email
-set use_from      = yes
-set ssl_force_tls = yes
-
-set smtp_url      = smtps://$my_email@smtp.mailbox.org:465/
-set smtp_pass     = $my_pass
-
-set folder        = imaps://$my_email@imap.mailbox.org:993/
-set imap_pass     = $my_pass
-
-set spoolfile     = +INBOX
-set postponed     = +Drafts
-set record        = +Sent
+set realname = 'Gabriel Fontes'
 
 set signature     = ~/.config/mutt/signature
 set mark_old      = no
@@ -31,7 +21,19 @@ unset imap_passive
 set imap_check_subscribed
 set imap_keepalive = 300
 set mail_check = 120
+set use_from      = yes
+set ssl_force_tls = yes
 
+set sidebar_visible = yes
+
+macro index,pager 'F' "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro index,pager 'V' "<view-attachments><search>html<enter><pipe-entry>qutebrowserpipe<enter><exit>" "pipe html attachment to qutebrowser"
+macro attach 'V' "<pipe-entry>qutebrowserpipe<enter><exit>" "pipe attachment to qutebrowser"
+macro index J "<sidebar-next><sidebar-open>"
+macro index K "<sidebar-prev><sidebar-open>"
+
+bind index,pager \\ sidebar-toggle-visible 
+bind index G imap-fetch-mail
 
 color hdrdefault blue black
 color quoted blue black

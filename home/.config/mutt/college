@@ -1,0 +1,8 @@
+# Variables
+set my_college_pass = `gpg -dq ~/.config/mutt/usp-password.gpg`
+set my_college_email = g.fontes@usp.br
+
+# Send options
+set from = $my_email
+set smtp_url = "smtps://$my_college_email@smtp.gmail.com:465/"
+set smtp_pass = $my_college_pass

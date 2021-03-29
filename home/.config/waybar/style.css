@@ -17,6 +17,10 @@
     margin: 0px 0px 0px 0px;
 }
 
+#waybar.hidden {
+    opacity: 0.2;
+}
+
 #workspaces button.visible {
     background-color: @selected_bg_color;
 }

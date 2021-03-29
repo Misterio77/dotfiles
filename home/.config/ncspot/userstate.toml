@@ -1,0 +1,294 @@
+volume = 65535
+shuffle = false
+repeat = 'off'
+
+[[queue]]
+type = 'Track'
+id = '5cJEr5SppnuMYcUmXhpY99'
+uri = 'spotify:track:5cJEr5SppnuMYcUmXhpY99'
+title = 'Overture - Live at the Royal Albert Hall'
+track_number = 1
+disc_number = 1
+duration = 164276
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:5cJEr5SppnuMYcUmXhpY99'
+list_index = 0
+
+[[queue]]
+type = 'Track'
+id = '5IBDi9cISbefMMtAB8syp3'
+uri = 'spotify:track:5IBDi9cISbefMMtAB8syp3'
+title = 'Doomed - Live at the Royal Albert Hall'
+track_number = 2
+disc_number = 1
+duration = 280250
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:5IBDi9cISbefMMtAB8syp3'
+list_index = 0
+
+[[queue]]
+type = 'Track'
+id = '0ChMOU9Q1J0kQVCiFYIBQR'
+uri = 'spotify:track:0ChMOU9Q1J0kQVCiFYIBQR'
+title = 'Happy Song - Live at the Royal Albert Hall'
+track_number = 3
+disc_number = 1
+duration = 282506
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:0ChMOU9Q1J0kQVCiFYIBQR'
+list_index = 0
+
+[[queue]]
+type = 'Track'
+id = '69ovKtfOrt7zRkiOSSzGBO'
+uri = 'spotify:track:69ovKtfOrt7zRkiOSSzGBO'
+title = '''Go to Hell, for Heaven's Sake - Live at the Royal Albert Hall'''
+track_number = 4
+disc_number = 1
+duration = 309320
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:69ovKtfOrt7zRkiOSSzGBO'
+list_index = 0
+
+[[queue]]
+type = 'Track'
+id = '21e5M6dfmPOmFLLPrkjUZ6'
+uri = 'spotify:track:21e5M6dfmPOmFLLPrkjUZ6'
+title = 'Avalanche - Live at the Royal Albert Hall'
+track_number = 5
+disc_number = 1
+duration = 329040
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:21e5M6dfmPOmFLLPrkjUZ6'
+list_index = 0
+
+[[queue]]
+type = 'Track'
+id = '0dEFiIxRfXiisPp00kAQrE'
+uri = 'spotify:track:0dEFiIxRfXiisPp00kAQrE'
+title = 'It Never Ends - Live at the Royal Albert Hall'
+track_number = 6
+disc_number = 1
+duration = 367093
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:0dEFiIxRfXiisPp00kAQrE'
+list_index = 0
+
+[[queue]]
+type = 'Track'
+id = '5OomSPKKwQqazfzzDZ7pa4'
+uri = 'spotify:track:5OomSPKKwQqazfzzDZ7pa4'
+title = 'Sleepwalking - Live at the Royal Albert Hall'
+track_number = 7
+disc_number = 1
+duration = 296986
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:5OomSPKKwQqazfzzDZ7pa4'
+list_index = 0
+
+[[queue]]
+type = 'Track'
+id = '0gXL5tTUHw8BC7NGG4I7v9'
+uri = 'spotify:track:0gXL5tTUHw8BC7NGG4I7v9'
+title = 'Empire - Live at the Royal Albert Hall'
+track_number = 8
+disc_number = 1
+duration = 253760
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:0gXL5tTUHw8BC7NGG4I7v9'
+list_index = 0
+
+[[queue]]
+type = 'Track'
+id = '1Hxe4J8HuTxDTOR0wwu0co'
+uri = 'spotify:track:1Hxe4J8HuTxDTOR0wwu0co'
+title = 'Throne - Live at the Royal Albert Hall'
+track_number = 9
+disc_number = 1
+duration = 243205
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:1Hxe4J8HuTxDTOR0wwu0co'
+list_index = 0
+
+[[queue]]
+type = 'Track'
+id = '6FZFdnkWL4y3ALbU2gsOa7'
+uri = 'spotify:track:6FZFdnkWL4y3ALbU2gsOa7'
+title = 'Shadow Moses - Live at the Royal Albert Hall'
+track_number = 10
+disc_number = 1
+duration = 309764
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:6FZFdnkWL4y3ALbU2gsOa7'
+list_index = 0
+
+[[queue]]
+type = 'Track'
+id = '7fbrcKKwjbnmjoqAo2Qq48'
+uri = 'spotify:track:7fbrcKKwjbnmjoqAo2Qq48'
+title = 'True Friends - Live at the Royal Albert Hall'
+track_number = 11
+disc_number = 1
+duration = 374626
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:7fbrcKKwjbnmjoqAo2Qq48'
+list_index = 0
+
+[[queue]]
+type = 'Track'
+id = '1nlN3WIoV8GuIU1V1DdaFb'
+uri = 'spotify:track:1nlN3WIoV8GuIU1V1DdaFb'
+title = 'Follow You - Live at the Royal Albert Hall'
+track_number = 12
+disc_number = 1
+duration = 233520
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:1nlN3WIoV8GuIU1V1DdaFb'
+list_index = 0
+
+[[queue]]
+type = 'Track'
+id = '28DcCxLamMqusGsWxXpwDf'
+uri = 'spotify:track:28DcCxLamMqusGsWxXpwDf'
+title = 'Can You Feel My Heart - Live at the Royal Albert Hall'
+track_number = 13
+disc_number = 1
+duration = 360360
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:28DcCxLamMqusGsWxXpwDf'
+list_index = 0
+
+[[queue]]
+type = 'Track'
+id = '63VdGAHgsNW0uDrXzo7spb'
+uri = 'spotify:track:63VdGAHgsNW0uDrXzo7spb'
+title = 'Antivist - Live at the Royal Albert Hall'
+track_number = 14
+disc_number = 1
+duration = 271733
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:63VdGAHgsNW0uDrXzo7spb'
+list_index = 0
+
+[[queue]]
+type = 'Track'
+id = '4XnSAIxLmqmJXX8uTEcatS'
+uri = 'spotify:track:4XnSAIxLmqmJXX8uTEcatS'
+title = 'Drown - Live at the Royal Albert Hall'
+track_number = 15
+disc_number = 1
+duration = 429120
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:4XnSAIxLmqmJXX8uTEcatS'
+list_index = 0
+
+[[queue]]
+type = 'Track'
+id = '5Xtm0UubJiUYGEXVHtNiWv'
+uri = 'spotify:track:5Xtm0UubJiUYGEXVHtNiWv'
+title = 'Oh No - Live at the Royal Albert Hall'
+track_number = 16
+disc_number = 1
+duration = 505626
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:5Xtm0UubJiUYGEXVHtNiWv'
+list_index = 0
+
+[[queue]]
+type = 'Track'
+id = '6FZFdnkWL4y3ALbU2gsOa7'
+uri = 'spotify:track:6FZFdnkWL4y3ALbU2gsOa7'
+title = 'Shadow Moses - Live at the Royal Albert Hall'
+track_number = 10
+disc_number = 1
+duration = 309764
+artists = ['Bring Me The Horizon']
+artist_ids = ['1Ffb6ejR6Fe5IamqA5oRUF']
+album = 'Live at the Royal Albert Hall'
+album_id = '5dH7StOKoPnNEbWh86MwFz'
+album_artists = ['Bring Me The Horizon']
+cover_url = 'https://i.scdn.co/image/ab67616d0000b273b75f7297bea89ed838a58a82'
+url = 'spotify:track:6FZFdnkWL4y3ALbU2gsOa7'
+list_index = 0
+
+[playlist_orders]

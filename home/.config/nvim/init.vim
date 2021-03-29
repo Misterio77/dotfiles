@@ -8,12 +8,13 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'cespare/vim-toml'
 Plug 'vim-scripts/restore_view.vim'
 Plug 'tpope/vim-surround'
-Plug 'tonyseek/markdown-preview.nvim', { 'do': 'cd app && yarn install', 'branch': 'feat/dark-mode-background' }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'plasticboy/vim-markdown'
 Plug 'rust-lang/rust.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'udalov/kotlin-vim'
 
 call plug#end()
 

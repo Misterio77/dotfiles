@@ -1,3 +1,3 @@
 #!/usr/bin/bash
 
-STAGING_SHARED_MEMORY=0 WINEPREFIX=~/Games/Linux/Steam/steamapps/compatdata/1237970/pfx /home/misterio/.steam/steam/compatibilitytools.d/Proton-5.11-GE-3-MF/dist/bin/wine /home/misterio/Games/Linux/Steam/steamapps/compatdata/1237970/pfx/drive_c/Program\ Files\ \(x86\)/Origin/Origin.exe
+STAGING_SHARED_MEMORY=0 WINEPREFIX=~/Games/steam/steamapps/compatdata/1237970/pfx /home/misterio/.steam/steam/steamapps/common/Proton\ 3.16/dist/bin/wine /home/misterio/Games/steam/steamapps/compatdata/1237970/pfx/drive_c/Program\ Files\ \(x86\)/Origin/Origin.exe

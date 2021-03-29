@@ -115,7 +115,8 @@ daemon_workspaces() {
 }
 daemon_player() {
     # Playing color
-    status=$(mpris-ctl status 2>/dev/null | head -n 1)
+    player=$(preferredplayer)
+    status=$(mpris-ctl --player $player status 2>/dev/null | head -n 1)
     if [[ $status == "Playing" ]]; then
         setcolor_key "play" $1
     elif [[ $status == "Paused" ]]; then
@@ -166,11 +167,13 @@ bindings() {
 }
 
 startup() {
-    kill $rgb_pid
+    if [ -n "${rgb_pid}" ]; then
+        kill "${rgb_pid}"
+    fi
 
     source ~/.colors
 
-    export color_base=$(pastel mix $base00 $base05 | pastel darken 0.1 | pastel saturate 0.5 | pastel format hex | cut -d '#' -f2)
+    export color_base=$(pastel mix $base00 --fraction 0.7 $base05 | pastel darken 0.1 | pastel saturate 0.5 | pastel format hex | cut -d '#' -f2)
     export color_trim=$(pastel darken 0.1 $base0B | pastel saturate 0.8 | pastel format hex | cut -d '#' -f2)
     export color_urgent=$(pastel saturate 0.6 $base09 | pastel format hex | cut -d '#' -f2)
     export color_visible=$(pastel saturate 0.1 $base0E | pastel format hex | cut -d '#' -f2)
@@ -212,6 +215,7 @@ keyboard="/dev/input/ckb1/cmd"
 mouse="/dev/input/ckb2/cmd"
 echo active > $keyboard
 echo active > $mouse
+echo "dpi 1:750 dpisel 1" > $mouse
 
 bindings
 startup

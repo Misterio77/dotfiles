@@ -21,16 +21,14 @@
         "interval": 2
     },
     "custom/player": {
-        "exec-if": "[[ $(mpris-ctl list) ]]",
-        "exec": "mpris-ctl info '{\"text\": \"%track_name - %artist_name\",\"alt\": \"%play_status\"}'",
+        "exec-if": "[[ \"$(player=$(preferredplayer) && mpris-ctl --player $player status)\" != \"Stopped\" ]]",
+        "exec": "player=$(preferredplayer) && mpris-ctl --player $player info '{\"text\": \"%track_name - %artist_name (%player_name)\",\"alt\": \"%play_status\"}'",
         "return-type": "json",
         "interval": 2,
         "signal": 8,
-        "on-click": "pkill -SIGRTMIN+8 waybar; mpris-ctl pp",
-        "on-click-right": "pkill -SIGRTMIN+8 waybar; mpris-ctl stop",
-        "on-click-middle": "pkill -SIGRTMIN+8 waybar; mpris-ctl play",
-        "on-scroll-up": "pkill -SIGRTMIN+8 waybar; mpris-ctl previous",
-        "on-scroll-down": "pkill -SIGRTMIN+8 waybar; mpris-ctl next",
+        "on-click": "pkill -SIGRTMIN+8 waybar; player=$(preferredplayer) && mpris-ctl --player $player pp",
+        "on-scroll-up": "pkill -SIGRTMIN+8 waybar; player=$(preferredplayer) && mpris-ctl --player $player previous",
+        "on-scroll-down": "pkill -SIGRTMIN+8 waybar; player=$(preferredplayer) && mpris-ctl --player $player next",
         "format": "{icon}   {}",
         "format-icons": {
             "Playing": "契",
@@ -88,3 +86,4 @@
         "on-click": "pavucontrol"
     }
 }
+// vim: set filetype=json:

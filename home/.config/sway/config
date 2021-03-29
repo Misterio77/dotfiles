@@ -80,7 +80,7 @@ input "6940:6985:ckb1:_CORSAIR_K70_RGB_MK.2_Mechanical_Gaming_Keyboard_vKB" {
 }
 ### Mouse sensitivity
 input "6940:7051:ckb2:_CORSAIR_SCIMITAR_RGB_ELITE_Gaming_Mouse_vM" {
-    pointer_accel 0.8 
+    pointer_accel 1
 }
 
 ## Keys definition ##
@@ -236,9 +236,10 @@ bindsym Shift+XF86AudioMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Media player controls
-bindsym XF86AudioPlay exec mpris-ctl pp
-bindsym XF86AudioNext exec mpris-ctl next
-bindsym XF86AudioPrev exec mpris-ctl prev
+bindsym XF86AudioNext exec player=$(preferredplayer) && mpris-ctl next --player "$player" && pkill "-SIGRTMIN+8" waybar
+bindsym XF86AudioPrev exec player=$(preferredplayer) && mpris-ctl prev --player "$player" && pkill "-SIGRTMIN+8" waybar
+bindsym XF86AudioPlay exec player=$(preferredplayer) && mpris-ctl pp --player "$player" && pkill "-SIGRTMIN+8" waybar
+bindsym Shift+XF86AudioPlay exec player=$(mpris-ctl list | alacritty-fzf) && preferredplayer "$player" && pkill "-SIGRTMIN+8" waybar
 
 # Notifications
 bindsym $mod+w         exec makoctl dismiss
@@ -280,19 +281,29 @@ bindsym Scroll_Lock exec passfzf
 # Get passwordstore on qutebrowser
 bindsym control+Scroll_Lock exec passfill
 # Reload gpg agent (remove cached password)
-bindsym Shift+Scroll_Lock exec gpg-connect-agent reloadagent /bye && notify-send "Reloaded" "GPG Agent Reloaded successfully" -i lock -t 5000
+bindsym Shift+Scroll_Lock exec gpg-connect-agent reloadagent /bye && \
+    notify-send "Reloaded" "GPG Agent Reloaded successfully" -i lock -t 5000
 
 # Screenshot a monitor
-bindsym --release Print        exec grim -g "$(slurp -ro)" - | wl-copy
+bindsym --release Print exec grim -g "$(slurp -ro)" - | wl-copy
 
 # Screenshot a window
-bindsym --release $alt+Print exec grim -g $(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp) - | wl-copy
+bindsym --release $alt+Print exec geometry=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp) && grim -g "${geometry}" - | wl-copy
 
 # Screenshot selection
-bindsym --release $mod+Print   exec grim -g "$(slurp)" - | wl-copy
+bindsym --release $mod+Print exec grim -g "$(slurp)" - | wl-copy
+
+# Image clipboard upload
+bindsym --release Ctrl+Print exec notify-send "Uploading" -i upload-media -t 3000 && \
+    link=$(wl-paste | imageupload) && \
+    wl-copy "$link" && \
+    notify-send "Upload successful" "$link" -i edit-copy -t 4000 || \
+    notify-send "Error" "No image received" -i error -t 6000
+
 
 # Screencast
-bindsym --release Pause        exec systemctl --user is-active --quiet screencast && systemctl --user stop screencast || systemctl --user start screencast
+bindsym --release Pause exec systemctl --user is-active --quiet screencast && \
+    systemctl --user stop screencast || systemctl --user start screencast
 
 ## Launch app keys ##
 # Open app menu
@@ -300,31 +311,33 @@ bindsym --release super_l exec rofimenu applications "舘" applications
 bindsym --release super_r exec rofimenu applications "舘" applications
 
 # Run dialog
-bindsym $alt+F2   exec rofimenu run \> run
+bindsym $alt+F2 exec rofimenu run \> run
 
 # Launch terminal
-bindsym $mod+t       exec alacritty
-bindsym $mod+Return  exec alacritty
+bindsym $mod+t      exec alacritty
+bindsym $mod+Return exec alacritty
 # Launch terminal floating
-bindsym $mod+Shift+Return  exec alacritty --class AlacrittyFloating
+bindsym $mod+Shift+Return exec alacritty --class AlacrittyFloating
 
 # Launch browser
-bindsym $mod+b       exec qutebrowser
+bindsym $mod+b exec qutebrowser
 
 # Launch vim
-bindsym $mod+v      exec alacritty -e nvim
+bindsym $mod+v exec alacritty -e nvim
 
 # Launch mutt
-bindsym $mod+m      exec alacritty -e neomutt
+bindsym $mod+m exec alacritty -e neomutt
 
 # Launch ikhal
-bindsym $mod+c      exec alacritty -e ikhal
+bindsym $mod+c exec alacritty -e ikhal
 
 ### Window overrides ###
 
 ## Scratchpad (hidden stuff) ##
 # Origin
 for_window [instance="origin.exe"] move scratchpad
+# Origin
+for_window [title="Origin"] move scratchpad
 # Wine explorer
 for_window [instance="explorer.exe"] move scratchpad
 
@@ -347,7 +360,7 @@ for_window [app_id="AlacrittyFloating"] floating enable
 exec ~/.config/sway/swaybg.sh
 
 # Transparency
-exec 'swayinactives'
+exec 'killall swayinactives; swayinactives'
 exec 'killall flashfocus; flashfocus'
 
 ## Idle Manager
@@ -372,11 +385,17 @@ exec swayidle -w  \
     timeout 620 'gpg-connect-agent reloadagent /bye'
 
 
+### Set either light or dark icon theme, depending on color scheme
+exec_always seticons $(darkmode query)
+
 ### Start systemd target and pass enviroment ###
 exec "systemctl --user import-environment; systemctl --user start sway-session.target"
 
 ### Kill gpg agent, so it can be restarted with the correct settings (ssh enabled)
 exec gpg-connect-agent killagent /bye
 
-### Set either light or dark icon theme, depending on color scheme
-exec_always seticons $(darkmode query)
+### KDE Connect
+exec kdeconnect-indicator
+
+### Set xwayland primary monitor
+exec_always "xrandr --output $(xrandr | grep "XWAYLAND.*2560x1080" | awk '{printf $1}') --primary"
