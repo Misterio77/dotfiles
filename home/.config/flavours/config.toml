@@ -1,71 +1,72 @@
-[[item]]
-file = '~/.config/alacritty/alacritty.yml'
-template = 'alacritty'
-subtemplate = 'default-256'
+shell = "bash -c '{}'"
 
 [[item]]
-file = '~/.config/nvim/colors/base16.vim'
-template = 'vim'
+file = "~/.config/alacritty/alacritty.yml"
+template = "alacritty"
+subtemplate = "default-256"
+
+[[item]]
+file = "~/.config/nvim/colors/base16.vim"
+template = "vim"
 rewrite = true
-hook = 'reloadnvim'
+hook = "reloadnvim"
 
 [[item]]
-file = '~/.config/qutebrowser/config.py'
-template = 'qutebrowser'
-subtemplate = 'minimal'
-hook = 'reloadqb'
+file = "~/.config/qutebrowser/config.py"
+template = "qutebrowser"
+subtemplate = "minimal"
+hook = "reloadqb"
 
 [[item]]
-file = '~/.config/sway/config'
-template = 'sway'
-subtemplate = 'colors'
-hook = 'swaymsg reload'
+file = "~/.config/sway/config"
+template = "sway"
+subtemplate = "colors"
+hook = "swaymsg reload"
 light = false
 
 [[item]]
-file = '~/.themes/FlatColor/colors3'
-template = 'gtk-flatcolor'
-subtemplate = 'gtk-3'
+file = "~/.themes/FlatColor/colors3"
+template = "gtk-flatcolor"
+subtemplate = "gtk-3"
 rewrite = true
-hook = 'bash -c "gsettings set org.gnome.desktop.interface gtk-theme dummy && gsettings set org.gnome.desktop.interface gtk-theme FlatColor"'
+hook = "gsettings set org.gnome.desktop.interface gtk-theme dummy && gsettings set org.gnome.desktop.interface gtk-theme FlatColor"
 
 [[item]]
-file= '~/.config/zathura/zathurarc'
-template = 'zathura'
+file= "~/.config/zathura/zathurarc"
+template = "zathura"
 
 [[item]]
-file= '~/.config/mako/config'
-template = 'mako'
-hook = 'killall mako'
+file= "~/.config/mako/config"
+template = "mako"
+hook = "killall mako"
 
 [[item]]
-file = '~/.themes/FlatColor/colors2'
-template = 'gtk-flatcolor'
-subtemplate = 'gtk-2'
+file = "~/.themes/FlatColor/colors2"
+template = "gtk-flatcolor"
+subtemplate = "gtk-2"
 rewrite = true
 
 [[item]]
-file = '~/.colors'
-template = 'bash'
+file = "~/.colors"
+template = "bash"
 rewrite = true
-hook = 'systemctl --user reload rgbdaemon'
+hook = "systemctl --user reload rgbdaemon"
 
 [[item]]
-file = '~/.config/waybar/colors.css'
-template = 'waybar'
+file = "~/.config/waybar/colors.css"
+template = "waybar"
 rewrite = true
-hook = 'pkill -SIGRTMIN+7 waybar'
 
 [[item]]
-file = '~/.config/beautifuldiscord/style.css'
-template = 'styles'
-subtemplate = 'css-variables'
+file = "~/.config/beautifuldiscord/style.css"
+template = "styles"
+subtemplate = "css-variables"
 rewrite = false
-start= '/* Start flavours */'
-end = '/* End flavours */'
+start= "/* Start flavours */"
+end = "/* End flavours */"
 
 [[item]]
-file = '~/.config/rofi/themes/colors.rasi'
-template = 'rofi'
-subtemplate = 'colors'
+file = "~/.config/rofi/themes/colors.rasi"
+template = "rofi"
+subtemplate = "colors"
 rewrite = true

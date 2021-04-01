@@ -278,11 +278,11 @@ bindsym control+$light exec systemctl --user is-active --quiet rgbdaemon && \
 
 # Get passwordstore password (or other item)
 bindsym Scroll_Lock exec passfzf
-# Get passwordstore on qutebrowser
-bindsym control+Scroll_Lock exec passfill
 # Reload gpg agent (remove cached password)
 bindsym Shift+Scroll_Lock exec gpg-connect-agent reloadagent /bye && \
     notify-send "Reloaded" "GPG Agent Reloaded successfully" -i lock -t 5000
+# Mount pgp usb
+bindsym $alt+Scroll_Lock exec mount ~/.pgp_usb && notify-send "Mounted" "Private pgp usb stick mounted" -i lock -t 5000
 
 # Screenshot a monitor
 bindsym --release Print exec grim -g "$(slurp -ro)" - | wl-copy
@@ -353,7 +353,9 @@ for_window [title="Friends List"] [floating] resize set 300 600
 # Discord updater
 for_window [title="Discord Updater"] floating enable
 # Alacritty floating
-for_window [app_id="AlacrittyFloating"] floating enable
+for_window [app_id="AlacrittyFloating*"] floating enable
+for_window [app_id="AlacrittyFloatingMiner"] [floating] resize set 1000 300 
+for_window [app_id="AlacrittyFloatingSelector"] [floating] resize set 600 700
 
 ### Startup programs ###
 # wallpaper

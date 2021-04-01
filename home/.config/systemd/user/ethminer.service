@@ -1,0 +1,11 @@
+[Unit]
+Description="Ethminer"
+
+[Service]
+StartLimitBurst=20
+Type=exec
+ExecStart=ethminer $ETHMINER_OPTS -P $ETHMINER_POOL
+Restart=no
+
+[Install]
+WantedBy=default.target

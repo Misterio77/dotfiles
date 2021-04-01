@@ -3,8 +3,7 @@ efibootmgr
 
 disk="Arch"
 label="Arch Linux"
-#parameters="quiet splash loglevel=0 rd.systemd.show_status=auto rd.udev.log_priority=3 vt.global_cursor_default=0 amd_iommu=off amdgpu.ppfeaturemask=0xffffffff"
-parameters="quiet splash loglevel=0 rd.systemd.show_status=auto rd.udev.log_priority=0 udev.log_priority=0 vt.global_cursor_default=0"
+parameters="quiet splash loglevel=0 rd.systemd.show_status=auto rd.udev.log_priority=0 udev.log_priority=0 vt.global_cursor_default=0 amdgpu.ppfeaturemask=0xffffffff"
 echo ""
 echo "Using parameters: $parameters"
 echo ""
@@ -23,13 +22,13 @@ echo "Using disk $rootuuid"
 echo ""
 
 echo "Adding zen entry"
-sudo efibootmgr -c -L "$label (Zen)" -l /vmlinuz-linux-zen -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\initramfs-linux-zen.img $parameters" > /dev/null
+sudo efibootmgr -c -L "$label (Zen)" -l /vmlinuz-linux-zen -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\amd-ucode.img initrd=\initramfs-linux-zen.img $parameters" > /dev/null
 echo ""
 echo "Adding vanilla entry"
-sudo efibootmgr -c -L "$label (Vanilla)" -l /vmlinuz-linux -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\initramfs-linux.img $parameters" > /dev/null
+sudo efibootmgr -c -L "$label (Vanilla)" -l /vmlinuz-linux -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\amd-ucode.img initrd=\initramfs-linux.img $parameters" > /dev/null
 echo ""
 echo "Adding lts entry"
-sudo efibootmgr -c -L "$label (Lts)" -l /vmlinuz-linux-lts -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\initramfs-linux-lts.img $parameters" > /dev/null
+sudo efibootmgr -c -L "$label (Lts)" -l /vmlinuz-linux-lts -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\amd-ucode.img initrd=\initramfs-linux-lts.img $parameters" > /dev/null
 echo ""
 
 efibootmgr -v

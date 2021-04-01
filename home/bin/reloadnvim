@@ -2,5 +2,5 @@
 
 nvr --serverlist | \
 while read line; do
-    nvr --nostart -c ':source $MYVIMRC' --servername $line & \
+    nvr --nostart -cc ':colorscheme base16' --servername $line & \
 done

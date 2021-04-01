@@ -20,6 +20,7 @@ cat > "${directory}/input"
 # returns its output to directory/output, and outputs fzf return code to directory/exitcode
 cat <<'EOF' > "${directory}/inner"
 #!/usr/bin/env bash
+sleep 0.1
 directory="/run/user/$UID/alacritty-fzf"
 output=$(cat "${directory}/input" | fzf --color=16 "$@")
 echo $? > "${directory}/exitcode"
@@ -28,7 +29,7 @@ EOF
 # Make it executable
 chmod +x "${directory}/inner"
 
-alacritty -t "Selector" --class AlacrittyFloating -e "${directory}/inner" "$@"
+alacritty -t "Selector" --class AlacrittyFloatingSelector -e "${directory}/inner" "$@"
 
 # Outputs fzf output
 cat "${directory}/output"

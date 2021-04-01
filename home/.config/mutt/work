@@ -1,0 +1,8 @@
+# Variables
+set my_work_pass = `gpg -dq ~/.config/mutt/uget-password.gpg`
+set my_work_email = gabriel.fontes@uget.express
+
+# Send options
+set from = $my_work_email
+set smtp_url = "smtps://$my_work_email@smtp.gmail.com:465/"
+set smtp_pass = $my_work_pass

@@ -2,9 +2,9 @@
     "layer": "bottom",
     "height": 45,
     "width": 10,
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/player"],
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/player", "tray"],
     "modules-center": ["sway/window"],
-    "modules-right": [ "custom/gamemode", "tray", "custom/flavours", "pulseaudio", "network", "cpu", "memory", "temperature#cpu", "temperature#gpu", "clock"],
+    "modules-right": [ "custom/eth", "custom/gamemode", "custom/flavours", "pulseaudio", "network", "cpu", "memory", "temperature#cpu", "temperature#gpu", "clock"],
     "margin-left": 25,
     "margin-right": 25,
     "margin-top": 20,
@@ -35,6 +35,14 @@
             "Paused": "",
             "Stopped": "栗"
         }
+    },
+    "custom/eth": {
+        "exec-if": "systemctl --user is-active ethminer",
+        "exec": "journalctl --user -n 10 -u ethminer | grep -e '\\ m\\ .*' | cut -d ' ' -f12-13; echo ' '",
+        "interval": 1,
+        "on-click": "alacritty --class AlacrittyFloatingMiner -e journalctl --user -u ethminer -f --output=cat",
+        "on-click-right": "systemctl --user stop ethminer",
+        "format": "{} ﲹ"
     },
     "sway/workspaces": {
         "format": "{icon} {name}",
@@ -86,4 +94,3 @@
         "on-click": "pavucontrol"
     }
 }
-// vim: set filetype=json:

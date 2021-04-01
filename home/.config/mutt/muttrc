@@ -6,6 +6,7 @@ source ~/.config/mutt/personal
 # Keybinds for switching identities
 macro index <f2> '<enter-command>source ~/.config/mutt/personal<enter>'
 macro index <f3> '<enter-command>source ~/.config/mutt/college<enter>'
+macro index <f4> '<enter-command>source ~/.config/mutt/work<enter>'
 
 set realname = 'Gabriel Fontes'
 
