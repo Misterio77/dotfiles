@@ -43,4 +43,4 @@ esac
 
 rofitheme="$path/themes/$theme.rasi"
 
-rofi -modi $rofimodi -show $rofishow -theme $rofitheme -display-$rofimodi $display $flags
+rofi -sorting-method fzf -matching fuzzy -drun-match-fields name,keywords,generic,categories -modi $rofimodi -show $rofishow -theme $rofitheme -display-$rofimodi $display $flags

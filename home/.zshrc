@@ -32,9 +32,8 @@ export MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL"
 export MODE_INDICATOR_VICMD=">-"
 # Disable certain expansions
 export GLOBALIAS_FILTER_VALUES=(dragon fzf)
-# Ethminer
-export ETHMINER_POOL="stratum1+ssl://0x5c019Ecd5a8ac9C5A6c61C405c33A9F54fa57820.misterio@eth-br.flexpool.io:5555"
-export ETHMINER_OPTS="--cl-devices 1 -R -G"
+# Auto completion sensitivity
+export HYPHEN_INSENSITIVE="true"
 ##
 
 # aliases
@@ -53,7 +52,6 @@ setopt appendhistory
 source "$HOME/.zinit/bin/zinit.zsh"
 
 # autocompletions
-export HYPHEN_INSENSITIVE="true"
 zstyle ':completion:*' completer _complete
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
 autoload -U +X compinit && compinit

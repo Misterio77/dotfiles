@@ -21,14 +21,14 @@ rootuuid=$(lsblk -o LABEL,UUID | grep $disk | awk '{printf $2}')
 echo "Using disk $rootuuid"
 echo ""
 
-echo "Adding zen entry"
-sudo efibootmgr -c -L "$label (Zen)" -l /vmlinuz-linux-zen -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\amd-ucode.img initrd=\initramfs-linux-zen.img $parameters" > /dev/null
+echo "Adding lts entry"
+sudo efibootmgr -c -L "$label (Lts)" -l /vmlinuz-linux-lts -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\amd-ucode.img initrd=\initramfs-linux-lts.img $parameters" > /dev/null
 echo ""
 echo "Adding vanilla entry"
 sudo efibootmgr -c -L "$label (Vanilla)" -l /vmlinuz-linux -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\amd-ucode.img initrd=\initramfs-linux.img $parameters" > /dev/null
 echo ""
-echo "Adding lts entry"
-sudo efibootmgr -c -L "$label (Lts)" -l /vmlinuz-linux-lts -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\amd-ucode.img initrd=\initramfs-linux-lts.img $parameters" > /dev/null
+echo "Adding zen entry"
+sudo efibootmgr -c -L "$label (Zen)" -l /vmlinuz-linux-zen -d /dev/nvme0n1p1 -u "root=UUID=$rootuuid rw initrd=\amd-ucode.img initrd=\initramfs-linux-zen.img $parameters" > /dev/null
 echo ""
 
 efibootmgr -v

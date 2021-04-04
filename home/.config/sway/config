@@ -43,9 +43,10 @@ set $base0D #8E7DC6
 set $base0E #953B9D
 set $base0F #59325C
 # End flavours
-client.focused           $base04 $base00 $base05 $base02 $base03
+client.focused           $base04 $base00 $base05 $base01 $base03
 client.unfocused         $base02 $base00 $base04 $base00 $base00
 client.focused_inactive  $base02 $base00 $base04 $base00 $base00
+client.urgent            $base02 $base00 $base04 $base00 $base00
 
 ## Font ##
 font pango:Fira Sans Regular 12
@@ -361,10 +362,6 @@ for_window [app_id="AlacrittyFloatingSelector"] [floating] resize set 600 700
 # wallpaper
 exec ~/.config/sway/swaybg.sh
 
-# Transparency
-exec 'killall swayinactives; swayinactives'
-exec 'killall flashfocus; flashfocus'
-
 ## Idle Manager
 # 10 minutes -> lock the screen
 # 10 seconds after locking -> mute inputs
@@ -390,9 +387,6 @@ exec swayidle -w  \
 ### Set either light or dark icon theme, depending on color scheme
 exec_always seticons $(darkmode query)
 
-### Start systemd target and pass enviroment ###
-exec "systemctl --user import-environment; systemctl --user start sway-session.target"
-
 ### Kill gpg agent, so it can be restarted with the correct settings (ssh enabled)
 exec gpg-connect-agent killagent /bye
 
@@ -401,3 +395,6 @@ exec kdeconnect-indicator
 
 ### Set xwayland primary monitor
 exec_always "xrandr --output $(xrandr | grep "XWAYLAND.*2560x1080" | awk '{printf $1}') --primary"
+
+### Start systemd target and pass enviroment ###
+exec "systemctl --user import-environment; systemctl --user start sway-session.target"

@@ -1,24 +1,15 @@
 #!/usr/bin/env bash
-stats=$(https --check-status GET https://flexpool.io/api/v1/miner/0x5c019Ecd5a8ac9C5A6c61C405c33A9F54fa57820/stats/)
-hashrate=$(bc <<< "scale=0; $(echo $stats | jq -e '.result.current.effective_hashrate') / 1000000")
-daily_hashrate=$(bc <<< "scale=0; $(echo $stats | jq -e '.result.daily.effective_hashrate') / 1000000")
 
-#eth_in_brl=$(https GET "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BRL" | jq '.BRL')
+eth_in_brl=$(https GET "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BRL" | jq '.BRL')
 
-#balance_eth=$(bc <<< "scale=6; $(\
-#    https GET https://flexpool.io/api/v1/miner/0x5c019Ecd5a8ac9C5A6c61C405c33A9F54fa57820/balance/ | jq '.result'\
-#) / 1000000000000000000" | awk '{printf "%f", $0}')
-#balance_brl=$(bc <<< "scale=2; $balance_eth * $eth_in_brl" | awk '{printf "%.2f", $0}')
-#
-#daily_eth=$(bc <<< "scale=6; $(\
-#    https --check-status GET https://flexpool.io/api/v1/miner/0x5c019Ecd5a8ac9C5A6c61C405c33A9F54fa57820/estimatedDailyRevenue/ | jq -e '.result'\
-#) / 1000000000000000000" | awk '{printf "%f", $0}')
-#daily_brl=$(bc <<< "scale=2; $daily_eth * $eth_in_brl" | awk '{printf "%.2f", $0}')
+balance_eth=$(bc <<< "scale=6; $(https GET https://flexpool.io/api/v1/miner/0x5c019Ecd5a8ac9C5A6c61C405c33A9F54fa57820/balance/ | jq '.result') / 1000000000000000000" | awk '{printf "%f", $0}')
+daily_eth=$(bc <<< "scale=6; $(https --check-status GET https://flexpool.io/api/v1/miner/0x5c019Ecd5a8ac9C5A6c61C405c33A9F54fa57820/estimatedDailyRevenue/ | jq -e '.result') / 1000000000000000000" | awk '{printf "%f", $0}')
+monthly_eth=$(bc <<< "scale=6; $daily_eth * 30" | awk '{printf "%f", $0}')
 
-#balance="Balance: $balance_eth ETH / R\$$balance_brl"
-#daily="Daily: $daily_eth ETH / R\$$daily_brl"
+balance_brl=$(bc <<< "scale=2; $balance_eth * $eth_in_brl" | awk '{printf "%.2f", $0}')
+daily_brl=$(bc <<< "scale=2; $daily_eth * $eth_in_brl" | awk '{printf "%.2f", $0}')
+monthly_brl=$(bc <<< "scale=2; $monthly_eth * $eth_in_brl" | awk '{printf "%.2f", $0}')
 
-#tooltip="$balance\n$daily"
-
-#echo '{"text": '\"$hashrate\"', "tooltip": '\"$tooltip\"'}'
-echo '{"text": '\"$hashrate/$daily_hashrate\"'}'
+echo "Balance: $balance_eth ETH / $balance_brl BRL"
+echo "Daily: $daily_eth ETH / $daily_brl BRL"
+echo "Monthly: $monthly_eth ETH / $monthly_brl BRL"

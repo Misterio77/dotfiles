@@ -1,0 +1,11 @@
+# /usr/lib/systemd/user/waybar.service
+[Unit]
+Description=Sway focused opacity script
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+ExecStart=/home/misterio/bin/swayfader
+
+[Install]
+WantedBy=sway-session.target

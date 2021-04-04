@@ -213,8 +213,8 @@ trap startup SIGHUP
 
 keyboard="/dev/input/ckb1/cmd"
 mouse="/dev/input/ckb2/cmd"
-echo active > $keyboard
-echo active > $mouse
+echo active > $keyboard || exit -1
+echo active > $mouse || exit -1
 echo "dpi 1:750 dpisel 1" > $mouse
 
 bindings

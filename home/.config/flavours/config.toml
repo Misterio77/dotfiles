@@ -55,6 +55,7 @@ hook = "systemctl --user reload rgbdaemon"
 [[item]]
 file = "~/.config/waybar/colors.css"
 template = "waybar"
+hook = "pkill -SIGRTMIN+7 waybar"
 rewrite = true
 
 [[item]]

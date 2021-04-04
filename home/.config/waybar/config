@@ -11,7 +11,7 @@
     "custom/flavours": {
         "exec": "flavours current && echo Flavours scheme",
         "interval": 5,
-        "on-click": "flavours apply",
+        "on-click": "old=\"$(flavours current)\" && flavours list -l | alacritty-fzf --preview='flavours apply -l {}' || flavours apply \"${old}\" && flavours apply \"$(flavours current)\"",
         "on-click-right": "darkmode",
         "signal": 7,
         "format": "{} "
