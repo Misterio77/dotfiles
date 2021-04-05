@@ -186,7 +186,7 @@ startup() {
 }
 
 rgb_daemon() {
-    while sleep 0.5; do
+    while sleep 1; do
         daemon_workspaces $color_urgent $color_trim $color_visible $color_unfocused $color_base & \
         daemon_mute "000000" $color_base $color_visible $color_trim & \
         daemon_gpg $color_trim $color_unfocused & \
