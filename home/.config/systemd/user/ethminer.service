@@ -6,7 +6,7 @@ StartLimitIntervalSec=0
 [Service]
 Type=exec
 ExecStart=ethminer $ETHMINER_OPTS -P $ETHMINER_POOL
-Restart=on-failure
+Restart=always
 RestartSec=20
 
 [Install]

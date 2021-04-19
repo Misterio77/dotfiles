@@ -1,13 +1,15 @@
 {
     "layer": "bottom",
-    "height": 45,
-    "width": 10,
+    "height": 42,
     "modules-left": ["sway/workspaces", "sway/mode", "custom/player", "tray"],
     "modules-center": ["sway/window"],
     "modules-right": [ "custom/eth", "custom/gamemode", "custom/flavours", "pulseaudio", "network", "cpu", "memory", "temperature#cpu", "temperature#gpu", "clock"],
-    "margin-left": 25,
-    "margin-right": 25,
-    "margin-top": 20,
+    "margin-left": 0,
+    "margin-right": 0,
+    "margin-top": 0,
+    "sway/window": {
+        "max-lenth": 20
+    },
     "custom/flavours": {
         "exec": "flavours current && echo Flavours scheme",
         "interval": 5,
@@ -22,13 +24,14 @@
     },
     "custom/player": {
         "exec-if": "[[ \"$(player=$(preferredplayer) && mpris-ctl --player $player status)\" != \"Stopped\" ]]",
-        "exec": "player=$(preferredplayer) && mpris-ctl --player $player info '{\"text\": \"%track_name - %artist_name (%player_name)\",\"alt\": \"%play_status\"}'",
+        "exec": "player=$(preferredplayer) && mpris-ctl --player $player info '{\"text\": \"(%player_name) %artist_name - %track_name\",\"alt\": \"%play_status\"}'",
+        "max-length": 35,
         "return-type": "json",
         "interval": 2,
         "signal": 8,
-        "on-click": "pkill -SIGRTMIN+8 waybar; player=$(preferredplayer) && mpris-ctl --player $player pp",
-        "on-scroll-up": "pkill -SIGRTMIN+8 waybar; player=$(preferredplayer) && mpris-ctl --player $player previous",
-        "on-scroll-down": "pkill -SIGRTMIN+8 waybar; player=$(preferredplayer) && mpris-ctl --player $player next",
+        "on-click": "player=$(preferredplayer) && mpris-ctl --player $player pp; pkill -SIGRTMIN+8 waybar",
+        "on-scroll-up": "player=$(preferredplayer) && mpris-ctl --player $player previous; pkill -SIGRTMIN+8 waybar",
+        "on-scroll-down": "player=$(preferredplayer) && mpris-ctl --player $player next; pkill -SIGRTMIN+8 waybar",
         "format": "{icon}   {}",
         "format-icons": {
             "Playing": "契",
@@ -52,7 +55,8 @@
         }
     },
     "tray": {
-        "spacing": 10
+        "icon-size": 18,
+        "spacing": 0
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",

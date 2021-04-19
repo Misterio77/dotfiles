@@ -1,15 +1,22 @@
 shell = "bash -c '{}'"
 
 [[item]]
-file = "~/.config/alacritty/alacritty.yml"
-template = "alacritty"
-subtemplate = "default-256"
+file = '~/.config/sway/border.svg'
+template = 'svg-circle'
+rewrite = true
+hook = '~/.config/sway/renderborder.sh'
+light = false
 
 [[item]]
 file = "~/.config/nvim/colors/base16.vim"
 template = "vim"
 rewrite = true
 hook = "reloadnvim"
+
+[[item]]
+file = "~/.config/alacritty/alacritty.yml"
+template = "alacritty"
+subtemplate = "default-256"
 
 [[item]]
 file = "~/.config/qutebrowser/config.py"
@@ -21,7 +28,6 @@ hook = "reloadqb"
 file = "~/.config/sway/config"
 template = "sway"
 subtemplate = "colors"
-hook = "swaymsg reload"
 light = false
 
 [[item]]

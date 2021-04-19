@@ -14,7 +14,7 @@ prompt {
     padding:            0% 0.5% 0% 0%;
     background-color:   @background;
     text-color:         @red;
-    font:               "FiraCode Nerd Font 13";
+    font:               "Fira Code Nerd Font 13";
 }
 
 

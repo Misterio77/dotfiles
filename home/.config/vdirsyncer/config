@@ -23,6 +23,7 @@ a = "calendars_local"
 b = "calendars_remote"
 collections = ["from a", "from b"]
 metadata = ["color"]
+conflict_resolution = "b wins"
 
 [storage calendars_local]
 type = "filesystem"

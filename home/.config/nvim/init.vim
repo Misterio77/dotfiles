@@ -15,8 +15,12 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'udalov/kotlin-vim'
+Plug 'hjson/vim-hjson'
 
 call plug#end()
+
+"Options when composing mutt mail
+autocmd FileType mail set noautoindent wrapmargin=0 textwidth=0 linebreak wrap
 
 "Color scheme
 colorscheme base16
@@ -34,6 +38,8 @@ let g:vimtex_view_automatic=0
 
 "Suda plugin
 let g:suda_smart_edit = 1
+"Use gcc with ale
+let g:ale_c_parse_makefile = 1
 "Use clippy with ale
 let g:ale_rust_cargo_use_clippy = 1
 "Nerdtree plugin

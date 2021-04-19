@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+protontricks -c "wine Mopy/Wrye\ Bash.exe" 489830

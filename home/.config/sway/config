@@ -8,7 +8,7 @@ set $mleft   DP-1
 
 ## Resolution and disposition
 output $mleft   res 1920x1080@60Hz pos 0    0
-output $mcenter res 2560x1080@75Hz pos 1920 48
+output $mcenter res 2560x1080@75Hz pos 1920 80
 #adaptive_sync on max_render_time 1
 #output $mright  res 1920x1080@60Hz pos 4480 0
 
@@ -43,27 +43,27 @@ set $base0D #8E7DC6
 set $base0E #953B9D
 set $base0F #59325C
 # End flavours
-client.focused           $base04 $base00 $base05 $base01 $base03
+client.focused           $base02 $base00 $base05 $base00 $base00
 client.unfocused         $base02 $base00 $base04 $base00 $base00
 client.focused_inactive  $base02 $base00 $base04 $base00 $base00
 client.urgent            $base02 $base00 $base04 $base00 $base00
 
 ## Font ##
-font pango:Fira Sans Regular 12
+font pango:Fira Sans 12
 
 # Gaps
-gaps horizontal 15
-gaps inner 30
+gaps horizontal 5
+gaps inner 32
 
 # Border
 default_border pixel 2
 for_window [class=".*"] border pixel 2
 
-# Rounded borders
-#border_images.focused ~/.config/sway/border.png
-#border_images.focused_inactive ~/.config/sway/border.png
-#border_images.unfocused ~/.config/sway/border.png
-#border_images.urgent ~/.config/sway/border.png
+# Shadow on borders
+border_images.focused ~/.config/sway/border.png
+border_images.focused_inactive ~/.config/sway/border.png
+border_images.unfocused ~/.config/sway/border.png
+border_images.urgent ~/.config/sway/border.png
 
 ### Lock screen ###
 # Initial lock
@@ -357,6 +357,8 @@ for_window [title="Discord Updater"] floating enable
 for_window [app_id="AlacrittyFloating*"] floating enable
 for_window [app_id="AlacrittyFloatingMiner"] [floating] resize set 1000 300 
 for_window [app_id="AlacrittyFloatingSelector"] [floating] resize set 600 700
+# Wrye Bash
+for_window [instance="wrye bash.exe"] floating enable
 
 ### Startup programs ###
 # wallpaper

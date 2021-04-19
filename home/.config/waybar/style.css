@@ -7,17 +7,17 @@
     margin: 1.8px 15px 1.8px 15px;
 }
 
-#waybar {
+window#waybar {
     color: @text_color;
-    background-color: @bg_color;
-    min-height: 20px;
+    background-color: alpha(@bg_color, 0.88);
+    border-bottom: 2px solid @selected_bg_color;
 }
 
 #workspaces button {
     margin: 0px 0px 0px 0px;
 }
 
-#waybar.hidden {
+window#waybar.hidden {
     opacity: 0.2;
 }
 

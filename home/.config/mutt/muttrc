@@ -1,12 +1,12 @@
 source ~/.config/mutt/gpg.rc
 source ~/.config/mutt/vim-keys.rc
 
-# Default account one
-source ~/.config/mutt/personal 
+# Default account
+source ~/.config/mutt/personal ~/.config/mutt/statusbar
 # Keybinds for switching identities
-macro index <f2> '<enter-command>source ~/.config/mutt/personal<enter>'
-macro index <f3> '<enter-command>source ~/.config/mutt/college<enter>'
-macro index <f4> '<enter-command>source ~/.config/mutt/work<enter>'
+macro index <f2> '<enter-command>source ~/.config/mutt/personal ~/.config/mutt/statusbar<enter>'
+macro index <f3> '<enter-command>source ~/.config/mutt/college ~/.config/mutt/statusbar<enter>'
+macro index <f4> '<enter-command>source ~/.config/mutt/work ~/.config/mutt/statusbar<enter>'
 
 set realname = 'Gabriel Fontes'
 
@@ -15,8 +15,12 @@ set mark_old      = no
 
 # Use khard as address book
 set query_command = "khard email --parsable %s"
+
 bind editor <Tab> complete-query
 bind editor ^T    complete
+
+# Disable automatic hard line breaks
+set text_flowed
 
 unset imap_passive
 set imap_check_subscribed
