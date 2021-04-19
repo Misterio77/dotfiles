@@ -1,10 +1,18 @@
 shell = "bash -c '{}'"
 
 [[item]]
-file = '~/.config/sway/border.svg'
-template = 'svg-circle'
+file = "~/.config/sway/border.svg"
+template = "svg-circle"
 rewrite = true
-hook = '~/.config/sway/renderborder.sh'
+hook = "~/.config/sway/rendersvg.sh border"
+light = false
+
+[[item]]
+file = "~/.config/sway/border-selected.svg"
+template = "svg-circle"
+subtemplate = "selected"
+rewrite = true
+hook = "~/.config/sway/rendersvg.sh border-selected"
 light = false
 
 [[item]]

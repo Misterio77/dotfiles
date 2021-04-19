@@ -60,7 +60,7 @@ default_border pixel 2
 for_window [class=".*"] border pixel 2
 
 # Shadow on borders
-border_images.focused ~/.config/sway/border.png
+border_images.focused ~/.config/sway/border-selected.png
 border_images.focused_inactive ~/.config/sway/border.png
 border_images.unfocused ~/.config/sway/border.png
 border_images.urgent ~/.config/sway/border.png
@@ -250,6 +250,9 @@ bindsym $mod+control+w exec makoctl invoke
 ## Services keybinds ##
 # Lock the screen
 bindsym $lock exec ~/.config/sway/swaylock.sh --screenshots
+
+# Toggle waybar visibility
+bindsym Shift+$lock exec killall waybar -s USR1
 
 # Change color scheme (flavours), using fzf alacritty
 bindsym $light exec old="$(flavours current)" && \

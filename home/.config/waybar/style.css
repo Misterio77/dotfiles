@@ -13,6 +13,10 @@ window#waybar {
     border-bottom: 2px solid @selected_bg_color;
 }
 
+window#waybar.hidden {
+    opacity: 0;
+}
+
 #workspaces button {
     margin: 0px 0px 0px 0px;
 }
