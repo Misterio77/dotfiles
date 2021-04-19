@@ -4,25 +4,35 @@
     border-radius: 0;
     font-family: Fira Sans, Fira Code NerdFont;
     font-size: 12pt;
-    margin: 1.8px 15px 1.8px 15px;
+    margin: 1.8px 12px 1.8px 12px;
 }
 
-window#waybar {
+window#waybar.top {
     color: @text_color;
     background-color: alpha(@bg_color, 0.88);
     border-bottom: 2px solid @selected_bg_color;
+}
+window#waybar.bottom {
+    color: @text_color;
+    background-color: alpha(@bg_color, 0.88);
+    border-top: 2px solid @selected_bg_color;
 }
 
 window#waybar.hidden {
     opacity: 0;
 }
 
-#workspaces button {
-    margin: 0px 0px 0px 0px;
+#custom-preferredplayer {
+    margin-right: 8px;
+    margin-left: 10px;
+}
+#custom-player {
+    margin-right: 10px;
+    margin-left: 8px;
 }
 
-window#waybar.hidden {
-    opacity: 0.2;
+#workspaces button {
+    margin: 0px 0px 0px 0px;
 }
 
 #workspaces button.visible {
@@ -33,10 +43,17 @@ window#waybar.hidden {
     background-color: @selected_bg_color;
 }
 
+#cpu {
+    margin-right: 5px;
+}
+#memory {
+    margin-left: 5px;
+}
+
 #temperature.cpu {
-    margin: 1.8px 5px 1.8px 15px;
+    margin-right: 3px;
 }
 
 #temperature.gpu {
-    margin: 1.8px 15px 1.8px 5px;
+    margin-left: 3px;
 }

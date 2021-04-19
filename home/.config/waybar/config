@@ -1,15 +1,10 @@
 {
-    "layer": "top",
-    "height": 42,
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/player", "tray"],
+    "name": "top",
+    "position": "top",
+    "height": 44,
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/preferredplayer", "custom/player"],
     "modules-center": ["sway/window"],
-    "modules-right": [ "custom/eth", "custom/gamemode", "custom/flavours", "pulseaudio", "network", "cpu", "memory", "temperature#cpu", "temperature#gpu", "clock"],
-    "margin-left": 0,
-    "margin-right": 0,
-    "margin-top": 0,
-    "sway/window": {
-        "max-lenth": 20
-    },
+    "modules-right": [ "custom/eth", "custom/gamemode", "custom/flavours", "pulseaudio", "network", "cpu",  "custom/gpu", "memory", "temperature#cpu", "temperature#gpu", "clock"],
     "custom/flavours": {
         "exec": "flavours current && echo Flavours scheme",
         "interval": 5,
@@ -22,23 +17,6 @@
         "exec": "(gamemoded --status | grep 'is active' -q) && echo '\n Gamemode is active' || echo ''",
         "interval": 2
     },
-    "custom/player": {
-        "exec-if": "[[ \"$(player=$(preferredplayer) && mpris-ctl --player $player status)\" != \"Stopped\" ]]",
-        "exec": "player=$(preferredplayer) && mpris-ctl --player $player info '{\"text\": \"(%player_name) %artist_name - %track_name\",\"alt\": \"%play_status\"}'",
-        "max-length": 35,
-        "return-type": "json",
-        "interval": 2,
-        "signal": 8,
-        "on-click": "player=$(preferredplayer) && mpris-ctl --player $player pp; pkill -SIGRTMIN+8 waybar",
-        "on-scroll-up": "player=$(preferredplayer) && mpris-ctl --player $player previous; pkill -SIGRTMIN+8 waybar",
-        "on-scroll-down": "player=$(preferredplayer) && mpris-ctl --player $player next; pkill -SIGRTMIN+8 waybar",
-        "format": "{icon}   {}",
-        "format-icons": {
-            "Playing": "契",
-            "Paused": "",
-            "Stopped": "栗"
-        }
-    },
     "custom/eth": {
         "exec-if": "systemctl --user is-active ethminer",
         "exec": "journalctl --user -n 10 -u ethminer | grep -e '\\ m\\ .*' | cut -d ' ' -f12-13; echo ' '",
@@ -46,17 +24,6 @@
         "on-click": "alacritty --class AlacrittyFloatingMiner -e journalctl --user -u ethminer -f --output=cat",
         "on-click-right": "systemctl --user stop ethminer",
         "format": "{} ﲹ"
-    },
-    "sway/workspaces": {
-        "format": "{icon} {name}",
-        "format-icons": {
-            "focused": "綠",
-            "default": "祿"
-        }
-    },
-    "tray": {
-        "icon-size": 18,
-        "spacing": 0
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
@@ -69,9 +36,14 @@
     "memory": {
         "format": "{}% "
     },
+    "custom/gpu": {
+        "exec": "cat /sys/class/drm/card0/device/gpu_busy_percent",
+        "interval": 2,
+        "format": "{}% 力"
+    },
     "temperature#cpu": {
         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "format": "{temperatureC}°C",
+        "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", "", "", ""]
     },
     "temperature#gpu": {
@@ -96,5 +68,52 @@
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
+    },
+    "custom/preferredplayer": {
+        "exec": "jq -c -n --arg tooltip \"Current: $(preferredplayer || echo No player set)\" --arg text \"$(preferredplayer || echo No player set)\" '{text: $text, alt: $text, tooltip: $tooltip}'",
+        "on-click": "player=$(mpris-ctl list | alacritty-fzf) && preferredplayer $player && pkill -SIGRTMIN+8 waybar",
+        "tooltip": true,
+        "return-type": "json",
+        "interval": 2,
+        "signal": 8,
+        "format": "{icon}",
+        "format-icons": {
+            "Spotify": "阮",
+            "qutebrowser": "爵",
+            "discord": "ﭮ",
+            "No player set": "ﱘ"
+        }
+    },
+    "custom/player": {
+        "exec-if": "[[ \"$(player=$(preferredplayer) && mpris-ctl --player $player status)\" != \"Stopped\" ]]",
+        "exec": "player=$(preferredplayer) && mpris-ctl --player $player info '{\"text\": \"%track_name\",\"alt\": \"%play_status\", \"tooltip\": \"%track_name (%artist_name - %album_name)\"}'",
+        "max-length": 25,
+        "return-type": "json",
+        "interval": 2,
+        "signal": 8,
+        "on-click": "player=$(preferredplayer) && mpris-ctl --player $player pp; pkill -SIGRTMIN+8 waybar",
+        "on-scroll-up": "player=$(preferredplayer) && mpris-ctl --player $player previous; pkill -SIGRTMIN+8 waybar",
+        "on-scroll-down": "player=$(preferredplayer) && mpris-ctl --player $player next; pkill -SIGRTMIN+8 waybar",
+        "format": "{icon}  {}",
+        "format-icons": {
+            "Playing": "契",
+            "Paused": "",
+            "Stopped": "栗"
+        }
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 0
+    },
+    "sway/window": {
+        "max-length": 50
+    },
+    "sway/workspaces": {
+        "format": "{icon} {name}",
+        "format-icons": {
+            "focused": "綠",
+            "default": "祿"
+        }
     }
+
 }

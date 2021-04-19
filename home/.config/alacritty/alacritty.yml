@@ -4,8 +4,8 @@ font:
         family: Fira Code Nerd Font
 window:
     padding:
-        x: 30
-        y: 25
+        x: 20
+        y: 20
     dynamic_title: true
 # Start flavours
 # Base16 Pasque 256 - alacritty color config

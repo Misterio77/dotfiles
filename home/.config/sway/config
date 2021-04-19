@@ -237,10 +237,10 @@ bindsym Shift+XF86AudioMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Media player controls
-bindsym XF86AudioNext exec player=$(preferredplayer) && mpris-ctl next --player "$player" && pkill "-SIGRTMIN+8" waybar
-bindsym XF86AudioPrev exec player=$(preferredplayer) && mpris-ctl prev --player "$player" && pkill "-SIGRTMIN+8" waybar
-bindsym XF86AudioPlay exec player=$(preferredplayer) && mpris-ctl pp --player "$player" && pkill "-SIGRTMIN+8" waybar
-bindsym Shift+XF86AudioPlay exec player=$(mpris-ctl list | alacritty-fzf) && preferredplayer "$player" && pkill "-SIGRTMIN+8" waybar
+bindsym XF86AudioNext exec player=$(preferredplayer) && mpris-ctl next --player "$player" && pkill -SIGRTMIN+8 waybar
+bindsym XF86AudioPrev exec player=$(preferredplayer) && mpris-ctl prev --player "$player" && pkill -SIGRTMIN+8 waybar
+bindsym XF86AudioPlay exec player=$(preferredplayer) && mpris-ctl pp --player "$player" && pkill -SIGRTMIN+8 waybar
+bindsym Shift+XF86AudioPlay exec player=$(mpris-ctl list | alacritty-fzf) && preferredplayer "$player" && pkill -SIGRTMIN+8 waybar
 
 # Notifications
 bindsym $mod+w         exec makoctl dismiss
