@@ -39,6 +39,10 @@ customCommands:
     attach: true
     command: docker exec -it {{ .Container.ID }} rcon-cli
     serviceNames: []
+  - name: sh
+    attach: true
+    command: docker exec -it {{ .Container.ID }} sh
+    serviceNames: []
 bulkCommands:
   containers: []
   services:

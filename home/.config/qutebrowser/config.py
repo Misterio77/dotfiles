@@ -1,4 +1,5 @@
 config.load_autoconfig()
+c.editor.command = ["alacritty", "-e", "nvim", "{file}"]
 c.qt.args = ["enable-features=WebRTCPipeWireCapturer","ppapi-widevine-path=/usr/lib/qt/plugins/ppapi/libwidevinecdmadapter.so"]
 c.tabs.show = "multiple"
 c.tabs.position = "left"

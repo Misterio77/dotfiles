@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+sqlformat --reindent --keywords upper --identifiers lower -

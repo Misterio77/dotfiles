@@ -19,6 +19,40 @@ Plug 'hjson/vim-hjson'
 
 call plug#end()
 
+
+"Mermaid filetype
+autocmd BufNewFile,BufReadPost *.mmd,*.mermaid set filetype=mermaid
+
+"Mermaid auto build
+"Initial auto state (false)
+let b:MermaidBuild = 0
+"Register build command
+autocmd FileType mermaid command MmdBuild silent exec "!mmdc -i % -o /tmp/%.pdf"
+"Register open command
+autocmd FileType mermaid command MmdOpen silent exec "!xdg-open /tmp/%.pdf"
+"Register toggle command
+autocmd FileType mermaid command MmdBuildToggle :call ToggleMmdcBuildAuto()
+"Automatically call auto build when writing mermaid file
+autocmd FileType mermaid autocmd BufWritePost * :call MmdcBuildAuto()
+
+function! MmdcBuildAuto()
+    if b:MermaidBuild
+        MmdBuild
+    endif
+endfunction
+
+function! ToggleMmdcBuildAuto()
+    if b:MermaidBuild
+        let b:MermaidBuild = 0
+    else
+        let b:MermaidBuild = 1
+    endif
+endfunction
+         
+
+"Alias unnamed clipboard to system clibpoard
+set clipboard=unnamedplus
+
 "Options when composing mutt mail
 autocmd FileType mail set noautoindent wrapmargin=0 textwidth=0 linebreak wrap
 
@@ -39,6 +73,7 @@ let g:vimtex_view_automatic=0
 "Suda plugin
 let g:suda_smart_edit = 1
 "Use gcc with ale
+let b:ale_linters = {"c": ["gcc"]}
 let g:ale_c_parse_makefile = 1
 "Use clippy with ale
 let g:ale_rust_cargo_use_clippy = 1

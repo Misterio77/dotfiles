@@ -59,7 +59,7 @@ gaps inner 32
 default_border pixel 2
 for_window [class=".*"] border pixel 2
 
-# Shadow on borders
+# Shadows and rounded borders
 border_images.focused ~/.config/sway/border-selected.png
 border_images.focused_inactive ~/.config/sway/border.png
 border_images.unfocused ~/.config/sway/border.png
@@ -241,6 +241,7 @@ bindsym XF86AudioNext exec player=$(preferredplayer) && mpris-ctl next --player 
 bindsym XF86AudioPrev exec player=$(preferredplayer) && mpris-ctl prev --player "$player" && pkill -SIGRTMIN+8 waybar
 bindsym XF86AudioPlay exec player=$(preferredplayer) && mpris-ctl pp --player "$player" && pkill -SIGRTMIN+8 waybar
 bindsym Shift+XF86AudioPlay exec player=$(mpris-ctl list | alacritty-fzf) && preferredplayer "$player" && pkill -SIGRTMIN+8 waybar
+bindsym XF86AudioStop exec player=$(preferredplayer) && mpris-ctl stop --player "$player" && pkill -SIGRTMIN+8 waybar
 
 # Notifications
 bindsym $mod+w         exec makoctl dismiss
@@ -362,6 +363,8 @@ for_window [app_id="AlacrittyFloatingMiner"] [floating] resize set 1000 300
 for_window [app_id="AlacrittyFloatingSelector"] [floating] resize set 600 700
 # Wrye Bash
 for_window [instance="wrye bash.exe"] floating enable
+# League of legends
+for_window [instance="league of legends.exe"] floating enable
 
 ### Startup programs ###
 # wallpaper
@@ -388,15 +391,11 @@ exec swayidle -w  \
     timeout 20  'pgrep -x swaylock && gpg-connect-agent reloadagent /bye' \
     timeout 620 'gpg-connect-agent reloadagent /bye'
 
-
 ### Set either light or dark icon theme, depending on color scheme
 exec_always seticons $(darkmode query)
 
 ### Kill gpg agent, so it can be restarted with the correct settings (ssh enabled)
 exec gpg-connect-agent killagent /bye
-
-### KDE Connect
-exec kdeconnect-indicator
 
 ### Set xwayland primary monitor
 exec_always "xrandr --output $(xrandr | grep "XWAYLAND.*2560x1080" | awk '{printf $1}') --primary"

@@ -1,12 +1,17 @@
 [calendars]
 
-[[misterio]]
+[[calendar]]
 path = ~/.calendars/Y2FsOi8vMC8zMQ
 color = light magenta
+
+[[classes]]
+path = ~/.calendars/Y2FsOi8vMC80NQ
+color = light blue
 
 [[birthdays]]
 type = birthdays
 path = ~/.contacts/32
+color = yellow
 
 [locale]
 timeformat = %H:%M

@@ -5,7 +5,6 @@ file = "~/.config/sway/border.svg"
 template = "svg-circle"
 rewrite = true
 hook = "~/.config/sway/rendersvg.sh border"
-light = false
 
 [[item]]
 file = "~/.config/sway/border-selected.svg"
@@ -13,7 +12,6 @@ template = "svg-circle"
 subtemplate = "selected"
 rewrite = true
 hook = "~/.config/sway/rendersvg.sh border-selected"
-light = false
 
 [[item]]
 file = "~/.config/nvim/colors/base16.vim"
@@ -31,12 +29,6 @@ file = "~/.config/qutebrowser/config.py"
 template = "qutebrowser"
 subtemplate = "minimal"
 hook = "reloadqb"
-
-[[item]]
-file = "~/.config/sway/config"
-template = "sway"
-subtemplate = "colors"
-light = false
 
 [[item]]
 file = "~/.themes/FlatColor/colors3"
@@ -85,3 +77,20 @@ file = "~/.config/rofi/themes/colors.rasi"
 template = "rofi"
 subtemplate = "colors"
 rewrite = true
+
+[[item]]
+file = "~/.config/spicetify/Themes/base16/color.ini"
+template = "spotify"
+rewrite = true
+
+[[item]]
+file = "~/.config/imv/config"
+template = "imv"
+
+[[item]]
+file = "~/.config/sway/config"
+template = "sway"
+subtemplate = "colors"
+light = false
+hook = "while true; do pgrep -x inkscape && while true; do pgrep -x inkscape || break; done && break; done && swaymsg reload"
+#hook = "swaymsg reload"

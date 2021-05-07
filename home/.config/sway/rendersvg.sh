@@ -7,4 +7,3 @@ svg="$dir/$1.svg"
 png="$dir/$1.png"
 
 inkscape --export-type="png" $svg -w $size -h $size
-swaymsg reload
