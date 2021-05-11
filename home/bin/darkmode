@@ -24,17 +24,22 @@ function which_scheme() {
         try_scheme "${scheme%"-light"}" $scheme) && return 0
         return 1
 
-    elif [[ $scheme =~ "dark" ]]; then 
+    elif [[ $scheme =~ "dark" ]]; then
         (try_scheme "${scheme/dark/light}" $scheme || \
         try_scheme "${scheme#"dark"}" $scheme || \
         try_scheme "${scheme#"dark-"}" $scheme || \
         try_scheme "${scheme%"dark"}" $scheme || \
         try_scheme "${scheme%"-dark"}" $scheme) && return 0
         return 1
+    elif [[ $scheme =~ "moon" ]]; then
+        try_scheme "${scheme/moon/dawn}" $scheme && return 0
+    elif [[ $scheme =~ "dawn" ]]; then
+        try_scheme "${scheme/dawn/moon}" $scheme && return 0
 
     else
         (try_scheme "${scheme}-dark" $scheme || try_scheme "dark-${scheme}"  $scheme)  && return 0
         (try_scheme "${scheme}-light" $scheme|| try_scheme "light-${scheme}" $scheme)  && return 0
+        try_scheme "${scheme}-dawn" $scheme  && return 0
         return 1
     fi
 }
