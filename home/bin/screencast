@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-device=$(v4l2-ctl --list-devices | grep "WfRecorder" -A 1 | tail -1 | xargs)
-wf-recorder --muxer=v4l2 --codec=rawvideo --pixel-format=yuyv422 --file="$device" --geometry "$(slurp -ro)"

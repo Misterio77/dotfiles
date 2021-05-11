@@ -241,6 +241,7 @@ bindsym XF86AudioNext exec player=$(preferredplayer) && mpris-ctl next --player 
 bindsym XF86AudioPrev exec player=$(preferredplayer) && mpris-ctl prev --player "$player" && pkill -SIGRTMIN+8 waybar
 bindsym XF86AudioPlay exec player=$(preferredplayer) && mpris-ctl pp --player "$player" && pkill -SIGRTMIN+8 waybar
 bindsym Shift+XF86AudioPlay exec player=$(mpris-ctl list | alacritty-fzf) && preferredplayer "$player" && pkill -SIGRTMIN+8 waybar
+bindsym Ctrl+XF86AudioPlay exec preferredplayer none && pkill -SIGRTMIN+8 waybar
 bindsym XF86AudioStop exec player=$(preferredplayer) && mpris-ctl stop --player "$player" && pkill -SIGRTMIN+8 waybar
 
 # Notifications
@@ -268,8 +269,10 @@ bindsym $alt+$light exec darkmode
 
 
 # Change wallpaper (also updates scheme if current is generated), using fzf alacritty
-bindsym $profile exec wallpaper=$(setwallpaper -L | alacritty-fzf) && \
-                      setwallpaper $wallpaper
+bindsym $profile exec old="$(setwallpaper -Q)" && \
+                      setwallpaper -L | alacritty-fzf --preview='setwallpaper {}' || \
+                      setwallpaper "${old}" && \
+                      setwallpaper "$(setwallpaper -Q)"
 # Change to random wallpaper
 bindsym Shift+$profile exec setwallpaper -R
 # Generates color scheme based on wallpaper and changes to it
@@ -365,6 +368,8 @@ for_window [app_id="AlacrittyFloatingSelector"] [floating] resize set 600 700
 for_window [instance="wrye bash.exe"] floating enable
 # League of legends
 for_window [instance="league of legends.exe"] floating enable
+# Kde connect handler
+for_window [app_id="org.kde.kdeconnect-urlhandler"] floating enable
 
 ### Startup programs ###
 # wallpaper

@@ -11,6 +11,8 @@ export GDK_BACKEND=wayland
 export QT_QPA_PLATFORM=wayland
 export XDG_SESSION_TYPE=wayland
 export XDG_CURRENT_DESKTOP=sway
+# Styling for qt apps
+export QT_QPA_PLATFORMTHEME=gtk2
 # 'less' colors
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'

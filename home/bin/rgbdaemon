@@ -115,7 +115,7 @@ daemon_workspaces() {
 }
 daemon_player() {
     # Playing color
-    player=$(preferredplayer)
+    player=$(preferredplayer || echo "No player set")
     status=$(mpris-ctl --player $player status 2>/dev/null | head -n 1)
     if [[ $status == "Playing" ]]; then
         setcolor_key "play" $1

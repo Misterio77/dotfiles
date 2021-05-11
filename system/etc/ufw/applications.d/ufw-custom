@@ -27,3 +27,13 @@ ports=1714:1764/tcp|1714:1764/udp
 title=Mindustry Server
 description=A factory and tower defence FOSS game
 ports=6567/tcp|6567/udp
+
+[soundwire]
+title=Soundwire
+description=Sound streaming
+ports=59010/udp|59011/udp
+
+[deluge-torrent]
+title=Deluge Torrent
+description=Deluge Torrent Connection
+ports=56881

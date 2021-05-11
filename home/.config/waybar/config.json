@@ -4,7 +4,7 @@
     "height": 44,
     "modules-left": ["sway/workspaces", "sway/mode", "custom/preferredplayer", "custom/player"],
     "modules-center": ["sway/window"],
-    "modules-right": ["custom/eth", "custom/gamemode", "custom/flavours", "custom/deluge",  "pulseaudio", "network", "cpu",  "custom/gpu", "memory", "temperature#cpu", "temperature#gpu", "clock"],
+    "modules-right": ["custom/eth", "custom/gamemode",  "custom/kdeconnect", "custom/deluge", "custom/flavours",  "pulseaudio", "network", "cpu",  "custom/gpu", "memory", "temperature#cpu", "temperature#gpu", "clock"],
     "custom/flavours": {
         "exec": "flavours current && echo Flavours scheme",
         "interval": 5,
@@ -17,6 +17,12 @@
         "exec-if": "gamemoded --status | grep 'is active' -q",
         "interval": 2,
         "exec": "echo '\n Gamemode is active'"
+    },
+    "custom/kdeconnect": {
+        "exec-if": "systemctl --user is-active kdeconnectd",
+        "interval": 2,
+        "exec": "echo '\nKdeconnect is active'",
+        "on-click": "kdeconnect-app"
     },
     "custom/deluge": {
         "exec-if": "systemctl is-active deluged",

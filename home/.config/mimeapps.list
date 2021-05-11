@@ -1,8 +1,16 @@
-[Added Associations]
-
 [Default Applications]
 application/pdf=org.pwmt.zathura.desktop;
 inode/directory=ranger.desktop;
 text/plain=nvim.desktop;
-x-scheme-handler/discord-443564201349218305=discord-443564201349218305.desktop
-x-scheme-handler/discord-610508934456934412=discord-610508934456934412.desktop
+x-scheme-handler/discord-443564201349218305=discord-443564201349218305.desktop;
+x-scheme-handler/discord-610508934456934412=discord-610508934456934412.desktop;
+x-scheme-handler/mailto=neomutt.desktop;
+x-scheme-handler/nxm=vortex-downloads-handler.desktop;
+x-scheme-handler/nxm-protocol=vortex-downloads-handler.desktop;
+[Added Associations]
+image/gif=imv.desktop;
+image/jpeg=imv.desktop;
+image/png=imv.desktop;
+image/svg+xml=imv.desktop;
+image/tiff=imv.desktop;
+
