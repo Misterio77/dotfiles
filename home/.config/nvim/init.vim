@@ -1,24 +1,23 @@
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'lervag/vimtex'
-Plug 'airblade/vim-gitgutter'
 Plug 'dense-analysis/ale'
-Plug 'scrooloose/nerdtree'
+
+Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
-Plug 'cespare/vim-toml'
 Plug 'vim-scripts/restore_view.vim'
 Plug 'tpope/vim-surround'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
-Plug 'plasticboy/vim-markdown'
-Plug 'rust-lang/rust.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'KabbAmine/vCoolor.vim'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-Plug 'udalov/kotlin-vim'
+Plug 'scrooloose/nerdtree'
+
+Plug 'plasticboy/vim-markdown'
+Plug 'lervag/vimtex'
+Plug 'cespare/vim-toml'
+Plug 'rust-lang/rust.vim'
 Plug 'hjson/vim-hjson'
 
 call plug#end()
-
 
 "Mermaid filetype
 autocmd BufNewFile,BufReadPost *.mmd,*.mermaid set filetype=mermaid
@@ -70,15 +69,17 @@ let g:mkdp_page_title = '${name}'
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_view_automatic=0
 
-"Suda plugin
-let g:suda_smart_edit = 1
+"Go to definition binding
+map <C-l> :ALEGoToDefinition<CR>
 "Use gcc with ale
-let b:ale_linters = {"c": ["gcc"]}
+let g:ale_linters = {"c": ["clang"]}
 let g:ale_c_parse_makefile = 1
 "Use clippy with ale
-let g:ale_rust_cargo_use_clippy = 1
-"Nerdtree plugin
-map <C-o> :NERDTreeToggle<CR>
+let g:ale_linters = {'rust': ['analyzer']}
+let g:ale_fixers = {'rust': ['rustfmt']}
+
+"Nerdtree binding
+map <Leader><Tab> :NERDTreeToggle<CR>
 
 "Folding
 set foldmethod=syntax

@@ -180,7 +180,7 @@ startup() {
     export color_unfocused=$(pastel lighten 0.1 $base05 | pastel format hex | cut -d '#' -f2)
 
     setcolor_base $color_base $color_trim & \
-    openrgb --client --device=0 --color $color_base --mode static & \
+    #openrgb --client --device 0 --color $color_base --mode static & \
     rgb_daemon & rgb_pid=$!
     wait
 }
@@ -204,10 +204,10 @@ if ! pgrep -x ckb-next-daemon > /dev/null; then
     echo "Error: Ckb-next is not running" >&2
     exit -1
 fi
-if ! pgrep -x openrgb > /dev/null; then
-    echo "Error: OpenRGB is not running" >&2
-    exit -2
-fi
+#if ! pgrep -x openrgb > /dev/null; then
+#    echo "Error: OpenRGB is not running" >&2
+#    exit -2
+#fi
 
 trap startup SIGHUP
 

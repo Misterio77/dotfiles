@@ -36,6 +36,7 @@ macro index,pager 'V' "<view-attachments><search>html<enter><pipe-entry>qutebrow
 macro attach 'V' "<pipe-entry>qutebrowserpipe<enter><exit>" "pipe attachment to qutebrowser"
 macro index J "<sidebar-next><sidebar-open>"
 macro index K "<sidebar-prev><sidebar-open>"
+macro index,pager A ":set confirmappend=no\n<tag-prefix><save-message>+Archive<enter>:set confirmappend=yes\n"
 
 bind index,pager \\ sidebar-toggle-visible 
 bind index G imap-fetch-mail

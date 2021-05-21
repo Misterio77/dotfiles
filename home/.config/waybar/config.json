@@ -2,7 +2,7 @@
     "name": "top",
     "position": "top",
     "height": 44,
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/preferredplayer", "custom/player"],
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/cava", "custom/preferredplayer", "custom/player"],
     "modules-center": ["sway/window"],
     "modules-right": ["custom/eth", "custom/gamemode",  "custom/kdeconnect", "custom/deluge", "custom/flavours",  "pulseaudio", "network", "cpu",  "custom/gpu", "memory", "temperature#cpu", "temperature#gpu", "clock"],
     "custom/flavours": {
@@ -81,6 +81,10 @@
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
+    },
+    "custom/cava": {
+        "exec": "minicava",
+        "restart-interval": 1
     },
     "custom/preferredplayer": {
         "exec": "jq -c -n --arg tooltip \"Current: $(preferredplayer || echo No player set)\" --arg text \"$(preferredplayer || echo No player set)\" '{text: $text, alt: $text, tooltip: $tooltip}'",

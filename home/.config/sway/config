@@ -240,9 +240,11 @@ bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86AudioNext exec player=$(preferredplayer) && mpris-ctl next --player "$player" && pkill -SIGRTMIN+8 waybar
 bindsym XF86AudioPrev exec player=$(preferredplayer) && mpris-ctl prev --player "$player" && pkill -SIGRTMIN+8 waybar
 bindsym XF86AudioPlay exec player=$(preferredplayer) && mpris-ctl pp --player "$player" && pkill -SIGRTMIN+8 waybar
-bindsym Shift+XF86AudioPlay exec player=$(mpris-ctl list | alacritty-fzf) && preferredplayer "$player" && pkill -SIGRTMIN+8 waybar
-bindsym Ctrl+XF86AudioPlay exec preferredplayer none && pkill -SIGRTMIN+8 waybar
 bindsym XF86AudioStop exec player=$(preferredplayer) && mpris-ctl stop --player "$player" && pkill -SIGRTMIN+8 waybar
+
+bindsym Shift+XF86AudioPlay exec player=$(mpris-ctl list | alacritty-fzf) && preferredplayer "$player" && pkill -SIGRTMIN+8 waybar
+bindsym Shift+XF86AudioStop exec preferredplayer none && pkill -SIGRTMIN+8 waybar
+
 
 # Notifications
 bindsym $mod+w         exec makoctl dismiss
@@ -346,8 +348,6 @@ bindsym $mod+c exec alacritty -e ikhal
 for_window [instance="origin.exe"] move scratchpad
 # Origin
 for_window [title="Origin"] move scratchpad
-# Wine explorer
-for_window [instance="explorer.exe"] move scratchpad
 
 ## Floating ##
 # Zenity

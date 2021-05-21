@@ -6,6 +6,8 @@ StartLimitIntervalSec=0
 [Service]
 Type=exec
 ExecStart=ethminer $ETHMINER_OPTS -P $ETHMINER_POOL
+ExecStartPost=sudo amdgpu-clocks-mining
+ExecStopPost=sudo amdgpu-clocks
 Restart=always
 RestartSec=20
 
