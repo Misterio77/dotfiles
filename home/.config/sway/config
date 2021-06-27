@@ -53,17 +53,18 @@ font pango:Fira Sans 12
 
 # Gaps
 gaps horizontal 5
-gaps inner 32
+#gaps inner 32
+gaps inner 28
 
 # Border
 default_border pixel 2
 for_window [class=".*"] border pixel 2
 
 # Shadows and rounded borders
-border_images.focused ~/.config/sway/border-selected.png
-border_images.focused_inactive ~/.config/sway/border.png
-border_images.unfocused ~/.config/sway/border.png
-border_images.urgent ~/.config/sway/border.png
+#border_images.focused ~/.config/sway/border-selected.png
+#border_images.focused_inactive ~/.config/sway/border.png
+#border_images.unfocused ~/.config/sway/border.png
+#border_images.urgent ~/.config/sway/border.png
 
 ### Lock screen ###
 # Initial lock
@@ -230,9 +231,14 @@ bindsym $mod+r mode "resize"
 
 ## Media and volume ##
 # Volume
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
+
+bindsym Shift+XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym Shift+XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+
 bindsym Shift+XF86AudioMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
@@ -274,7 +280,7 @@ bindsym $alt+$light exec darkmode
 bindsym $profile exec old="$(setwallpaper -Q)" && \
                       setwallpaper -L | alacritty-fzf --preview='setwallpaper {}' || \
                       setwallpaper "${old}" && \
-                      setwallpaper "$(setwallpaper -Q)"
+                      setwallpaper "$(setwallpaper -Q)" && flavours apply "$(flavours current)"
 # Change to random wallpaper
 bindsym Shift+$profile exec setwallpaper -R
 # Generates color scheme based on wallpaper and changes to it
@@ -295,13 +301,16 @@ bindsym Shift+Scroll_Lock exec gpg-connect-agent reloadagent /bye && \
 bindsym $alt+Scroll_Lock exec mount ~/.pgp_usb && notify-send "Mounted" "Private pgp usb stick mounted" -i lock -t 5000
 
 # Screenshot a monitor
-bindsym --release Print exec grim -g "$(slurp -ro)" - | wl-copy
+bindsym --release Print exec geometry=$(slurp -ro) && grim -g "${geometry}" - | wl-copy && shutter_sound
+bindsym --release Shift+Print exec geometry=$(slurp -ro) && sleep 4 && grim -g "${geometry}" - | wl-copy && shutter_sound
 
 # Screenshot a window
-bindsym --release $alt+Print exec geometry=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp) && grim -g "${geometry}" - | wl-copy
+bindsym --release $alt+Print exec geometry=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp) && grim -g "${geometry}" - | wl-copy && shutter_sound
+bindsym --release Shift+$alt+Print exec geometry=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp) && sleep 4 && grim -g "${geometry}" - | wl-copy && shutter_sound
 
 # Screenshot selection
-bindsym --release $mod+Print exec grim -g "$(slurp)" - | wl-copy
+bindsym --release $mod+Print exec geometry=$(slurp) && grim -g "${geometry}" - | wl-copy && shutter_sound
+bindsym --release Shift+$mod+Print exec geometry=$(slurp) && sleep 4 && grim -g "${geometry}" - | wl-copy && shutter_sound
 
 # Image clipboard upload
 bindsym --release Ctrl+Print exec notify-send "Uploading" -i upload-media -t 3000 && \
@@ -341,13 +350,15 @@ bindsym $mod+m exec alacritty -e neomutt
 # Launch ikhal
 bindsym $mod+c exec alacritty -e ikhal
 
+# Launch zathura
+bindsym $mod+z exec zathura
 ### Window overrides ###
 
 ## Scratchpad (hidden stuff) ##
 # Origin
 for_window [instance="origin.exe"] move scratchpad
-# Origin
 for_window [title="Origin"] move scratchpad
+for_window [title="Wine System Tray"] move scratchpad
 
 ## Floating ##
 # Zenity
@@ -370,6 +381,8 @@ for_window [instance="wrye bash.exe"] floating enable
 for_window [instance="league of legends.exe"] floating enable
 # Kde connect handler
 for_window [app_id="org.kde.kdeconnect-urlhandler"] floating enable
+# Firefox indicator
+for_window [title="Firefox - Sharing indicator"] move scratchpad
 
 ### Startup programs ###
 # wallpaper

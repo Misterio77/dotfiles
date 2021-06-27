@@ -13,17 +13,17 @@ fi
 
 # Random
 if [[ $* == *-R* ]]; then
-    mapfile -t wallpapers < <(setwallpaper -L)
-    rand=$(( $RANDOM % ${#wallpapers[@]}))
-    wallpaper=~/Pictures/Wallpapers/${wallpapers[$rand]}
+    wallpaper=$(setwallpaper -L | shuf -n 1)
 # Specified
 else
-    wallpaper=~/Pictures/Wallpapers/$1
+    wallpaper=$1
 fi
 
-echo $wallpaper > ~/.bg
+wallpaper=~/Pictures/Wallpapers/"${wallpaper}"
+
+echo "${wallpaper}" > ~/.bg
 ~/.config/sway/swaybg.sh & \
 
 if [[ $(flavours current) == "generated" ]]; then
-    flavours generate $(darkmode query) ${wallpaper} && flavours apply generated
+    flavours generate $(darkmode query) "${wallpaper}" && flavours apply -l generated
 fi

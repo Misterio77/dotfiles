@@ -10,7 +10,9 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'scrooloose/nerdtree'
+Plug 'gregsexton/MatchTag'
 
+Plug 'jvirtanen/vim-octave'
 Plug 'plasticboy/vim-markdown'
 Plug 'lervag/vimtex'
 Plug 'cespare/vim-toml'
@@ -18,6 +20,22 @@ Plug 'rust-lang/rust.vim'
 Plug 'hjson/vim-hjson'
 
 call plug#end()
+
+"Tabs
+set tabstop=4 "How many spaces equals a tab
+set softtabstop=4 "How many columns when you hit tab
+set shiftwidth=4 "How many to indent with reindent ops
+
+set expandtab "Use spaces
+"set noexpandtab "Use tabs
+
+"Two spaces tab when editing html
+autocmd FileType html setlocal ts=2 sts=2 sw=2
+
+
+"Alias unnamed clipboard to system clibpoard
+set clipboard=unnamedplus
+
 
 "Mermaid filetype
 autocmd BufNewFile,BufReadPost *.mmd,*.mermaid set filetype=mermaid
@@ -30,7 +48,7 @@ autocmd FileType mermaid command MmdBuild silent exec "!mmdc -i % -o /tmp/%.pdf"
 "Register open command
 autocmd FileType mermaid command MmdOpen silent exec "!xdg-open /tmp/%.pdf"
 "Register toggle command
-autocmd FileType mermaid command MmdBuildToggle :call ToggleMmdcBuildAuto()
+autocmd FileType mermaid command MmdBuildToggle :call ToggleMmdcBuild()
 "Automatically call auto build when writing mermaid file
 autocmd FileType mermaid autocmd BufWritePost * :call MmdcBuildAuto()
 
@@ -40,7 +58,7 @@ function! MmdcBuildAuto()
     endif
 endfunction
 
-function! ToggleMmdcBuildAuto()
+function! ToggleMmdcBuild()
     if b:MermaidBuild
         let b:MermaidBuild = 0
     else
@@ -48,10 +66,6 @@ function! ToggleMmdcBuildAuto()
     endif
 endfunction
          
-
-"Alias unnamed clipboard to system clibpoard
-set clipboard=unnamedplus
-
 "Options when composing mutt mail
 autocmd FileType mail set noautoindent wrapmargin=0 textwidth=0 linebreak wrap
 
@@ -71,13 +85,15 @@ let g:vimtex_view_automatic=0
 
 "Go to definition binding
 map <C-l> :ALEGoToDefinition<CR>
-"Use gcc with ale
+"Enable completions
+let g:ale_completion_enabled = 1
+"C
 let g:ale_linters = {"c": ["clang"]}
 let g:ale_c_parse_makefile = 1
-"Use clippy with ale
-let g:ale_linters = {'rust': ['analyzer']}
+"Rust
+let g:ale_linters = {'rust': ['analyzer', 'cargo']}
 let g:ale_fixers = {'rust': ['rustfmt']}
-
+let g:ale_rust_analyzer_config = {'checkOnSave': {'command': 'clippy', 'enable': v:true}}
 "Nerdtree binding
 map <Leader><Tab> :NERDTreeToggle<CR>
 
@@ -95,14 +111,6 @@ set conceallevel=2
 "(https://github.com/neovim/neovim/issues/11330)
 autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 
-"Tabs
-set tabstop=4 "How many spaces equals a tab
-set softtabstop=4 "How many columns when you hit tab
-set shiftwidth=4 "How many to indent with reindent ops
-
-set expandtab "Use spaces
-"set noexpandtab "Use tabs
-
 "Line numbers
 augroup numbertoggle
   autocmd!
@@ -118,6 +126,7 @@ nnoremap <CR> G
 syntax match Tab /\t/
 set title
 
+"============================="
 "Sensible defaults
 set autoindent
 set autoread

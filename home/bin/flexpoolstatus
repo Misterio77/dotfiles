@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-eth_in_brl=$(https GET "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BRL" | jq '.BRL')
+eth_in_brl=$(https --check-status --follow GET "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BRL" | jq '.BRL')
 
-balance_eth=$(bc <<< "scale=6; $(https GET https://flexpool.io/api/v1/miner/0x281D13676C5CffF630aECC23B94Dbc33b9e766E3/balance/ | jq '.result') / 1000000000000000000" | awk '{printf "%f", $0}')
-daily_eth=$(bc <<< "scale=6; $(https --check-status GET https://flexpool.io/api/v1/miner/0x281D13676C5CffF630aECC23B94Dbc33b9e766E3/estimatedDailyRevenue/ | jq -e '.result') / 1000000000000000000" | awk '{printf "%f", $0}')
+balance_eth=$(bc <<< "scale=6; $(https --check-status --follow GET https://www.flexpool.io/api/v1/miner/0x281D13676C5CffF630aECC23B94Dbc33b9e766E3/balance/ | jq '.result') / 1000000000000000000" | awk '{printf "%f", $0}')
+daily_eth=$(bc <<< "scale=6; $(https --check-status --follow GET https://www.flexpool.io/api/v1/miner/0x281D13676C5CffF630aECC23B94Dbc33b9e766E3/estimatedDailyRevenue/ | jq -e '.result') / 1000000000000000000" | awk '{printf "%f", $0}')
 monthly_eth=$(bc <<< "scale=6; $daily_eth * 30" | awk '{printf "%f", $0}')
 
 balance_brl=$(bc <<< "scale=2; $balance_eth * $eth_in_brl" | awk '{printf "%.2f", $0}')

@@ -82,10 +82,6 @@
         },
         "on-click": "pavucontrol"
     },
-    "custom/cava": {
-        "exec": "minicava",
-        "restart-interval": 1
-    },
     "custom/preferredplayer": {
         "exec": "jq -c -n --arg tooltip \"Current: $(preferredplayer || echo No player set)\" --arg text \"$(preferredplayer || echo No player set)\" '{text: $text, alt: $text, tooltip: $tooltip}'",
         "on-click": "player=$(mpris-ctl list | alacritty-fzf) && preferredplayer $player && pkill -SIGRTMIN+8 waybar",

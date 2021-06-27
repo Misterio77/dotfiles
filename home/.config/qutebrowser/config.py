@@ -311,3 +311,5 @@ c.colors.tabs.selected.even.bg = base02
 # color).
 c.colors.webpage.bg = base00
 # End flavours
+
+c.colors.webpage.bg = "#ffffff"

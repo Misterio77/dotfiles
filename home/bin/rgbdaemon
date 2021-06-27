@@ -180,14 +180,14 @@ startup() {
     export color_unfocused=$(pastel lighten 0.1 $base05 | pastel format hex | cut -d '#' -f2)
 
     setcolor_base $color_base $color_trim & \
-    #openrgb --client --device 0 --color $color_base --mode static & \
+    openrgb --client --device 0 --color $color_base --mode static & \
     rgb_daemon & rgb_pid=$!
     wait
 }
 
 rgb_daemon() {
-    while sleep 1; do
-        daemon_workspaces $color_urgent $color_trim $color_visible $color_unfocused $color_base & \
+    while sleep 0.8; do
+        #daemon_workspaces $color_urgent $color_trim $color_visible $color_unfocused $color_base & \
         daemon_mute "000000" $color_base $color_visible $color_trim & \
         daemon_gpg $color_trim $color_unfocused & \
         daemon_tty $color_trim $color_visible $color_base & \
@@ -195,7 +195,7 @@ rgb_daemon() {
         daemon_dark $color_visible $color_trim & \
         daemon_player $color_trim $color_visible $color_base &  \
         daemon_print $color_trim $color_base &  \
-        daemon_screencast $color_unfocused $color_base &  \
+        #daemon_screencast $color_unfocused $color_base &  \
         #daemon_monitors $color_trim $color_base  
     done
 }
@@ -204,10 +204,10 @@ if ! pgrep -x ckb-next-daemon > /dev/null; then
     echo "Error: Ckb-next is not running" >&2
     exit -1
 fi
-#if ! pgrep -x openrgb > /dev/null; then
-#    echo "Error: OpenRGB is not running" >&2
-#    exit -2
-#fi
+if ! pgrep -x openrgb > /dev/null; then
+    echo "Error: OpenRGB is not running" >&2
+    exit -2
+fi
 
 trap startup SIGHUP
 

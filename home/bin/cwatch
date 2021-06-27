@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+while [ 1 ]
+do
+  output=$(eval $@)
+  clear
+  echo -e "$output"
+  sleep 0.1
+done

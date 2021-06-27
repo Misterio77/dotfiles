@@ -8,3 +8,4 @@ fi
 
 response=$(https --ignore-stdin --check-status --form POST api.imgur.com/3/upload Authorization:"Client-ID $id" image@"/tmp/upload.png") && \
 echo $response | jq -r '.data.link'
+rm /tmp/upload.png

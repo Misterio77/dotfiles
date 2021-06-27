@@ -22,6 +22,7 @@ export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 # Use gpg as ssh key
+unset SSH_AGENT_PID
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 export GPG_TTY=$(tty)
 # vim mode appearance
@@ -36,6 +37,9 @@ export MODE_INDICATOR_VICMD=">-"
 export GLOBALIAS_FILTER_VALUES=(dragon fzf)
 # Auto completion sensitivity
 export HYPHEN_INSENSITIVE="true"
+# Ruby
+export GEM_HOME="$HOME/.gems"
+export PATH="$HOME/.gems/bin:$PATH"
 ##
 
 # aliases
@@ -56,7 +60,9 @@ source "$HOME/.zinit/bin/zinit.zsh"
 # autocompletions
 zstyle ':completion:*' completer _complete
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
+autoload bashcompinit && bashcompinit
 autoload -U +X compinit && compinit
+complete -C '/usr/bin/aws_completer' aws
 
 # Plugins
 zinit light zsh-users/zsh-autosuggestions

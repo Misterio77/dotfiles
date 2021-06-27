@@ -1,17 +1,17 @@
 shell = "bash -c '{}'"
 
-[[item]]
-file = "~/.config/sway/border.svg"
-template = "svg-circle"
-rewrite = true
-hook = "~/.config/sway/rendersvg.sh border"
+#[[item]]
+#file = "~/.config/sway/border.svg"
+#template = "svg-circle"
+#rewrite = true
+#hook = "~/.config/sway/rendersvg.sh border"
 
-[[item]]
-file = "~/.config/sway/border-selected.svg"
-template = "svg-circle"
-subtemplate = "selected"
-rewrite = true
-hook = "~/.config/sway/rendersvg.sh border-selected"
+#[[item]]
+#file = "~/.config/sway/border-selected.svg"
+#template = "svg-circle"
+#subtemplate = "selected"
+#rewrite = true
+#hook = "~/.config/sway/rendersvg.sh border-selected"
 
 [[item]]
 file = "~/.config/nvim/colors/base16.vim"
@@ -38,6 +38,12 @@ rewrite = true
 hook = "gsettings set org.gnome.desktop.interface gtk-theme dummy && gsettings set org.gnome.desktop.interface gtk-theme FlatColor"
 
 [[item]]
+file = "~/.themes/FlatColor/colors2"
+template = "gtk-flatcolor"
+subtemplate = "gtk-2"
+rewrite = true
+
+[[item]]
 file= "~/.config/zathura/zathurarc"
 template = "zathura"
 
@@ -45,12 +51,6 @@ template = "zathura"
 file= "~/.config/mako/config"
 template = "mako"
 hook = "killall mako"
-
-[[item]]
-file = "~/.themes/FlatColor/colors2"
-template = "gtk-flatcolor"
-subtemplate = "gtk-2"
-rewrite = true
 
 [[item]]
 file = "~/.colors"
@@ -92,5 +92,5 @@ file = "~/.config/sway/config"
 template = "sway"
 subtemplate = "colors"
 light = false
-hook = "while true; do pgrep -x inkscape && while true; do pgrep -x inkscape || break; done && break; done && swaymsg reload"
-#hook = "swaymsg reload"
+#hook = "while true; do pgrep -x inkscape && while true; do pgrep -x inkscape || break; done && break; done && swaymsg reload"
+hook = "swaymsg reload"
