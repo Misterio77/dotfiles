@@ -1,5 +1,7 @@
 # Dotfiles
 
+Superseded by [nix-config](https://github.com/misterio77/nix-config). This one is kept for future reference.
+
 ## Info
 
 Component        | Name
